@@ -1,0 +1,44 @@
+{
+    "name": "reymonbot/easy-keyboard",
+    "description": "A fluent keyboard builder for Api syntax",
+    "keywords": [
+        "telegram",
+        "bot",
+        "api",
+        "fluent",
+        "keyboard",
+        "builder",
+        "telegram-api"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mahdi",
+            "email": "mahdi.talaee1379@gmail.com"
+        },
+        {
+            "name": "AmirHossein Jafari",
+            "email": "amirhosseinjafari8228@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Reymon\\EasyKeyboard\\": "./src"
+        }
+    },
+    "require": {
+        "php-64bit": ">=8.1",
+        "ext-mbstring": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "amphp/php-cs-fixer-config": "^2.0"
+    },
+    "scripts": {
+        "build": [
+            "@cs-fix"
+        ],
+        "cs-fix": "PHP_CS_FIXER_IGNORE_ENV=1 php -d pcre.jit=0 vendor/bin/php-cs-fixer fix -v"
+    }
+}
