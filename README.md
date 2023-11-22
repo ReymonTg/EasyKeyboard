@@ -151,14 +151,18 @@ KeyboardMarkup::new()
     ->build();
 ```
 You can even use these methods
-<br>for InlineKeyboard:
+
+for InlineKeyboard:
+
 * [addCallback](src/Tools/EasyInline.php#L30)
 * [addWebApp](src/Tools/EasyInline.php#L59)
 * [addUrl](src/Tools/EasyInline.php#L71)
 * [addGame](src/Tools/EasyInline.php#L83)
 * [addBuy](src/Tools/EasyInline.php#L95)
 * [addSwitchInline](src/Tools/EasyInline.php#L110)
-* <br><br>and for ReplyKeyboard:
+  
+and for ReplyKeyboard:
+
 * [addText](src/Tools/EasyMarkup.php#L33)
 * [addProfile](src/Tools/EasyMarkup.php#L60)
 * [addWebApp](src/Tools/EasyMarkup.php#L72)
