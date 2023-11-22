@@ -1,11 +1,11 @@
 {
     "name": "reymonbot/easy-keyboard",
-    "description": "A fluent keyboard builder for Api syntax",
+    "description": "A easy keyboard builder for Api syntax",
     "keywords": [
         "telegram",
         "bot",
         "api",
-        "fluent",
+        "easy",
         "keyboard",
         "builder",
         "telegram-api"
