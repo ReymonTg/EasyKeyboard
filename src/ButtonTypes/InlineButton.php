@@ -32,8 +32,8 @@ final class InlineButton extends Button
     {
         $data = match (true)
         {
+            !is_null($filter) => ['switch_inline_query_chosen_chat'  => [...$filter->jsonSerialize(), 'query' => $query]],
             $same   => ['switch_inline_query_current_chat' => $query],
-            $filter => ['switch_inline_query_chosen_chat'  => [...$filter->jsonSerialize(), 'query' => $query]],
             default => ['switch_inline_query' => $query]
         };
         $data += ['text' => $text];
