@@ -30,21 +30,21 @@ final class ChatAdminRights implements \JsonSerializable
     }
 
     public static function new(
-        bool $changeInfo     = false,
-        bool $postMessages   = false,
-        bool $editMessages   = false,
-        bool $deleteMessages = false,
-        bool $banUsers       = false,
-        bool $inviteUsers    = false,
-        bool $pinMessages    = false,
-        bool $addAdmins      = false,
-        bool $anonymous      = false,
-        bool $manageCall     = false,
-        bool $manageChat     = false,
-        bool $manageTopics   = false,
-        bool $postStories    = false,
-        bool $editStories    = false,
-        bool $deleteStories  = false,
+        ?bool $changeInfo     = null,
+        ?bool $postMessages   = null,
+        ?bool $editMessages   = null,
+        ?bool $deleteMessages = null,
+        ?bool $banUsers       = null,
+        ?bool $inviteUsers    = null,
+        ?bool $pinMessages    = null,
+        ?bool $addAdmins      = null,
+        ?bool $anonymous      = null,
+        ?bool $manageCall     = null,
+        ?bool $manageChat     = null,
+        ?bool $manageTopics   = null,
+        ?bool $postStories    = null,
+        ?bool $editStories    = null,
+        ?bool $deleteStories  = null,
     ): self
     {
         $adminRights = [
@@ -72,6 +72,6 @@ final class ChatAdminRights implements \JsonSerializable
      */
     public function jsonSerialize(): mixed
     {
-        return $this->adminRights;
+        return array_filter($this->adminRights, fn($v) => !is_null($v));
     }
 }

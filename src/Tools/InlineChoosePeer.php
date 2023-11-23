@@ -48,6 +48,6 @@ final class InlineChoosePeer implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        return $this->data;
+        return array_filter($this->data, fn($v) => !is_null($v));
     }
 }

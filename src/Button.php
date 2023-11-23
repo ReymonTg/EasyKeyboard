@@ -29,6 +29,6 @@ abstract class Button implements \JsonSerializable
      */
     public function jsonSerialize(): mixed
     {
-        return $this->keyboard;
+        return array_filter($this->keyboard, fn($v) => !is_null($v));
     }
 }

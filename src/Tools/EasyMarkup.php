@@ -15,12 +15,12 @@
 
 namespace Reymon\EasyKeyboard\Tools;
 
+use Reymon\EasyKeyboard\ChatAdminRights;
 use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeUser;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeChat;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeChannel;
-use Reymon\EasyKeyboard\ChatAdminRights;
 
 trait EasyMarkup
 {
@@ -54,12 +54,12 @@ trait EasyMarkup
 
     /**
      * @param string $text
-     * @param int $user_id
+     * @param int $userId
      * @return KeyboardMarkup
      */
-    public function addProfile(string $text, int $user_id): KeyboardMarkup
+    public function addProfile(string $text, int $userId): KeyboardMarkup
     {
-        return $this->addButton(KeyboardButton::Profile($text, $user_id));
+        return $this->addButton(KeyboardButton::Profile($text, $userId));
     }
     
     /**
@@ -118,7 +118,7 @@ trait EasyMarkup
      * @param bool $premium
      * @return KeyboardMarkup
      */
-    public function requestUser(string $text, int $buttonId, bool $bot = false, bool $premium = false): KeyboardMarkup
+    public function requestUser(string $text, int $buttonId, ?bool $bot = null, ?bool $premium = null): KeyboardMarkup
     {
         $peerType = RequestPeerTypeUser::new($bot, $premium);
         return $this->addButton(KeyboardButton::Peer($text, $buttonId, $peerType));
@@ -127,48 +127,45 @@ trait EasyMarkup
     /**
      * Create a request peer chat button
      *
-     * @param string $text
-     * @param int $buttonId
-     * @param bool $creator
-     * @param bool $hasUsername
-     * @param bool $forum
-     * @param ChatAdminRights|null $userAdminRights
-     * @param ChatAdminRights|null $botAdminRights
+     * @param string           $text
+     * @param int              $buttonId
+     * @param ?bool            $creator
+     * @param ?bool            $hasUsername
+     * @param ?bool            $forum
+     * @param ?ChatAdminRights $userAdminRights
+     * @param ?ChatAdminRights $botAdminRights
      * @return KeyboardMarkup
      */
     public function requestChat(
         string $text,
-        int  $buttonId,
-        bool $creator      = false,
-        bool $hasUsername = false,
-        bool $forum        = false,
+        int    $buttonId,
+        ?bool  $creator = null,
+        ?bool  $hasUsername = null,
+        ?bool  $forum = null,
         ?ChatAdminRights $userAdminRights = null,
         ?ChatAdminRights $botAdminRights  = null
     ): KeyboardMarkup
     {
-        $peerType = RequestPeerTypeChat::new(
-            $creator, $hasUsername, $forum,
-            $botAdminRights, $userAdminRights
-        );
+        $peerType = RequestPeerTypeChat::new($creator, $hasUsername, $forum, $botAdminRights, $userAdminRights);
         return $this->addButton(KeyboardButton::Peer($text, $buttonId, $peerType));
     }
 
     /**
      * Create a request peer broadcast button
      *
-     * @param string $text
-     * @param int $buttonId
-     * @param bool $creator
-     * @param bool $hasUsername
-     * @param ChatAdminRights|null $userAdminRights
-     * @param ChatAdminRights|null $botAdminRights
+     * @param string           $text
+     * @param int              $buttonId
+     * @param ?bool            $creator
+     * @param ?bool            $hasUsername
+     * @param ?ChatAdminRights $userAdminRights
+     * @param ?ChatAdminRights $botAdminRights
      * @return KeyboardMarkup
      */
     public function requestChannel(
         string $text,
-        int  $buttonId,
-        bool $creator      = false,
-        bool $hasUsername = false,
+        int    $buttonId,
+        ?bool  $creator = null,
+        ?bool  $hasUsername = null,
         ?ChatAdminRights $userAdminRights = null,
         ?ChatAdminRights $botAdminRights  = null
     ): KeyboardMarkup
