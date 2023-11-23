@@ -102,13 +102,12 @@ final class KeyboardButton extends Button
      * Create a request peer button.
      *
      */
-    public static function Peer(string $text, int $buttonId, RequestPeerType $type): KeyboardButton
+    public static function Peer(string $text, int $requestId, RequestPeerType $type): KeyboardButton
     {
         $peer = $type instanceof RequestPeerTypeUser ? 'request_user' : 'request_chat';
         $data = [
-            '_'    => 'keyboardButtonRequestPeer',
             'text' => $text,
-            $peer  => [ 'request_id' => $buttonId, ...$type->jsonSerialize()]
+            $peer  => [ 'request_id' => $requestId, ...$type->jsonSerialize()]
         ];
         return new static($data);
     }
