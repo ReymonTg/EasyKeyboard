@@ -56,7 +56,6 @@ $this->sendMessage(
         ->singleUse()
         ->addButton(KeyboardButton::Text('Cancel'))
         ->addButton(KeyboardButton::Text('OK'))
-        ->build()
 );
 ```
 
@@ -76,8 +75,7 @@ After that you can chain methods to set additional fields that are available in 
 
 ```php
 KeyboardMarkup::new()
-    ->placeholder('Placeholder')
-    ->build();
+    ->placeholder('Placeholder');
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -110,8 +108,7 @@ KeyboardMarkup::new()
     ->row(
         KeyboardButton::Text('Cancel'),
         KeyboardButton::Text('OK')
-    )
-    ->build();
+    );
 ```
 
 If you need more than one row, call `row()` multiple times:
@@ -126,8 +123,7 @@ KeyboardInline::new()
     ->row(
         InlineButton::Callback('prev','page-prev'),
         InlineButton::Callback('next','page-next')
-    )
-    ->build();
+    );
 ```
 You can add array of callbacks or texts keyboard in another way!
 ```php
@@ -139,16 +135,14 @@ KeyboardInline::new()
     ],[
         'prev' => 'page-prev',
         'next' => 'page-next'
-    ])
-    ->build();
+    ]);
 ```
 ```php
 KeyboardMarkup::new()
     ->addTexts([
        'Cancel',
        'Ok'
-    ])
-    ->build();
+    ]);
 ```
 You can even use these methods
 
@@ -175,20 +169,22 @@ and for ReplyKeyboard:
 ```php
 KeyboardMarkup::new()
     ->addButton(KeyboardButton::Text('First Button'))
-    ->addButton(KeyboardButton::Text('Second Button'))
-    ->build();
+    ->addButton(KeyboardButton::Text('Second Button'));
 ```
 
 If you need more than one row, just call the row method without arguments, and continue calling `addButton()`:
 
 ```php
 KeyboardInline::new()
-    ->addButton(InlineButton::Callback('A','answer-a'))
-    ->addButton(InlineButton::Callback('B','answer-b'))
+    ->addButton(
+        InlineButton::Callback('A','answer-a'),
+        InlineButton::Callback('B','answer-b')
+    )
     ->row()
-    ->addButton(InlineButton::Callback('C','answer-c'))
-    ->addButton(InlineButton::Callback('D','answer-d'))
-    ->build();
+    ->addButton(
+        InlineButton::Callback('C','answer-c'),
+        InlineButton::Callback('D','answer-d')
+    );
 ```
 
 It's up to you if you define your buttons inline like in these examples or if you'd like to generate a whole row beforehand and
@@ -262,8 +258,7 @@ KeyboardInline::new()
     ->Stack(
         InlineButton::Login('Login','https://example.com/login'),
         InlineButton::Url('Visit Homepage','https://example.com')
-    )
-    ->build();
+    );
 ```
 
 
@@ -288,8 +283,7 @@ public function handleExit(Message $message) {
 ```php
 $data['reply_markup'] = KeyboardForceReply::new()
     ->addButton(KeyboardButton::Text('Hello please reply'))
-    ->placeholder('must reply')
-    ->build();
+    ->placeholder('must reply');
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
