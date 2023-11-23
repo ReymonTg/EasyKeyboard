@@ -78,7 +78,7 @@ jobs:
             composer info -D
 
       - name: Run tests
-        run: vendor/bin/phpunit ${{ matrix.phpunit-flags }}
+        run: composer test
 
       - name: Run style fixer
         env:
