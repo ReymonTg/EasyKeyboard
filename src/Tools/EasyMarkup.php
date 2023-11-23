@@ -15,20 +15,18 @@
 
 namespace Reymon\EasyKeyboard\Tools;
 
-use Reymon\EasyKeyboard\ChatAdminRights;
 use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
+use Reymon\EasyKeyboard\ChatAdminRights;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
-use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeUser;
-use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeChat;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeChannel;
+use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeChat;
+use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeUser;
 
 trait EasyMarkup
 {
     /**
-     * create simple text keyboard
+     * create simple text keyboard.
      *
-     * @param string $text
-     * @return KeyboardMarkup
      */
     public function addText(string $text): KeyboardMarkup
     {
@@ -36,51 +34,37 @@ trait EasyMarkup
     }
 
     /**
-     * create simple texts keyboard
-     * 
+     * create simple texts keyboard.
+     *
      * @param array $keyboards
-     * @return KeyboardMarkup
      */
     public function addTexts(... $keyboards): KeyboardMarkup
     {
-        $callabe = function(array $row)
-        {
-            array_map($this->addText(...), $row);
+        $callabe = function (array $row): void {
+            \array_map($this->addText(...), $row);
             $this->row();
         };
-        array_map($callabe, $keyboards);
+        \array_map($callabe, $keyboards);
         return $this;
     }
 
-    /**
-     * @param string $text
-     * @param int $userId
-     * @return KeyboardMarkup
-     */
     public function addProfile(string $text, int $userId): KeyboardMarkup
     {
         return $this->addButton(KeyboardButton::Profile($text, $userId));
     }
-    
+
     /**
-     * Create text button that open web app without requiring user information
+     * Create text button that open web app without requiring user information.
      *
-     * @param string $text
-     * @param string $url
-     * @return KeyboardMarkup
      */
     public function addWebApp(string $text, string $url): KeyboardMarkup
     {
         return $this->addButton(KeyboardButton::WebApp($text, $url));
     }
-    
 
     /**
-     * Create text button that request poll from user
+     * Create text button that request poll from user.
      *
-     * @param string $text
-     * @param PollType $quiz
-     * @return KeyboardMarkup
      */
     public function requestPoll(string $text, PollType $type = PollType::ALL): KeyboardMarkup
     {
@@ -88,10 +72,8 @@ trait EasyMarkup
     }
 
     /**
-     * Create text button that request location from user
+     * Create text button that request location from user.
      *
-     * @param string $text
-     * @return KeyboardMarkup
      */
     public function requestLocation(string $text): KeyboardMarkup
     {
@@ -99,10 +81,8 @@ trait EasyMarkup
     }
 
     /**
-     * Create text button that request contact info from user
+     * Create text button that request contact info from user.
      *
-     * @param string $text
-     * @return KeyboardMarkup
      */
     public function requestPhone(string $text): KeyboardMarkup
     {
@@ -110,13 +90,8 @@ trait EasyMarkup
     }
 
     /**
-     * Create a request peer user button
+     * Create a request peer user button.
      *
-     * @param string $text
-     * @param int $buttonId
-     * @param bool $bot
-     * @param bool $premium
-     * @return KeyboardMarkup
      */
     public function requestUser(string $text, int $buttonId, ?bool $bot = null, ?bool $premium = null): KeyboardMarkup
     {
@@ -125,16 +100,13 @@ trait EasyMarkup
     }
 
     /**
-     * Create a request peer chat button
+     * Create a request peer chat button.
      *
-     * @param string           $text
-     * @param int              $buttonId
      * @param ?bool            $creator
      * @param ?bool            $hasUsername
      * @param ?bool            $forum
      * @param ?ChatAdminRights $userAdminRights
      * @param ?ChatAdminRights $botAdminRights
-     * @return KeyboardMarkup
      */
     public function requestChat(
         string $text,
@@ -144,22 +116,18 @@ trait EasyMarkup
         ?bool  $forum = null,
         ?ChatAdminRights $userAdminRights = null,
         ?ChatAdminRights $botAdminRights  = null
-    ): KeyboardMarkup
-    {
+    ): KeyboardMarkup {
         $peerType = RequestPeerTypeChat::new($creator, $hasUsername, $forum, $botAdminRights, $userAdminRights);
         return $this->addButton(KeyboardButton::Peer($text, $buttonId, $peerType));
     }
 
     /**
-     * Create a request peer broadcast button
+     * Create a request peer broadcast button.
      *
-     * @param string           $text
-     * @param int              $buttonId
      * @param ?bool            $creator
      * @param ?bool            $hasUsername
      * @param ?ChatAdminRights $userAdminRights
      * @param ?ChatAdminRights $botAdminRights
-     * @return KeyboardMarkup
      */
     public function requestChannel(
         string $text,
@@ -168,8 +136,7 @@ trait EasyMarkup
         ?bool  $hasUsername = null,
         ?ChatAdminRights $userAdminRights = null,
         ?ChatAdminRights $botAdminRights  = null
-    ): KeyboardMarkup
-    {
+    ): KeyboardMarkup {
         $peerType = RequestPeerTypeChannel::new($creator, $hasUsername, $botAdminRights, $userAdminRights);
         return $this->addButton(KeyboardButton::Peer($text, $buttonId, $peerType));
     }

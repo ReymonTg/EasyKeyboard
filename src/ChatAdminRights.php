@@ -45,8 +45,7 @@ final class ChatAdminRights implements \JsonSerializable
         ?bool $postStories    = null,
         ?bool $editStories    = null,
         ?bool $deleteStories  = null,
-    ): self
-    {
+    ): self {
         $adminRights = [
             'can_change_info'        => $changeInfo,
             'can_post_messages'      => $postMessages,
@@ -72,6 +71,6 @@ final class ChatAdminRights implements \JsonSerializable
      */
     public function jsonSerialize(): mixed
     {
-        return array_filter($this->adminRights, fn($v) => !is_null($v));
+        return \array_filter($this->adminRights, fn ($v) => !\is_null($v));
     }
 }

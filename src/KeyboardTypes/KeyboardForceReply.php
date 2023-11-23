@@ -15,8 +15,8 @@
 
 namespace Reymon\EasyKeyboard\KeyboardTypes;
 
-use Reymon\EasyKeyboard\Tools\KeyboardDocs;
 use Reymon\EasyKeyboard\Keyboard;
+use Reymon\EasyKeyboard\Tools\KeyboardDocs;
 
 /**
  * @mixin KeyboardDocs
