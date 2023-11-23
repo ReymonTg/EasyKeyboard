@@ -26,7 +26,7 @@ final class InlineButton extends Button
      * @param string $text
      * @param string $query
      * @param bool $same
-     * @param InlineChoosePeer $filter
+     * @param ?InlineChoosePeer $filter
      */
     public static function SwitchInline(string $text, string $query, bool $same = true, ?InlineChoosePeer $filter = null): InlineButton
     {
