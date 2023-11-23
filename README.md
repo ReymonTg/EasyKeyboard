@@ -61,8 +61,7 @@ $this->sendMessage(
 
 A ReplyKeyboardMarkup is created by calling the static `new()` method on `KeyboardMarkup`. After that every field,
 like `singleUse`, ... add some extras. Buttons can be added by calling
-the `addButton()` method. We have a detailed look on that later.(note that this keyboard need to convert to array to 
-readable by your robot so at the end you need to call `init()` method)
+the `addButton()` method. We have a detailed look on that later.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -199,8 +198,7 @@ KeyboardInline::new()
     ->row()
     ->addButton(InlineButton::Callback('C','answer-c'))
     ->addButton(InlineButton::Callback('D','answer-d'))
-    ->remove()
-    ->build();
+    ->remove();
 ```
 In this example button D will remove from buttons.
 
@@ -274,7 +272,7 @@ KeyboardForceReply and KeyboardHide can be used the same way as a normal keyboar
 #[FilterAnd(new FilterPrivate, new FilterIncoming)]
 public function handleExit(Message $message) {
     $message->reply('Thank you',
-        replyMarkup : KeyboardHide::new()->build()
+        replyMarkup : KeyboardHide::new()
     );
 }
 
