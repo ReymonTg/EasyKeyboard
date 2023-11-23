@@ -76,6 +76,7 @@ final class InlineButton extends Button
             ],
             'text' => $text,
         ];
+        $data['login_url'] = array_filter($data['login_url'], fn($v) => !is_null($v));
         return new static($data);
     }
 
