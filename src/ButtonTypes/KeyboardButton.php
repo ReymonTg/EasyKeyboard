@@ -22,7 +22,6 @@ use Reymon\EasyKeyboard\Tools\PollType;
 
 final class KeyboardButton extends Button
 {
-
     public static function Profile(string $text, int $userId): KeyboardButton
     {
         $data = [
