@@ -35,20 +35,6 @@ abstract class Keyboard implements \JsonSerializable
     protected array $data = [];
 
     /**
-     * To cast easy-keyboard to Telegram Api keyboard.
-     *
-     * @return list<array> Telegram Api Keyboard
-     */
-    public function build(): array
-    {
-        $keyboard = &$this->data;
-        if (empty($keyboard[$this->currentRowIndex])) {
-            unset($keyboard[$this->currentRowIndex]);
-        }
-        return $this->data;
-    }
-
-    /**
      * To cast Telegram api keyboard to easy-keyboard.
      *
      * @param array $rawReplyMarkup array of Telegram api Keyboard
