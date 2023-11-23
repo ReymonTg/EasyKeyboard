@@ -1,6 +1,88 @@
-composer.*
-/vendor/
-test.*
-# Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
-# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
-# composer.lock
+*.raw
+
+# JetBrains IDE
+.idea/
+*.iml
+
+# Eclipse
+.buildpath
+.project
+.settings
+
+# VI
+*.swp
+
+# C extensions
+*.so
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# emacs auto-saving files
+\#*#
+.#*#
+vendor
+*bak
+token.php
+*~uploading*
+enc.tar.xz
+a
+web_data.php
+web_API.log
+db_connect.php
+Reymon.log
+
+sessions
+docs_md
+
+.env
+composer.lock
+b.php
+telegram-cli*
+src/Fuzzer.php
+fuzzer.php
+tests/500mb
+*.save
+*.save.1
+*.save.*
+phar7
+phar5
+big
+*.phar
+.phpunit.result.cache
+.vscode/*
+.vscode
+custom.md
+.php_cs.cache
+coverage
+tempConv
+test.php
+
+
+.phpdoc_cache
+
+tests/db-local.php
+
+app_test.json
+app.json
+config.json
+
+/Dockerfile
+
+/docker-compose.yml
+/Caddyfile
+/tt.php
+/changelog
+plugins/

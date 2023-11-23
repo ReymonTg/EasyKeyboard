@@ -27,13 +27,19 @@
             "Reymon\\EasyKeyboard\\": "./src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Reymon\\EasyKeyboard\\Test\\": "./tests"
+        }
+    },
     "require": {
         "php-64bit": ">=8.1",
         "ext-mbstring": "*",
         "ext-json": "*"
     },
     "require-dev": {
-        "amphp/php-cs-fixer-config": "^2.0"
+        "amphp/php-cs-fixer-config": "^2.0",
+        "phpunit/phpunit": "^9"
     },
     "scripts": {
         "build": [
