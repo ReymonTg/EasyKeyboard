@@ -16,18 +16,13 @@
 namespace Reymon\EasyKeyboard\ButtonTypes;
 
 use Reymon\EasyKeyboard\Button;
-use Reymon\EasyKeyboard\Tools\PollType;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerType;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeUser;
+use Reymon\EasyKeyboard\Tools\PollType;
 
 final class KeyboardButton extends Button
 {
 
-    /**
-     * @param string $text
-     * @param int $userId
-     * @return KeyboardButton
-     */
     public static function Profile(string $text, int $userId): KeyboardButton
     {
         $data = [
@@ -38,11 +33,8 @@ final class KeyboardButton extends Button
     }
 
     /**
-     * Create text button that request poll from user
+     * Create text button that request poll from user.
      *
-     * @param string $text
-     * @param PollType $type
-     * @return KeyboardButton
      */
     public static function Poll(string $text, PollType $type = PollType::ALL): KeyboardButton
     {
@@ -54,10 +46,8 @@ final class KeyboardButton extends Button
     }
 
     /**
-     * Create text button that request location from user
+     * Create text button that request location from user.
      *
-     * @param string $text
-     * @return KeyboardButton
      */
     public static function Location(string $text): KeyboardButton
     {
@@ -69,10 +59,8 @@ final class KeyboardButton extends Button
     }
 
     /**
-     * Create text button that request contact info from user
+     * Create text button that request contact info from user.
      *
-     * @param string $text
-     * @return KeyboardButton
      */
     public static function Phone(string $text): KeyboardButton
     {
@@ -84,10 +72,8 @@ final class KeyboardButton extends Button
     }
 
     /**
-     * create simple text keyboard
+     * create simple text keyboard.
      *
-     * @param string $text
-     * @return KeyboardButton
      */
     public static function Text(string $text): KeyboardButton
     {
@@ -98,11 +84,8 @@ final class KeyboardButton extends Button
     }
 
     /**
-     * Create text button that open web app without requiring user information
+     * Create text button that open web app without requiring user information.
      *
-     * @param string $text
-     * @param string $url
-     * @return KeyboardButton
      */
     public static function WebApp(string $text, string $url): KeyboardButton
     {
@@ -116,12 +99,8 @@ final class KeyboardButton extends Button
     }
 
     /**
-     * Create a request peer button
+     * Create a request peer button.
      *
-     * @param string $text
-     * @param int $buttonId
-     * @param RequestPeerType $type
-     * @return KeyboardButton
      */
     public static function Peer(string $text, int $buttonId, RequestPeerType $type): KeyboardButton
     {

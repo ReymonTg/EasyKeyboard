@@ -21,19 +21,15 @@ use Reymon\EasyKeyboard\Tools\InlineChoosePeer;
 final class InlineButton extends Button
 {
     /**
-     * Create Inline button with SwitchInline options
+     * Create Inline button with SwitchInline options.
      *
-     * @param string $text
-     * @param string $query
-     * @param bool $same
      * @param ?InlineChoosePeer $filter
      */
-    public static function SwitchInline(string $text, string $query, bool $same = true, ?InlineChoosePeer $filter = null): InlineButton
+    public static function SwitchInline(string $text, string $query, bool $same = false, ?InlineChoosePeer $filter = null): InlineButton
     {
-        $data = match (true)
-        {
+        $data = match (true) {
+            !\is_null($filter) => ['switch_inline_query_chosen_chat'  => [...$filter->jsonSerialize(), 'query' => $query]],
             $same   => ['switch_inline_query_current_chat' => $query],
-            $filter => ['switch_inline_query_chosen_chat'  => [...$filter->jsonSerialize(), 'query' => $query]],
             default => ['switch_inline_query' => $query]
         };
         $data += ['text' => $text];
@@ -41,10 +37,8 @@ final class InlineButton extends Button
     }
 
     /**
-     * Create Inline webapp button
+     * Create Inline webapp button.
      *
-     * @param string $text
-     * @param string $url
      */
     public static function WebApp(string $text, string $url): InlineButton
     {
@@ -58,12 +52,9 @@ final class InlineButton extends Button
     }
 
     /**
-     * Create inline button for login
-     * @param string $text
-     * @param string $url
+     * Create inline button for login.
      * @param ?string $fwdText
      * @param ?string $username
-     * @param bool $writeAccess
      */
     public static function Login(string $text, string $url, ?string $fwdText = null, ?string $username = null, bool $writeAccess = false): InlineButton
     {
@@ -76,15 +67,13 @@ final class InlineButton extends Button
             ],
             'text' => $text,
         ];
-        $data['login_url'] = array_filter($data['login_url'], fn($v) => !is_null($v));
+        $data['login_url'] = \array_filter($data['login_url'], fn ($v) => !\is_null($v));
         return new static($data);
     }
 
     /**
-     * Create inline button with callback data
+     * Create inline button with callback data.
      *
-     * @param string $text
-     * @param string $callback
      */
     public static function CallBack(string $text, string $callback): InlineButton
     {
@@ -96,10 +85,8 @@ final class InlineButton extends Button
     }
 
     /**
-     * Create Inline button with url
+     * Create Inline button with url.
      *
-     * @param string $text
-     * @param string $url
      */
     public static function Url(string $text, string $url): InlineButton
     {
@@ -111,9 +98,8 @@ final class InlineButton extends Button
     }
 
     /**
-     * Create game button for your inline game
+     * Create game button for your inline game.
      *
-     * @param string $text
      */
     public static function Game(string $text): InlineButton
     {
@@ -125,9 +111,8 @@ final class InlineButton extends Button
     }
 
     /**
-     * Create a buy button for your inline buy request(similar to webapps)
+     * Create a buy button for your inline buy request(similar to webapps).
      *
-     * @param string $text
      */
     public static function Buy(string $text): InlineButton
     {

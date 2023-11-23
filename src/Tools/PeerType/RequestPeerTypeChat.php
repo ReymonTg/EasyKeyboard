@@ -19,7 +19,6 @@ use Reymon\EasyKeyboard\ChatAdminRights;
 
 class RequestPeerTypeChat extends RequestPeerType
 {
-
     public static function new(
         ?bool            $creator         = null,
         ?bool            $hasUsername     = null,
@@ -27,16 +26,15 @@ class RequestPeerTypeChat extends RequestPeerType
         ?bool            $botMember       = null,
         ?ChatAdminRights $userAdminRights = null,
         ?ChatAdminRights $botAdminRights  = null
-    ): self
-    {
+    ): self {
         $data = [
             'chat_is_channel'   => false,
             'chat_is_forum'     => $forum,
             'chat_has_username' => $hasUsername,
             'chat_is_created'   => $creator,
             'bot_is_member'     => $botMember,
-            'user_admin_rights' => is_callable($userAdminRights) ? $userAdminRights(): null,
-            'bot_admin_rights'  => is_callable($botAdminRights)  ? $botAdminRights() : null
+            'user_admin_rights' => \is_callable($userAdminRights) ? $userAdminRights(): null,
+            'bot_admin_rights'  => \is_callable($botAdminRights)  ? $botAdminRights() : null
         ];
         return new static($data);
     }

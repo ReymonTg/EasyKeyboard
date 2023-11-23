@@ -15,42 +15,32 @@
 
 namespace Reymon\EasyKeyboard\Tools;
 
-use Reymon\EasyKeyboard\KeyboardTypes\{KeyboardForceReply, KeyboardMarkup};
+use Reymon\EasyKeyboard\KeyboardTypes\KeyboardForceReply;
+use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
 
 interface KeyboardDocs
 {
-
     /**
-     * Make current keyboard to be just used once
+     * Make current keyboard to be just used once.
      *
-     * @param bool $singleUse
-     * @return KeyboardMarkup|KeyboardForceReply
      */
     public function singleUse(bool $singleUse = true): KeyboardMarkup|KeyboardForceReply;
 
     /**
-     * Make current keyboard size smaller
+     * Make current keyboard size smaller.
      *
-     * @param bool $resize
-     * @return KeyboardMarkup|KeyboardForceReply
      */
     public function resize(bool $resize = true): KeyboardMarkup|KeyboardForceReply;
 
     /**
-     * Make current keyboard selective
+     * Make current keyboard selective.
      *
-     * @param bool $selective
-     * @return KeyboardMarkup|KeyboardForceReply
      */
     public function selective(bool $selective = true): KeyboardMarkup|KeyboardForceReply;
 
     /**
-     * Create placeholder for current keyboard it can be also empty string
+     * Create placeholder for current keyboard it can be also empty string.
      *
-     * @param string|null $placeholder
-     * @return KeyboardMarkup|KeyboardForceReply
      */
     public function placeholder(?string $placeholder = null): KeyboardMarkup|KeyboardForceReply;
-
-
 }

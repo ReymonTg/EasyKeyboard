@@ -25,15 +25,14 @@ class RequestPeerTypeChannel extends RequestPeerType
         ?bool            $botMember       = null,
         ?ChatAdminRights $userAdminRights = null,
         ?ChatAdminRights $botAdminRights  = null
-    ): self
-    {
+    ): self {
         $data = [
             'chat_is_channel'   => true,
             'chat_has_username' => $hasUsername,
             'chat_is_created'   => $creator,
             'bot_is_member'     => $botMember,
-            'user_admin_rights' => is_callable($userAdminRights) ? $userAdminRights(): null,
-            'bot_admin_rights'  => is_callable($botAdminRights)  ? $botAdminRights() : null
+            'user_admin_rights' => \is_callable($userAdminRights) ? $userAdminRights(): null,
+            'bot_admin_rights'  => \is_callable($botAdminRights)  ? $botAdminRights() : null
         ];
         return new static($data);
     }

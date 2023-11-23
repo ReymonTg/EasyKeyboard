@@ -52,6 +52,6 @@ abstract class RequestPeerType implements \JsonSerializable
      */
     public function jsonSerialize(): mixed
     {
-        return array_filter($this->types, fn($v) => !is_null($v));
+        return \array_filter($this->types, fn ($v) => !\is_null($v));
     }
 }
