@@ -43,9 +43,11 @@
     },
     "scripts": {
         "build": [
-            "@cs-fix"
+            "@cs-fix",
+            "@test"
         ],
         "cs-fix": "PHP_CS_FIXER_IGNORE_ENV=1 php -d pcre.jit=0 vendor/bin/php-cs-fixer fix -v",
         "test" :"php -dzend.assertions=1 -dassert.exception=1 ./vendor/bin/phpunit --coverage-text tests"
-    }
+    },
+    "minimum-stability": "stable"
 }
