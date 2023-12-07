@@ -15,16 +15,16 @@
 
 namespace Reymon\EasyKeyboard;
 
-use RangeException;
 use LengthException;
 use OutOfBoundsException;
-use Reymon\EasyKeyboard\Tools\InlineChoosePeer;
+use RangeException;
 use Reymon\EasyKeyboard\ButtonTypes\InlineButton;
 use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
+use Reymon\EasyKeyboard\KeyboardTypes\KeyboardForceReply;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardHide;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardInline;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
-use Reymon\EasyKeyboard\KeyboardTypes\KeyboardForceReply;
+use Reymon\EasyKeyboard\Tools\InlineChoosePeer;
 
 /**
  * Main class for Keyboard.
