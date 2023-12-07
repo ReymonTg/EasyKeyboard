@@ -15,15 +15,16 @@
 
 namespace Reymon\EasyKeyboard;
 
-use OutOfBoundsException;
 use RangeException;
+use LengthException;
+use OutOfBoundsException;
+use Reymon\EasyKeyboard\Tools\InlineChoosePeer;
 use Reymon\EasyKeyboard\ButtonTypes\InlineButton;
 use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
-use Reymon\EasyKeyboard\KeyboardTypes\KeyboardForceReply;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardHide;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardInline;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
-use Reymon\EasyKeyboard\Tools\InlineChoosePeer;
+use Reymon\EasyKeyboard\KeyboardTypes\KeyboardForceReply;
 
 /**
  * Main class for Keyboard.
@@ -101,17 +102,15 @@ abstract class Keyboard implements \JsonSerializable
                     if (isset($placeholder) && $length >= 0 && $length <= 64) {
                         $this->data['input_field_placeholder'] = $placeholder;
                     } elseif ($placeholder != null) {
-                        throw new Exception('PLACE_HOLDER_MAX_CHAR');
+                        throw new LengthException('PLACE_HOLDER_MAX_CHAR');
                     }
                 },
-                default => throw new Exception(\sprintf('Call to undefined method %s::%s()', $this::class, $name))
+                default => throw Exception::undefinedMethod($this::class, $name)
             };
             isset($arguments[0]) ? $fn($arguments[0]) : $fn();
             return $this;
         }
-        throw new Exception(
-            \sprintf('Call to undefined method %s::%s()', $this::class, $name)
-        );
+        throw Exception::undefinedMethod($this::class, $name);
     }
 
     /**

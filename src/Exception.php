@@ -16,5 +16,16 @@
 namespace Reymon\EasyKeyboard;
 
 final class Exception extends \Exception
-{
+{    
+   /**
+    * Complain about undefined method.
+    *
+    * @param string $className Class name
+    * @param string $methodName Method name
+    */
+    public static function undefinedMethod(string $className, string $methodName): self
+    {
+        $message = \sprintf('Call to undefined method %s::%s', $className, $$methodName);
+        return new self($message);
+    }
 }
