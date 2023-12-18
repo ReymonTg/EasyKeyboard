@@ -269,7 +269,7 @@ KeyboardInline::new()
 KeyboardForceReply and KeyboardHide can be used the same way as a normal keyboard, but they do not receive any buttons:
 
 ```php
-#[FilterAnd(new FilterPrivate, new FilterIncoming)]
+#[FilterAnd(new FilterPrivate)]
 public function handleExit(Message $message) {
     $message->reply('Thank you',
         replyMarkup : KeyboardHide::new()
@@ -332,6 +332,7 @@ here is an example if `$flunentKeyboard` instance of `KeyboardInline`
 ```php
 $fluentKeyboard->addButton(InlineButton::Callback('End','End'));
 ```
+<!---
 At the end you can call `json_encode` method on that and pass to some telegram method (Reymon will handle this automaticlly). here is an
 example for [Reymon](https://github.com/ReymonTg/Reymon) :
 
@@ -343,4 +344,5 @@ public function modify(Message $message) {
     );
 }
 ```
+--->
 <p align="right">(<a href="#top">back to top</a>)</p>
