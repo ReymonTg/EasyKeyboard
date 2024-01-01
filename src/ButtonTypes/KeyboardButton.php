@@ -34,6 +34,8 @@ final class KeyboardButton extends Button
     /**
      * Create text button that request poll from user.
      *
+     * @param string   $text Label text on the button
+     * @param PollType $quiz Whether the user can create polls in the quiz mode
      */
     public static function Poll(string $text, PollType $type = PollType::ALL): KeyboardButton
     {
@@ -47,6 +49,7 @@ final class KeyboardButton extends Button
     /**
      * Create text button that request location from user.
      *
+     * @param string $text Label text on the button
      */
     public static function Location(string $text): KeyboardButton
     {
@@ -60,6 +63,7 @@ final class KeyboardButton extends Button
     /**
      * Create text button that request contact info from user.
      *
+     * @param string $text Label text on the button
      */
     public static function Phone(string $text): KeyboardButton
     {
@@ -73,6 +77,7 @@ final class KeyboardButton extends Button
     /**
      * create simple text keyboard.
      *
+     * @param string $text Label text on the button
      */
     public static function Text(string $text): KeyboardButton
     {
@@ -85,6 +90,8 @@ final class KeyboardButton extends Button
     /**
      * Create text button that open web app without requiring user information.
      *
+     * @param string $text Label text on the button
+     * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
      */
     public static function WebApp(string $text, string $url): KeyboardButton
     {
@@ -100,13 +107,16 @@ final class KeyboardButton extends Button
     /**
      * Create a request peer button.
      *
+     * @param string $text     Label text on the button
+     * @param int    $buttonId Signed 32-bit identifier of the request
+     * @param RequestPeerType $peerType Pressing the button will open a list of suitable chats. Tapping on a chat will send its identifier to the bot
      */
-    public static function Peer(string $text, int $requestId, RequestPeerType $type): KeyboardButton
+    public static function Peer(string $text, int $buttonId, RequestPeerType $type): KeyboardButton
     {
         $peer = $type instanceof RequestPeerTypeUser ? 'request_user' : 'request_chat';
         $data = [
             'text' => $text,
-            $peer  => [ 'request_id' => $requestId, ...$type->jsonSerialize()]
+            $peer  => [ 'request_id' => $buttonId, ...$type->jsonSerialize()]
         ];
         return new static($data);
     }

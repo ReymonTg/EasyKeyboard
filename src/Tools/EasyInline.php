@@ -23,6 +23,8 @@ trait EasyInline
     /**
      * Create inline button with callback data.
      *
+     * @param string $text     Label text on the button
+     * @param string $callback Data to be sent in a callback query to the bot when button is pressed, 1-64 bytes
      */
     public function addCallback(string $text, string $callback): KeyboardInline
     {
@@ -47,6 +49,8 @@ trait EasyInline
     /**
      * Create Inline webapp button.
      *
+     * @param string $text Label text on the button
+     * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
      */
     public function addWebApp(string $text, string $url): KeyboardInline
     {
@@ -56,6 +60,8 @@ trait EasyInline
     /**
      * Create Inline button with url.
      *
+     * @param string $text Label text on the button
+     * @param string $url  HTTP or tg:// URL to be opened when the button is pressed. Links `tg://user?id=<user_id>` can be used to mention a user by their ID without using a username, if this is allowed by their privacy settings.
      */
     public function addUrl(string $text, string $url): KeyboardInline
     {
@@ -65,6 +71,7 @@ trait EasyInline
     /**
      * Create game button for your inline game.
      *
+     * @param string $text Label text on the button
      */
     public function addGame(string $text): KeyboardInline
     {
@@ -74,6 +81,7 @@ trait EasyInline
     /**
      * Create a buy button for your inline buy request(similar to webapps).
      *
+     * @param string $text Label text on the button
      */
     public function addBuy(string $text): KeyboardInline
     {
@@ -83,7 +91,10 @@ trait EasyInline
     /**
      * Create Inline button with SwitchInline options.
      *
-     * @param ?InlineChoosePeer $filter
+     * @param string $text  Label text on the button
+     * @param string $query Data to be sent in a [callback query](https://core.telegram.org/bots/api#callbackquery) to the bot when button is pressed, 1-64 bytes
+     * @param bool   $same  Pressing the button will insert the bot's username and the specified inline query in the current chat's input field
+     * @param InlineChoosePeer|null $peerTypes Filter to use when selecting chats.
      */
     public function addSwitchInline(string $text, string $query, bool $same = true, ?InlineChoosePeer $filter = null): KeyboardInline
     {

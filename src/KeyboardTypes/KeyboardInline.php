@@ -18,6 +18,9 @@ namespace Reymon\EasyKeyboard\KeyboardTypes;
 use Reymon\EasyKeyboard\Keyboard;
 use Reymon\EasyKeyboard\Tools\EasyInline;
 
+/**
+ * Represents an inline keyboard that appears right next to the message it belongs to.
+ */
 final class KeyboardInline extends Keyboard
 {
     use EasyInline;

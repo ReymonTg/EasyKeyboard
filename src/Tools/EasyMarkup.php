@@ -15,8 +15,8 @@
 
 namespace Reymon\EasyKeyboard\Tools;
 
-use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
 use Reymon\EasyKeyboard\ChatAdminRights;
+use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeChannel;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeChat;
@@ -25,8 +25,9 @@ use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeUser;
 trait EasyMarkup
 {
     /**
-     * create simple text keyboard.
+     * Create simple text keyboard.
      *
+     * @param string $text Label text on the button
      */
     public function addText(string $text): KeyboardMarkup
     {
@@ -34,7 +35,7 @@ trait EasyMarkup
     }
 
     /**
-     * create simple texts keyboard.
+     * Create simple texts keyboard.
      *
      * @param array $keyboards
      */
@@ -56,6 +57,8 @@ trait EasyMarkup
     /**
      * Create text button that open web app without requiring user information.
      *
+     * @param string $text Label text on the button
+     * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
      */
     public function addWebApp(string $text, string $url): KeyboardMarkup
     {
@@ -65,6 +68,8 @@ trait EasyMarkup
     /**
      * Create text button that request poll from user.
      *
+     * @param string   $text Label text on the button
+     * @param PollType $quiz Whether the user can create polls in the quiz mode
      */
     public function requestPoll(string $text, PollType $type = PollType::ALL): KeyboardMarkup
     {
@@ -74,6 +79,7 @@ trait EasyMarkup
     /**
      * Create text button that request location from user.
      *
+     * @param string $text Label text on the button
      */
     public function requestLocation(string $text): KeyboardMarkup
     {
@@ -83,6 +89,7 @@ trait EasyMarkup
     /**
      * Create text button that request contact info from user.
      *
+     * @param string $text Label text on the button
      */
     public function requestPhone(string $text): KeyboardMarkup
     {
@@ -92,6 +99,11 @@ trait EasyMarkup
     /**
      * Create a request peer user button.
      *
+     * @param string    $text     Label text on the button
+     * @param int       $buttonId Signed 32-bit identifier of the request
+     * @param bool|null $bot      Whether request a bot
+     * @param bool|null $premium  Whether request a premium user
+     * @param int       $max      The maximum number of users to be selected; 1-10
      */
     public function requestUser(string $text, int $buttonId, ?bool $bot = null, ?bool $premium = null, int $max = 1): KeyboardMarkup
     {
@@ -102,11 +114,13 @@ trait EasyMarkup
     /**
      * Create a request peer chat button.
      *
-     * @param ?bool            $creator
-     * @param ?bool            $hasUsername
-     * @param ?bool            $forum
-     * @param ?ChatAdminRights $userAdminRights
-     * @param ?ChatAdminRights $botAdminRights
+     * @param string    $text        Label text on the button
+     * @param int       $buttonId    Signed 32-bit identifier of the request
+     * @param bool|null $creator     Whether request a chat owned by the user
+     * @param bool|null $hasUsername Whether request a supergroup or a channel with a username
+     * @param bool|null $forum       Whether request a forum supergroup
+     * @param ChatAdminRights|null $userAdminRights Required administrator rights of the user in the chat
+     * @param ChatAdminRights|null $botAdminRights  Required administrator rights of the bot in the chat
      */
     public function requestChat(
         string $text,
@@ -124,10 +138,12 @@ trait EasyMarkup
     /**
      * Create a request peer broadcast button.
      *
-     * @param ?bool            $creator
-     * @param ?bool            $hasUsername
-     * @param ?ChatAdminRights $userAdminRights
-     * @param ?ChatAdminRights $botAdminRights
+     * @param string    $text        Label text on the button
+     * @param int       $buttonId    Signed 32-bit identifier of the request
+     * @param bool|null $creator     Whether request a chat owned by the user
+     * @param bool|null $hasUsername Whether request a supergroup or a channel with a username
+     * @param ChatAdminRights|null $userAdminRights Required administrator rights of the user in the channel
+     * @param ChatAdminRights|null $botAdminRights  Required administrator rights of the bot in the channel
      */
     public function requestChannel(
         string $text,

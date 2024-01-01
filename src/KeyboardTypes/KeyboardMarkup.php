@@ -20,6 +20,8 @@ use Reymon\EasyKeyboard\Tools\EasyMarkup;
 use Reymon\EasyKeyboard\Tools\KeyboardDocs;
 
 /**
+ * Represents a custom keyboard with reply options
+ *
  * @mixin KeyboardDocs
  */
 final class KeyboardMarkup extends Keyboard
