@@ -17,11 +17,12 @@ namespace Reymon\EasyKeyboard\Tools\PeerType;
 
 class RequestPeerTypeUser extends RequestPeerType
 {
-    public static function new(?bool $bot = null, ?bool $premium = null): self
+    public static function new(?bool $bot = null, ?bool $premium = null, int $max = 1): self
     {
         $data = [
             'user_is_bot'     => $bot,
-            'user_is_premium' => $premium
+            'user_is_premium' => $premium,
+            'max_quantity'    => $max
         ];
         return new static($data);
     }

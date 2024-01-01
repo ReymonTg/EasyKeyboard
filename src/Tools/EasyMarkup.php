@@ -93,9 +93,9 @@ trait EasyMarkup
      * Create a request peer user button.
      *
      */
-    public function requestUser(string $text, int $buttonId, ?bool $bot = null, ?bool $premium = null): KeyboardMarkup
+    public function requestUser(string $text, int $buttonId, ?bool $bot = null, ?bool $premium = null, int $max = 1): KeyboardMarkup
     {
-        $peerType = RequestPeerTypeUser::new($bot, $premium);
+        $peerType = RequestPeerTypeUser::new($bot, $premium, $max);
         return $this->addButton(KeyboardButton::Peer($text, $buttonId, $peerType));
     }
 
