@@ -26,7 +26,6 @@ final class InlineButton extends Button
      * @param string $text  Label text on the button
      * @param string $query Data to be sent in a [callback query](https://core.telegram.org/bots/api#callbackquery) to the bot when button is pressed, 1-64 bytes
      * @param bool   $same  Pressing the button will insert the bot's username and the specified inline query in the current chat's input field
-     * @param InlineChoosePeer|null $peerTypes Filter to use when selecting chats.
      */
     public static function SwitchInline(string $text, string $query, bool $same = false, ?InlineChoosePeer $filter = null): InlineButton
     {

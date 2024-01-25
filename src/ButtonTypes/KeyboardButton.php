@@ -35,7 +35,6 @@ final class KeyboardButton extends Button
      * Create text button that request poll from user.
      *
      * @param string   $text Label text on the button
-     * @param PollType $quiz Whether the user can create polls in the quiz mode
      */
     public static function Poll(string $text, PollType $type = PollType::ALL): KeyboardButton
     {
@@ -109,7 +108,6 @@ final class KeyboardButton extends Button
      *
      * @param string $text     Label text on the button
      * @param int    $buttonId Signed 32-bit identifier of the request
-     * @param RequestPeerType $peerType Pressing the button will open a list of suitable chats. Tapping on a chat will send its identifier to the bot
      */
     public static function Peer(string $text, int $buttonId, RequestPeerType $type): KeyboardButton
     {

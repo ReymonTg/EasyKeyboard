@@ -15,8 +15,8 @@
 
 namespace Reymon\EasyKeyboard\Tools;
 
-use Reymon\EasyKeyboard\ChatAdminRights;
 use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
+use Reymon\EasyKeyboard\ChatAdminRights;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeChannel;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeChat;
@@ -69,7 +69,6 @@ trait EasyMarkup
      * Create text button that request poll from user.
      *
      * @param string   $text Label text on the button
-     * @param PollType $quiz Whether the user can create polls in the quiz mode
      */
     public function requestPoll(string $text, PollType $type = PollType::ALL): KeyboardMarkup
     {
