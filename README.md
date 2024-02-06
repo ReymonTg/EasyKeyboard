@@ -285,7 +285,7 @@ $data['reply_markup'] = KeyboardForceReply::new()
 
 ### Keyboard Peer Type
 
-We have 3 types of peer type can be requested by bots RequestUsers , RequestGroup and RequestPeerBroadcast
+We have 3 types of peer type can be requested by bots RequestUsers , RequestGroup and RequestChannel
 
 ```php
 KeyboardMarkup::new()
@@ -297,7 +297,7 @@ KeyboardMarkup::new()
 ```
 ```php
 KeyboardMarkup::new()
-    ->addButton(KeyboardButton::Peer('Request for broadcast', 2, RequestPeerBroadcast::new()));
+    ->addButton(KeyboardButton::Peer('Request for broadcast', 2, RequestChannel::new()));
 ```
 **You can also use easier syntax to create better one**
 
