@@ -324,7 +324,7 @@ using `fromRawReplyMarkup` methods! here is and example
 $easyKeyboard = Keyboard::fromRawReplyMarkup($replyMarkup);
 ```
 As you know `$easyKeyboard` is object here and you can modify and add more buttons to it.
-here is an example if `$flunentKeyboard` instance of `KeyboardInline`
+here is an example if `$easyKeyboard` instance of `KeyboardInline`
 
 ```php
 $easyKeyboard->addButton(InlineButton::Callback('End','End'));
