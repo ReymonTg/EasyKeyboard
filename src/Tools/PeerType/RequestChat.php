@@ -17,22 +17,34 @@ namespace Reymon\EasyKeyboard\Tools\PeerType;
 
 use Reymon\EasyKeyboard\ChatAdminRights;
 
-class RequestPeerTypeChat extends RequestPeerType
+/**
+ * Create button the criteria used to request a suitable group/supergroup. The identifier of the selected chat will be shared with the bot when the corresponding button is pressed.
+ */
+class RequestGroup extends RequestPeer
 {
+    /**
+     * @param bool|null            $creator  Whether to request a chat owned by the user.
+     * @param bool|null            $username       Whether to request a supergroup or a channel with (or without) a username. If not specified, no additional restrictions are applied.
+     * @param bool|null            $forum           Whether to request a forum (or non-forum) supergroup.
+     * @param bool|null            $member          Whether to request a chat with the bot as a member. Otherwise, no additional restrictions are applied.
+     * @param ChatAdminRights|null $userAdminRights The required administrator rights of the user in the chat. If not specified, no additional restrictions are applied.
+     * @param ChatAdminRights|null $botAdminRights  The required administrator rights of the bot in the chat. If not specified, no additional restrictions are applied.
+     */
     public static function new(
         ?bool            $creator         = null,
-        ?bool            $hasUsername     = null,
+        ?bool            $username        = null,
         ?bool            $forum           = null,
-        ?bool            $botMember       = null,
+        ?bool            $member          = null,
         ?ChatAdminRights $userAdminRights = null,
         ?ChatAdminRights $botAdminRights  = null
-    ): self {
+    ): self
+    {
         $data = [
             'chat_is_channel'   => false,
             'chat_is_forum'     => $forum,
-            'chat_has_username' => $hasUsername,
+            'chat_has_username' => $username,
             'chat_is_created'   => $creator,
-            'bot_is_member'     => $botMember,
+            'bot_is_member'     => $member,
             'user_admin_rights' => \is_callable($userAdminRights) ? $userAdminRights(): null,
             'bot_admin_rights'  => \is_callable($botAdminRights)  ? $botAdminRights() : null
         ];

@@ -4,18 +4,18 @@ namespace Reymon\EasyKeyboard\Test\Buttons;
 
 use PHPUnit\Framework\TestCase;
 use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
-use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeChannel;
-use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeChat;
-use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeUser;
+use Reymon\EasyKeyboard\Tools\PeerType\RequestChannel;
+use Reymon\EasyKeyboard\Tools\PeerType\RequestGroup;
+use Reymon\EasyKeyboard\Tools\PeerType\RequestUsers;
 use Reymon\EasyKeyboard\Tools\PollType;
 
 class KeyboardButtonTest extends TestCase
 {
     public function testPeer(): void
     {
-        $button1 = KeyboardButton::Peer('hello', 0, $peer1 = RequestPeerTypeUser::new());
-        $button2 = KeyboardButton::Peer('hello', 0, $peer2 = RequestPeerTypeChat::new());
-        $button3 = KeyboardButton::Peer('hello', 0, $peer3 = RequestPeerTypeChannel::new());
+        $button1 = KeyboardButton::Peer('hello', 0, $peer1 = RequestUsers::new());
+        $button2 = KeyboardButton::Peer('hello', 0, $peer2 = RequestGroup::new());
+        $button3 = KeyboardButton::Peer('hello', 0, $peer3 = RequestChannel::new());
         $rawButton1 = [
             'text' => 'hello',
             'request_user' => ['request_id' => 0, ...$peer1->jsonSerialize()]

@@ -17,20 +17,27 @@ namespace Reymon\EasyKeyboard\Tools\PeerType;
 
 use Reymon\EasyKeyboard\ChatAdminRights;
 
-class RequestPeerTypeChannel extends RequestPeerType
+/**
+ * Create button the criteria used to request a suitable channel. The identifier of the selected channel will be shared with the bot when the corresponding button is pressed.
+ */
+class RequestChannel extends RequestPeer
 {
+    /**
+     * @param bool|null            $creator         Whether to request a chat owned by the user.
+     * @param bool|null            $username        Whether to request a supergroup or a channel with (or without) a username. If not specified, no additional restrictions are applied.
+     * @param ChatAdminRights|null $userAdminRights The required administrator rights of the user in the chat. If not specified, no additional restrictions are applied.
+     * @param ChatAdminRights|null $botAdminRights  The required administrator rights of the bot in the chat. If not specified, no additional restrictions are applied.
+     */
     public static function new(
         ?bool            $creator         = null,
-        ?bool            $hasUsername     = null,
-        ?bool            $botMember       = null,
+        ?bool            $username        = null,
         ?ChatAdminRights $userAdminRights = null,
         ?ChatAdminRights $botAdminRights  = null
     ): self {
         $data = [
             'chat_is_channel'   => true,
-            'chat_has_username' => $hasUsername,
+            'chat_has_username' => $username,
             'chat_is_created'   => $creator,
-            'bot_is_member'     => $botMember,
             'user_admin_rights' => \is_callable($userAdminRights) ? $userAdminRights(): null,
             'bot_admin_rights'  => \is_callable($botAdminRights)  ? $botAdminRights() : null
         ];

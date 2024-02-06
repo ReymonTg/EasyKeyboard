@@ -15,15 +15,23 @@
 
 namespace Reymon\EasyKeyboard\Tools\PeerType;
 
-class RequestPeerTypeUser extends RequestPeerType
+abstract class RequestPeer implements \JsonSerializable
 {
-    public static function new(?bool $bot = null, ?bool $premium = null, int $max = 1): self
+    protected array $types = [];
+
+    /**
+     * @internal
+     */
+    public function __construct(array $data)
     {
-        $data = [
-            'user_is_bot'     => $bot,
-            'user_is_premium' => $premium,
-            'max_quantity'    => $max
-        ];
-        return new static($data);
+        $this->types = $data + $this->types;
+    }
+
+    /**
+     * @internal
+     */
+    public function jsonSerialize(): mixed
+    {
+        return \array_filter($this->types, fn ($v) => !\is_null($v));
     }
 }

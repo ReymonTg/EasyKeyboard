@@ -288,19 +288,19 @@ $data['reply_markup'] = KeyboardForceReply::new()
 
 ### Keyboard Peer Type
 
-We have 3 types of peer type can be requested by bots RequestPeerTypeUser , RequestPeerTypeChat and RequestPeerTypeBroadcast
+We have 3 types of peer type can be requested by bots RequestUsers , RequestGroup and RequestPeerBroadcast
 
 ```php
 KeyboardMarkup::new()
-    ->addButton(KeyboardButton::Peer('Request for user', 0, RequestPeerTypeUser::new(bot: false)));
+    ->addButton(KeyboardButton::Peer('Request for user', 0, RequestUsers::new(bot: false)));
 ```
 ```php
 KeyboardMarkup::new()
-    ->addButton(KeyboardButton::Peer('Request for chat', 1, RequestPeerTypeChat::new()));
+    ->addButton(KeyboardButton::Peer('Request for chat', 1, RequestGroup::new()));
 ```
 ```php
 KeyboardMarkup::new()
-    ->addButton(KeyboardButton::Peer('Request for broadcast', 2, RequestPeerTypeBroadcast::new()));
+    ->addButton(KeyboardButton::Peer('Request for broadcast', 2, RequestPeerBroadcast::new()));
 ```
 **You can also use easier syntax to create better one**
 
@@ -310,7 +310,7 @@ KeyboardMarkup::new()
 ```
 ```php
 KeyboardMarkup::new()
-    ->requestChat('Request for chat', 1);
+    ->RequestGroup('Request for chat', 1);
 ```
 ```php
 KeyboardMarkup::new()

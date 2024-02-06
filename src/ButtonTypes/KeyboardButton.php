@@ -16,9 +16,9 @@
 namespace Reymon\EasyKeyboard\ButtonTypes;
 
 use Reymon\EasyKeyboard\Button;
-use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerType;
-use Reymon\EasyKeyboard\Tools\PeerType\RequestPeerTypeUser;
 use Reymon\EasyKeyboard\Tools\PollType;
+use Reymon\EasyKeyboard\Tools\PeerType\RequestPeer;
+use Reymon\EasyKeyboard\Tools\PeerType\RequestUsers;
 
 final class KeyboardButton extends Button
 {
@@ -106,12 +106,13 @@ final class KeyboardButton extends Button
     /**
      * Create a request peer button.
      *
-     * @param string $text     Label text on the button
-     * @param int    $buttonId Signed 32-bit identifier of the request
+     * @param string      $text     Label text on the button
+     * @param int         $buttonId Signed 32-bit identifier of the request
+     * @param RequestPeer $type     Pressing the button will open a list of suitable chats. Tapping on a chat will send its identifier to the bot
      */
-    public static function Peer(string $text, int $buttonId, RequestPeerType $type): KeyboardButton
+    public static function Peer(string $text, int $buttonId, RequestPeer $type): KeyboardButton
     {
-        $peer = $type instanceof RequestPeerTypeUser ? 'request_user' : 'request_chat';
+        $peer = $type instanceof RequestUsers ? 'request_user' : 'request_chat';
         $data = [
             'text' => $text,
             $peer  => [ 'request_id' => $buttonId, ...$type->jsonSerialize()]
