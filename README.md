@@ -2,9 +2,6 @@
 Simple reply &amp; inline telegram api keyboard
 <div id="top"></div>
 
-# easy-keyboard
-A easy keyboard created for MTProto syntax
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
