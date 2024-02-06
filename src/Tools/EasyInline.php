@@ -34,7 +34,7 @@ trait EasyInline
     /**
      * Create inline buttons with callback data.
      *
-     * @param array $keyboards
+     * @param array ...$keyboards
      */
     public function addCallbacks(... $keyboards): KeyboardInline
     {

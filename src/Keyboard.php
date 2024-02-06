@@ -39,12 +39,12 @@ abstract class Keyboard implements \JsonSerializable
      * To cast Telegram api keyboard to easy-keyboard.
      *
      * @param array $rawReplyMarkup array of Telegram api Keyboard
-     * @return KeyboardInline|KeyboardHide|KeyboardMarkup|KeyboardForceReply|null
+     * @return KeyboardInline|KeyboardHide|KeyboardMarkup|KeyboardForceReply
      */
-    public static function fromRawReplyMarkup(array $rawReplyMarkup): ?self
+    public static function fromRawReplyMarkup(array $rawReplyMarkup): self
     {
         $rawReplyMarkup = $rawReplyMarkup['inline_keyboard'] ?? false;
-        if (!isset($rawReplyMarkup)) {
+        if (!$rawReplyMarkup) {
             throw new Exception('Invalid keyboard type provided');
         }
 

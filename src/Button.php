@@ -19,6 +19,9 @@ abstract class Button implements \JsonSerializable
 {
     private array $keyboard = [];
 
+    /**
+     * @internal
+     */
     public function __construct(array $data = [])
     {
         $this->keyboard = $data + $this->keyboard;
