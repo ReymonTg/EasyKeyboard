@@ -321,13 +321,13 @@ You can now easily convert mtproto telegram keyboards to fluent keyboard for mod
 using `fromRawReplyMarkup` methods! here is and example
 
 ```php
-$fluentKeyboard = Keyboard::fromRawReplyMarkup($replyMarkup);
+$easyKeyboard = Keyboard::fromRawReplyMarkup($replyMarkup);
 ```
-As you know `$fluentKeyboard` is object here and you can modify and add more buttons to it.
+As you know `$easyKeyboard` is object here and you can modify and add more buttons to it.
 here is an example if `$flunentKeyboard` instance of `KeyboardInline`
 
 ```php
-$fluentKeyboard->addButton(InlineButton::Callback('End','End'));
+$easyKeyboard->addButton(InlineButton::Callback('End','End'));
 ```
 <!---
 At the end you can call `json_encode` method on that and pass to some telegram method (Reymon will handle this automaticlly). here is an
@@ -337,7 +337,7 @@ example for [Reymon](https://github.com/ReymonTg/Reymon) :
 #[FilterAnd(new FilterPrivate, new FilterIncoming)]
 public function modify(Message $message) {
     $message->reply('That is new keyboard',
-        replyMarkup : $fluentKeyboard
+        replyMarkup : $easyKeyboard
     );
 }
 ```
