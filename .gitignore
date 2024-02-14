@@ -1,3 +1,4 @@
+JSON.sh
 *.raw
 
 # JetBrains IDE
@@ -12,8 +13,34 @@
 # VI
 *.swp
 
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
 # C extensions
 *.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+lib64/
+sdist/
+var/
+.installed.cfg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
 
 # Unit test / coverage reports
 htmlcov/
@@ -30,59 +57,39 @@ coverage.xml
 # Django stuff:
 *.log
 
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
 # emacs auto-saving files
 \#*#
 .#*#
+
+# composer
 vendor
-*bak
-token.php
-*~uploading*
-enc.tar.xz
-a
-web_data.php
-web_API.log
-db_connect.php
-Reymon.log
-
-sessions
-docs_md
-
-.env
 composer.lock
-b.php
-telegram-cli*
-src/Fuzzer.php
-fuzzer.php
-tests/500mb
-*.save
-*.save.1
-*.save.*
+*.phar
 phar7
 phar5
-big
-*.phar
 .phpunit.result.cache
+
+# Vscode
 .vscode/*
 .vscode
-custom.md
 .php_cs.cache
-coverage
-tempConv
-test.php
-
-
 .phpdoc_cache
-
-tests/db-local.php
+*bak
+.env
 
 app_test.json
 app.json
 config.json
-
 /Dockerfile
-
 /docker-compose.yml
 /Caddyfile
-/tt.php
 /changelog
-plugins/
+
+# Project
+test.php
