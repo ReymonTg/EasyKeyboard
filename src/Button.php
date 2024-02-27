@@ -22,7 +22,7 @@ abstract class Button implements \JsonSerializable
     /**
      * @internal
      */
-    private function __construct(array $data = [])
+    protected function __construct(array $data = [])
     {
         $this->keyboard += \array_filter($data, fn ($v) => !\is_null($v));
     }
