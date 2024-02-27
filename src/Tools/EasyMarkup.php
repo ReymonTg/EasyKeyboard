@@ -16,8 +16,8 @@
 namespace Reymon\EasyKeyboard\Tools;
 
 use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
-use Reymon\EasyKeyboard\ChatAdminRights;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
+use Reymon\EasyKeyboard\Tools\ChatAdminRights;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestChannel;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestGroup;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestUsers;

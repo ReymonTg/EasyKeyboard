@@ -13,18 +13,16 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard;
+namespace Reymon\EasyKeyboard\Tools;
 
 final class ChatAdminRights implements \JsonSerializable
 {
     private array $adminRights = [];
 
-    public function __invoke(): array
-    {
-        return $this->adminRights;
-    }
-
-    public function __construct(array $data)
+    /**
+     * @internal
+     */
+    private function __construct(array $data)
     {
         $this->adminRights += $data;
     }

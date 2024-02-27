@@ -15,7 +15,7 @@
 
 namespace Reymon\EasyKeyboard\Tools\PeerType;
 
-use Reymon\EasyKeyboard\ChatAdminRights;
+use Reymon\EasyKeyboard\Tools\ChatAdminRights;
 
 /**
  * Create button the criteria used to request a suitable group/supergroup. The identifier of the selected chat will be shared with the bot when the corresponding button is pressed.
