@@ -22,7 +22,7 @@ abstract class RequestPeer implements \JsonSerializable
     /**
      * @internal
      */
-    private function __construct(array $data)
+    protected function __construct(array $data)
     {
         $this->types = $data + $this->types;
     }
