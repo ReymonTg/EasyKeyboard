@@ -33,7 +33,10 @@ final class InlineChoosePeer implements \JsonSerializable
         ];
     }
 
-    public static function fromRawChoose(array $rawChoose): self
+    /**
+     * @internal
+     */
+    public static function tryFrom(array $rawChoose): self
     {
         return new static(
             $rawChoose['allow_user_chats'] ?? null,

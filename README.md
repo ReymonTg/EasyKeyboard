@@ -318,10 +318,10 @@ KeyboardMarkup::new()
 ### Convert Telegram Keyboard To Fluent Keyboard
 
 You can now easily convert mtproto telegram keyboards to fluent keyboard for modify and ...
-using `fromRawReplyMarkup` methods! here is and example
+using `tryFrom` methods! here is and example
 
 ```php
-$easyKeyboard = Keyboard::fromRawReplyMarkup($replyMarkup);
+$easyKeyboard = Keyboard::tryFrom($replyMarkup);
 ```
 As you know `$easyKeyboard` is object here and you can modify and add more buttons to it.
 here is an example if `$easyKeyboard` instance of `KeyboardInline`

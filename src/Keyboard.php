@@ -36,20 +36,19 @@ abstract class Keyboard implements \JsonSerializable
     protected array $data = [];
 
     /**
-     * To cast Telegram api keyboard to easy-keyboard.
+     * Convert Telegram api keyboard to easy-keyboard.
      *
-     * @param array $rawReplyMarkup array of Telegram api Keyboard
-     * @return KeyboardInline|KeyboardHide|KeyboardMarkup|KeyboardForceReply
+     * @param array $replyMarkup array of Telegram api Keyboard
      */
-    public static function fromRawReplyMarkup(array $rawReplyMarkup): self
+    public static function tryFrom(array $replyMarkup): ?self
     {
-        $rawReplyMarkup = $rawReplyMarkup['inline_keyboard'] ?? false;
-        if (!$rawReplyMarkup) {
-            throw new Exception('Invalid keyboard type provided');
+        $replyMarkup = $replyMarkup['inline_keyboard'] ?? false;
+        if (!$replyMarkup) {
+            return null;
         }
 
         $keyboard = new KeyboardInline;
-        foreach ($rawReplyMarkup as $row) {
+        foreach ($replyMarkup as $row) {
             foreach ($row as $button) {
                 $text  = $button['text'];
                 $login = $button['login_url'] ?? null;
@@ -61,7 +60,7 @@ abstract class Keyboard implements \JsonSerializable
                     isset($button['callback_game']) => InlineButton::Game($text),
                     isset($button['callback_data']) => InlineButton::CallBack($text, $button['callback_data']),
                     !\is_null($query) => \is_array($query)
-                        ? InlineButton::SwitchInline($text, $query['query'], filter: InlineChoosePeer::fromRawChoose($button['switch_inline_query_chosen_chat']))
+                        ? InlineButton::SwitchInline($text, $query['query'], filter: InlineChoosePeer::tryFrom($button['switch_inline_query_chosen_chat']))
                         : InlineButton::SwitchInline($text, $query, $same),
                     !\is_null($login) => InlineButton::Login(
                         $text,
