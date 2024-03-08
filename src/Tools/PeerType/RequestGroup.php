@@ -23,21 +23,14 @@ use Reymon\EasyKeyboard\Tools\ChatAdminRights;
 class RequestGroup extends RequestPeer
 {
     /**
-     * @param bool|null            $creator  Whether to request a chat owned by the user.
-     * @param bool|null            $username       Whether to request a supergroup or a channel with (or without) a username. If not specified, no additional restrictions are applied.
-     * @param bool|null            $forum           Whether to request a forum (or non-forum) supergroup.
-     * @param bool|null            $member          Whether to request a chat with the bot as a member. Otherwise, no additional restrictions are applied.
-     * @param ChatAdminRights|null $userAdminRights The required administrator rights of the user in the chat. If not specified, no additional restrictions are applied.
-     * @param ChatAdminRights|null $botAdminRights  The required administrator rights of the bot in the chat. If not specified, no additional restrictions are applied.
+     * @param ?bool            $creator         Whether to request a chat owned by the user.
+     * @param ?bool            $username        Whether to request a supergroup or a channel with (or without) a username. If not specified, no additional restrictions are applied.
+     * @param ?bool            $forum           Whether to request a forum (or non-forum) supergroup.
+     * @param ?bool            $member          Whether to request a chat with the bot as a member. Otherwise, no additional restrictions are applied.
+     * @param ?ChatAdminRights $userAdminRights The required administrator rights of the user in the chat. If not specified, no additional restrictions are applied.
+     * @param ?ChatAdminRights $botAdminRights  The required administrator rights of the bot in the chat. If not specified, no additional restrictions are applied.
      */
-    public static function new(
-        ?bool            $creator         = null,
-        ?bool            $username        = null,
-        ?bool            $forum           = null,
-        ?bool            $member          = null,
-        ?ChatAdminRights $userAdminRights = null,
-        ?ChatAdminRights $botAdminRights  = null
-    ): self
+    public static function new(?bool $creator = null, ?bool $username = null, ?bool $forum = null, ?bool $member = null, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): self
     {
         $data = [
             'chat_is_channel'   => false,
@@ -45,8 +38,8 @@ class RequestGroup extends RequestPeer
             'chat_has_username' => $username,
             'chat_is_created'   => $creator,
             'bot_is_member'     => $member,
-            'user_admin_rights' => \is_callable($userAdminRights) ? $userAdminRights(): null,
-            'bot_admin_rights'  => \is_callable($botAdminRights)  ? $botAdminRights() : null
+            'user_admin_rights' => $userAdminRights?->jsonSerialize(),
+            'bot_admin_rights'  => $botAdminRights?->jsonSerialize()
         ];
         return new static($data);
     }

@@ -21,9 +21,9 @@ namespace Reymon\EasyKeyboard\Tools\PeerType;
 class RequestUsers extends RequestPeer
 {
     /**
-     * @param bool|null $bot     Whether to request bots or users, If not specified, no additional restrictions are applied.
-     * @param bool|null $premium Whether to request premium or non-premium users. If not specified, no additional restrictions are applied.
-     * @param int       $max     The maximum number of users to be selected; 1-10.
+     * @param ?bool $bot     Whether to request bots or users, If not specified, no additional restrictions are applied.
+     * @param ?bool $premium Whether to request premium or non-premium users. If not specified, no additional restrictions are applied.
+     * @param int   $max     The maximum number of users to be selected; 1-10.
      */
     public static function new(?bool $bot = null, ?bool $premium = null, int $max = 1): self
     {

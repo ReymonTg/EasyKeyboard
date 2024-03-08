@@ -23,10 +23,10 @@ final class InlineButton extends Button
     /**
      * Create Inline button with SwitchInline options.
      *
-     * @param string                $text   Label text on the button
-     * @param string                $query  Data to be sent in a [callback query](https://core.telegram.org/bots/api#callbackquery) to the bot when button is pressed, 1-64 bytes
-     * @param bool                  $same   Pressing the button will insert the bot's username and the specified inline query in the current chat's input field
-     * @param InlineChoosePeer|null $filter Filter to use when selecting chats.
+     * @param string            $text   Label text on the button
+     * @param string            $query  Data to be sent in a [callback query](https://core.telegram.org/bots/api#callbackquery) to the bot when button is pressed, 1-64 bytes
+     * @param bool              $same   Pressing the button will insert the bot's username and the specified inline query in the current chat's input field
+     * @param ?InlineChoosePeer $filter Filter to use when selecting chats.
      */
     public static function SwitchInline(string $text, string $query, bool $same = false, ?InlineChoosePeer $filter = null): InlineButton
     {
@@ -59,11 +59,11 @@ final class InlineButton extends Button
     /**
      * Create inline button for login.
      *
-     * @param string      $text        Label text on the button
-     * @param string      $url         An HTTPS URL used to automatically authorize the user
-     * @param string|null $fwdText     New text of the button in forwarded messages
-     * @param string|null $username    Username of a bot, which will be used for user authorization.
-     * @param bool        $writeAccess Whether to request the permission for your bot to send messages to the user
+     * @param string  $text        Label text on the button
+     * @param string  $url         An HTTPS URL used to automatically authorize the user
+     * @param ?string $fwdText     New text of the button in forwarded messages
+     * @param ?string $username    Username of a bot, which will be used for user authorization.
+     * @param bool    $writeAccess Whether to request the permission for your bot to send messages to the user
      */
     public static function Login(string $text, string $url, ?string $fwdText = null, ?string $username = null, bool $writeAccess = false): InlineButton
     {
