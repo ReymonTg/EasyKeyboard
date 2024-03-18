@@ -26,6 +26,6 @@ final class Exception extends \Exception
     public static function undefinedMethod(string $className, string $methodName): self
     {
         $message = \sprintf('Call to undefined method %s::%s', $className, $$methodName);
-        return new self($message);
+        return new static($message);
     }
 }
