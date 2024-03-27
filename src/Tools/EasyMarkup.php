@@ -17,7 +17,6 @@ namespace Reymon\EasyKeyboard\Tools;
 
 use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
-use Reymon\EasyKeyboard\Tools\ChatAdminRights;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestChannel;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestGroup;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestUsers;
@@ -134,7 +133,6 @@ trait EasyMarkup
      * @param string           $text            Label text on the button
      * @param int              $buttonId        Signed 32-bit identifier of the request
      * @param ?bool            $creator         Whether to request a chat owned by the user.
-     * @param ?bool            $username        Whether to request a supergroup or a channel with (or without) a username. If not specified, no additional restrictions are applied.
      * @param ?ChatAdminRights $userAdminRights The required administrator rights of the user in the chat. If not specified, no additional restrictions are applied.
      * @param ?ChatAdminRights $botAdminRights  The required administrator rights of the bot in the chat. If not specified, no additional restrictions are applied.
      */

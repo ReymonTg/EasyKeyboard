@@ -16,9 +16,9 @@
 namespace Reymon\EasyKeyboard\ButtonTypes;
 
 use Reymon\EasyKeyboard\Button;
-use Reymon\EasyKeyboard\Tools\PollType;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestPeer;
 use Reymon\EasyKeyboard\Tools\PeerType\RequestUsers;
+use Reymon\EasyKeyboard\Tools\PollType;
 
 final class KeyboardButton extends Button
 {
