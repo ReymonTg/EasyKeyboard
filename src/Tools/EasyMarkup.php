@@ -15,7 +15,6 @@
 
 namespace Reymon\EasyKeyboard\Tools;
 
-use Reymon\EasyKeyboard\Tools\ChatAdminRights;
 use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
 

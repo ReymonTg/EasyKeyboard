@@ -16,8 +16,8 @@
 namespace Reymon\EasyKeyboard\ButtonTypes;
 
 use Reymon\EasyKeyboard\Button;
-use Reymon\EasyKeyboard\Tools\PollType;
 use Reymon\EasyKeyboard\Tools\ChatAdminRights;
+use Reymon\EasyKeyboard\Tools\PollType;
 
 final class KeyboardButton extends Button
 {
@@ -184,7 +184,7 @@ final class KeyboardButton extends Button
      * @param bool    $photo    Whether to request the users' photo
      * @param int     $max      The maximum number of users to be selected; 1-10.
      */
-    public static function PeerUsers(string $text, int $buttonId,  ?bool $bot = null, ?bool $premium = null, bool $name = false, bool $username = false, bool $photo = false, int $max = 1): KeyboardButton
+    public static function PeerUsers(string $text, int $buttonId, ?bool $bot = null, ?bool $premium = null, bool $name = false, bool $username = false, bool $photo = false, int $max = 1): KeyboardButton
     {
         $data = [
             'text'         => $text,

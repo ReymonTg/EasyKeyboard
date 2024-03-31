@@ -16,7 +16,7 @@
 namespace Reymon\EasyKeyboard\Tools;
 
 /**
- * Represents an inline button that switches the current user to inline mode in a chosen chat
+ * Represents an inline button that switches the current user to inline mode in a chosen chat.
  */
 final class InlineChoosePeer implements \JsonSerializable
 {
