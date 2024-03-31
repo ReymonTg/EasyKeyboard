@@ -15,11 +15,9 @@
 
 namespace Reymon\EasyKeyboard\Tools;
 
+use Reymon\EasyKeyboard\Tools\ChatAdminRights;
 use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
-use Reymon\EasyKeyboard\Tools\PeerType\RequestChannel;
-use Reymon\EasyKeyboard\Tools\PeerType\RequestGroup;
-use Reymon\EasyKeyboard\Tools\PeerType\RequestUsers;
 
 trait EasyMarkup
 {
@@ -75,6 +73,26 @@ trait EasyMarkup
     }
 
     /**
+     * Create text button that request poll quiz from user.
+     *
+     * @param string   $text Label text on the button
+     */
+    public function requestPollQuiz(string $text): KeyboardMarkup
+    {
+        return $this->addButton(KeyboardButton::Poll($text, PollType::QUIZ));
+    }
+
+    /**
+     * Create text button that request poll regular from user.
+     *
+     * @param string   $text Label text on the button
+     */
+    public function requestPollRegular(string $text): KeyboardMarkup
+    {
+        return $this->addButton(KeyboardButton::Poll($text, PollType::REGULAR));
+    }
+
+    /**
      * Create text button that request location from user.
      *
      * @param string $text Label text on the button
@@ -101,12 +119,14 @@ trait EasyMarkup
      * @param int    $buttonId Signed 32-bit identifier of the request
      * @param ?bool  $bot      Whether to request bots or users, If not specified, no additional restrictions are applied.
      * @param ?bool  $premium  Whether to request premium or non-premium users. If not specified, no additional restrictions are applied.
+     * @param bool   $name     Whether to request the users' first and last name
+     * @param bool   $username Whether to request the users' username
+     * @param bool   $photo    Whether to request the users' photo
      * @param int    $max      The maximum number of users to be selected; 1-10.
      */
-    public function requestUsers(string $text, int $buttonId, ?bool $bot = null, ?bool $premium = null, int $max = 1): KeyboardMarkup
+    public function requestUsers(string $text, int $buttonId, ?bool $bot = null, ?bool $premium = null, bool $name = false, bool $username = false, bool $photo = false, int $max = 1): KeyboardMarkup
     {
-        $peer = RequestUsers::new($bot, $premium, $max);
-        return $this->addButton(KeyboardButton::Peer($text, $buttonId, $peer));
+        return $this->addButton(KeyboardButton::PeerUsers($text, $buttonId, $bot, $premium, $name, $username, $photo, $max));
     }
 
     /**
@@ -115,16 +135,18 @@ trait EasyMarkup
      * @param string           $text            Label text on the button
      * @param int              $buttonId        Signed 32-bit identifier of the request
      * @param ?bool            $creator         Whether to request a chat owned by the user.
-     * @param ?bool            $username        Whether to request a supergroup or a channel with (or without) a username. If not specified, no additional restrictions are applied.
+     * @param ?bool            $hasUsername     Whether to request a supergroup or a channel with (or without) a username. If not specified, no additional restrictions are applied.
      * @param ?bool            $forum           Whether to request a forum (or non-forum) supergroup.
      * @param ?bool            $member          Whether to request a chat with the bot as a member. Otherwise, no additional restrictions are applied.
+     * @param bool             $title           Whether to request the chat's title
+     * @param bool             $username        Whether to request the chat's username
+     * @param bool             $photo           Whether to request the chat's photo
      * @param ?ChatAdminRights $userAdminRights The required administrator rights of the user in the chat. If not specified, no additional restrictions are applied.
      * @param ?ChatAdminRights $botAdminRights  The required administrator rights of the bot in the chat. If not specified, no additional restrictions are applied.
      */
-    public function requestGroup(string $text, int $buttonId, ?bool $creator = null, ?bool $username = null, ?bool $forum = null, ?bool $member = null, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): KeyboardMarkup
+    public function requestGroup(string $text, int $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?bool $forum = null, ?bool $member = null, bool $title = false, bool $username = false, bool $photo = false, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): KeyboardMarkup
     {
-        $peerType = RequestGroup::new($creator, $username, $forum, $member, $botAdminRights, $userAdminRights);
-        return $this->addButton(KeyboardButton::Peer($text, $buttonId, $peerType));
+        return $this->addButton(KeyboardButton::PeerGroup($text, $buttonId, $creator, $hasUsername, $forum, $member, $title, $username, $photo, $userAdminRights, $botAdminRights));
     }
 
     /**
@@ -133,12 +155,16 @@ trait EasyMarkup
      * @param string           $text            Label text on the button
      * @param int              $buttonId        Signed 32-bit identifier of the request
      * @param ?bool            $creator         Whether to request a chat owned by the user.
+     * @param ?bool            $hasUsername     Whether to request a supergroup or a channel with (or without) a username. If not specified, no additional restrictions are applied.
+     * @param ?bool            $member          Whether to request a chat with the bot as a member. Otherwise, no additional restrictions are applied.
+     * @param bool             $title           Whether to request the chat's title
+     * @param bool             $username        Whether to request the chat's username
+     * @param bool             $photo           Whether to request the chat's photo
      * @param ?ChatAdminRights $userAdminRights The required administrator rights of the user in the chat. If not specified, no additional restrictions are applied.
      * @param ?ChatAdminRights $botAdminRights  The required administrator rights of the bot in the chat. If not specified, no additional restrictions are applied.
      */
-    public function requestChannel(string $text, int $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): KeyboardMarkup
+    public function requestChannel(string $text, int $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?bool $member = null, bool $title = false, bool $username = false, bool $photo = false, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): KeyboardMarkup
     {
-        $peerType = RequestChannel::new($creator, $hasUsername, $botAdminRights, $userAdminRights);
-        return $this->addButton(KeyboardButton::Peer($text, $buttonId, $peerType));
+        return $this->addButton(KeyboardButton::PeerChannel($text, $buttonId, $creator, $hasUsername, $member, $title, $username, $photo, $botAdminRights, $userAdminRights));
     }
 }

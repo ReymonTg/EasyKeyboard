@@ -15,9 +15,9 @@
 
 namespace Reymon\EasyKeyboard;
 
+use RangeException;
 use LengthException;
 use OutOfBoundsException;
-use RangeException;
 use Reymon\EasyKeyboard\ButtonTypes\InlineButton;
 use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardForceReply;
