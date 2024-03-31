@@ -23,7 +23,7 @@ Simple reply &amp; inline telegram api keyboard
             </li>
             <li><a href="#keyboardforcereply-and-keyboardhide">KeyboardForceReply and KeyboardHide</a></li>
             <li><a href="#keyboard-peer-type">Keyboard Peer Type</a></li>
-            <li><a href="#convert-telegram-keyboard-to-easy-keyboard">Convert Telegram Keyboard To Fluent Keyboard</a></li>
+            <li><a href="#convert-telegram-keyboard-to-easy-keyboard">Convert Telegram Keyboard To Easy Keyboard</a></li>
         </ol>
     </li>
   </ol>
@@ -144,21 +144,28 @@ You can even use these methods
 
 for InlineKeyboard:
 
-* [addCallback](src/Tools/EasyInline.php#L30)
-* [addWebApp](src/Tools/EasyInline.php#L59)
-* [addUrl](src/Tools/EasyInline.php#L71)
-* [addGame](src/Tools/EasyInline.php#L83)
-* [addBuy](src/Tools/EasyInline.php#L95)
-* [addSwitchInline](src/Tools/EasyInline.php#L110)
+* [addCallback](src/Tools/EasyInline.php#L29)
+* [addCallbacks](src/Tools/EasyInline.php#L39)
+* [addWebApp](src/Tools/EasyInline.php#L55)
+* [addUrl](src/Tools/EasyInline.php#L66)
+* [addGame](src/Tools/EasyInline.php#L76)
+* [addBuy](src/Tools/EasyInline.php#L86)
+* [addSwitchInline](src/Tools/EasyInline.php#L98)
   
 and for ReplyKeyboard:
 
-* [addText](src/Tools/EasyMarkup.php#L33)
-* [addProfile](src/Tools/EasyMarkup.php#L60)
-* [addWebApp](src/Tools/EasyMarkup.php#L72)
-* [requestPoll](src/Tools/EasyMarkup.php#L85)
-* [requestLocation](src/Tools/EasyMarkup.php#L96)
-* [requestPhone](src/Tools/EasyMarkup.php#L107)
+* [addText](src/Tools/EasyMarkup.php#L28)
+* [addTexts](src/Tools/EasyMarkup.php#L38)
+* [addProfile](src/Tools/EasyMarkup.php#L48)
+* [addWebApp](src/Tools/EasyMarkup.php#L59)
+* [requestPoll](src/Tools/EasyMarkup.php#L69)
+* [requestPollQuiz](src/Tools/EasyMarkup.php#L79)
+* [requestPollRegular](src/Tools/EasyMarkup.php#L89)
+* [requestLocation](src/Tools/EasyMarkup.php#L99)
+* [requestPhone](src/Tools/EasyMarkup.php#L109)
+* [requestUsers](src/Tools/EasyMarkup.php#L126)
+* [requestGroup](src/Tools/EasyMarkup.php#L146)
+* [requestChannel](src/Tools/EasyMarkup.php#L165)
 
 #### By Button
 
@@ -289,21 +296,21 @@ We have 3 types of peer type can be requested by bots RequestUsers , RequestGrou
 
 ```php
 KeyboardMarkup::new()
-    ->addButton(KeyboardButton::Peer('Request for user', 0, RequestUsers::new(bot: false)));
+    ->addButton(KeyboardButton::PeerUsers('Request for user', 0, bot: false));
 ```
 ```php
 KeyboardMarkup::new()
-    ->addButton(KeyboardButton::Peer('Request for chat', 1, RequestGroup::new()));
+    ->addButton(KeyboardButton::PeerGroup('Request for chat', 1));
 ```
 ```php
 KeyboardMarkup::new()
-    ->addButton(KeyboardButton::Peer('Request for broadcast', 2, RequestChannel::new()));
+    ->addButton(KeyboardButton::PeerChannel('Request for channel', 2));
 ```
 **You can also use easier syntax to create better one**
 
 ```php
 KeyboardMarkup::new()
-    ->requestUser('Request for user', 0);
+    ->requestUsers('Request for user', 0);
 ```
 ```php
 KeyboardMarkup::new()
@@ -315,9 +322,9 @@ KeyboardMarkup::new()
 ```
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Convert Telegram Keyboard To Fluent Keyboard
+### Convert Telegram Keyboard To Easy Keyboard
 
-You can now easily convert mtproto telegram keyboards to fluent keyboard for modify and ...
+You can now easily convert telegram keyboards to easy keyboard for modify and ...
 using `tryFrom` methods! here is and example
 
 ```php
