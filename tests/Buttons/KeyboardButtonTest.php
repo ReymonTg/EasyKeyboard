@@ -3,30 +3,45 @@
 namespace Reymon\EasyKeyboard\Test\Buttons;
 
 use PHPUnit\Framework\TestCase;
-use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
-use Reymon\EasyKeyboard\Tools\PeerType\RequestChannel;
-use Reymon\EasyKeyboard\Tools\PeerType\RequestGroup;
-use Reymon\EasyKeyboard\Tools\PeerType\RequestUsers;
 use Reymon\EasyKeyboard\Tools\PollType;
+use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
 
 class KeyboardButtonTest extends TestCase
 {
     public function testPeer(): void
     {
-        $button1 = KeyboardButton::Peer('hello', 0, $peer1 = RequestUsers::new());
-        $button2 = KeyboardButton::Peer('hello', 0, $peer2 = RequestGroup::new());
-        $button3 = KeyboardButton::Peer('hello', 0, $peer3 = RequestChannel::new());
+        $button1 = KeyboardButton::PeerUsers('hello', 0);
+        $button2 = KeyboardButton::PeerGroup('hello', 0);
+        $button3 = KeyboardButton::PeerChannel('hello', 0);
         $rawButton1 = [
             'text' => 'hello',
-            'request_user' => ['request_id' => 0, ...$peer1->jsonSerialize()]
+            'request_users' => [
+                'request_id'       => 0,
+                'max_quantity'     => 1,
+                'request_name'     => false,
+                'request_username' => false,
+                'request_photo'    => false
+            ]
         ];
         $rawButton2 = [
             'text' => 'hello',
-            'request_chat' => ['request_id' => 0, ...$peer2->jsonSerialize()]
+            'request_chat' => [
+                'request_id'       => 0,
+                'chat_is_channel'  => false,
+                'request_title'    => false,
+                'request_username' => false,
+                'request_photo'    => false
+            ]
         ];
         $rawButton3 = [
             'text' => 'hello',
-            'request_chat' => ['request_id' => 0, ...$peer3->jsonSerialize()]
+            'request_chat' => [
+                'request_id' => 0,
+                'chat_is_channel'  => true,
+                'request_title'    => false,
+                'request_username' => false,
+                'request_photo'    => false
+            ]
         ];
         $this->assertEquals(\json_encode($button1), \json_encode($rawButton1));
         $this->assertEquals(\json_encode($button2), \json_encode($rawButton2));
