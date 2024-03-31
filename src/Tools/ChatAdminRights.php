@@ -61,7 +61,7 @@ final class ChatAdminRights implements \JsonSerializable
             'can_edit_stories'       => $editStories,
             'can_delete_stories'     => $deleteStories,
         ];
-        return new static($adminRights);
+        return new ChatAdminRights($adminRights);
     }
 
     /**

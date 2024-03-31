@@ -15,6 +15,9 @@
 
 namespace Reymon\EasyKeyboard\Tools;
 
+/**
+ * Represents an inline button that switches the current user to inline mode in a chosen chat
+ */
 final class InlineChoosePeer implements \JsonSerializable
 {
     private array $data = [];
@@ -38,7 +41,7 @@ final class InlineChoosePeer implements \JsonSerializable
      */
     public static function tryFrom(array $rawChoose): self
     {
-        return new static(
+        return new InlineChoosePeer(
             $rawChoose['allow_user_chats'] ?? null,
             $rawChoose['allow_bot_chats'] ?? null,
             $rawChoose['allow_group_chats'] ?? null,
@@ -49,7 +52,7 @@ final class InlineChoosePeer implements \JsonSerializable
     /**
      * @internal
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return \array_filter($this->data, fn ($v) => !\is_null($v));
     }
