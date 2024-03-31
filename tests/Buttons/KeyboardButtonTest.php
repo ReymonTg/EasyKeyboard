@@ -17,10 +17,10 @@ class KeyboardButtonTest extends TestCase
             'text' => 'hello',
             'request_users' => [
                 'request_id'       => 0,
-                'max_quantity'     => 1,
                 'request_name'     => false,
                 'request_username' => false,
-                'request_photo'    => false
+                'request_photo'    => false,
+                'max_quantity'     => 1,
             ]
         ];
         $rawButton2 = [
