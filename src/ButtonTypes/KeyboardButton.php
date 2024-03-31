@@ -120,9 +120,9 @@ final class KeyboardButton extends Button
     {
         $data = [
             'text'         => $text,
-            'request_chat' => [
-                'request_id'        => $buttonId,
+            'request_chat' => array_filter([
                 'chat_is_channel'   => true,
+                'request_id'        => $buttonId,
                 'chat_has_username' => $hasUsername,
                 'chat_is_created'   => $creator,
                 'bot_is_member'     => $member,
@@ -131,7 +131,7 @@ final class KeyboardButton extends Button
                 'request_photo'     => $photo,
                 'user_admin_rights' => $userAdminRights,
                 'bot_admin_rights'  => $botAdminRights,
-            ]
+            ], fn ($v) => !\is_null($v))
         ];
         return new KeyboardButton($data);
     }
@@ -155,9 +155,9 @@ final class KeyboardButton extends Button
     {
         $data = [
             'text'         => $text,
-            'request_chat' => [
-                'request_id'        => $buttonId,
+            'request_chat' => array_filter([
                 'chat_is_channel'   => false,
+                'request_id'        => $buttonId,
                 'chat_is_forum'     => $forum,
                 'chat_has_username' => $hasUsername,
                 'chat_is_created'   => $creator,
@@ -167,7 +167,7 @@ final class KeyboardButton extends Button
                 'request_photo'     => $photo,
                 'user_admin_rights' => $userAdminRights,
                 'bot_admin_rights'  => $botAdminRights
-            ]
+            ], fn ($v) => !\is_null($v))
         ];
         return new KeyboardButton($data);
     }
@@ -188,7 +188,7 @@ final class KeyboardButton extends Button
     {
         $data = [
             'text'         => $text,
-            'request_user' => [
+            'request_user' => array_filter([
                 'request_id' => $buttonId,
                 'user_is_bot'      => $bot,
                 'user_is_premium'  => $premium,
@@ -196,7 +196,7 @@ final class KeyboardButton extends Button
                 'request_username' => $username,
                 'request_photo'    => $photo,
                 'max_quantity'     => $max,
-            ]
+            ], fn ($v) => !\is_null($v))
         ];
         return new KeyboardButton($data);
     }
