@@ -26,8 +26,8 @@ class KeyboardButtonTest extends TestCase
         $rawButton2 = [
             'text' => 'hello',
             'request_chat' => [
-                'request_id'       => 0,
                 'chat_is_channel'  => false,
+                'request_id'       => 0,
                 'request_title'    => false,
                 'request_username' => false,
                 'request_photo'    => false
@@ -36,8 +36,8 @@ class KeyboardButtonTest extends TestCase
         $rawButton3 = [
             'text' => 'hello',
             'request_chat' => [
-                'request_id' => 0,
                 'chat_is_channel'  => true,
+                'request_id' => 0,
                 'request_title'    => false,
                 'request_username' => false,
                 'request_photo'    => false
