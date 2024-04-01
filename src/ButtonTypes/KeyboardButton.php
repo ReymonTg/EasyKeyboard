@@ -120,7 +120,7 @@ final class KeyboardButton extends Button
     {
         $data = [
             'text'         => $text,
-            'request_chat' => array_filter([
+            'request_chat' => \array_filter([
                 'chat_is_channel'   => true,
                 'request_id'        => $buttonId,
                 'chat_has_username' => $hasUsername,
@@ -155,7 +155,7 @@ final class KeyboardButton extends Button
     {
         $data = [
             'text'         => $text,
-            'request_chat' => array_filter([
+            'request_chat' => \array_filter([
                 'chat_is_channel'   => false,
                 'request_id'        => $buttonId,
                 'chat_is_forum'     => $forum,
@@ -188,7 +188,7 @@ final class KeyboardButton extends Button
     {
         $data = [
             'text'         => $text,
-            'request_users' => array_filter([
+            'request_users' => \array_filter([
                 'request_id' => $buttonId,
                 'user_is_bot'      => $bot,
                 'user_is_premium'  => $premium,
