@@ -34,7 +34,7 @@ Simple reply &amp; inline telegram api keyboard
 Install the package using composer:
 
 ```shell
-composer require Reymon/easy-keyboard
+composer require reymon/easy-keyboard
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
