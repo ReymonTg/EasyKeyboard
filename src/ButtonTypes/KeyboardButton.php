@@ -188,7 +188,7 @@ final class KeyboardButton extends Button
     {
         $data = [
             'text'         => $text,
-            'request_user' => array_filter([
+            'request_users' => array_filter([
                 'request_id' => $buttonId,
                 'user_is_bot'      => $bot,
                 'user_is_premium'  => $premium,
