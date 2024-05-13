@@ -72,8 +72,7 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
             foreach ($row as $button) {
                 $text  = $button['text'];
                 $login = $button['login_url'] ?? null;
-                $query = $button['switch_inline_query'] ?? $button['switch_inline_query_current_chat'] ?? $button['switch_inline_query_chosen_chat'] ?? null;
-                $same  = $button['switch_inline_query_current_chat'] ?? false;
+                $query = $button['switch_inline_query'] ?? $button['switch_inline_query_current_chat'] ?? $button['switch_inline_query_chosen_chat']['query'] ?? '';
                 $keyboard->addButton(match (true) {
                     isset($button['url'])           => InlineButton::Url($text, $button['url']),
                     isset($button['pay'])           => InlineButton::Buy($text),
