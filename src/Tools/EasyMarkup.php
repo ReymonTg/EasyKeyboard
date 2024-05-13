@@ -15,8 +15,9 @@
 
 namespace Reymon\EasyKeyboard\Tools;
 
-use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
+use Reymon\EasyKeyboard\Button\KeyboardButton;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
+use Reymon\EasyKeyboard\Button\KeyboardButton\Poll\PollType;
 
 trait EasyMarkup
 {
@@ -45,10 +46,10 @@ trait EasyMarkup
         return $this;
     }
 
-    public function addProfile(string $text, int $userId): KeyboardMarkup
-    {
-        return $this->addButton(KeyboardButton::Profile($text, $userId));
-    }
+    // public function addProfile(string $text, int $userId): KeyboardMarkup
+    // {
+    //     return $this->addButton(KeyboardButton::Profile($text, $userId));
+    // }
 
     /**
      * Create text button that open web app without requiring user information.
@@ -125,7 +126,7 @@ trait EasyMarkup
      */
     public function requestUsers(string $text, int $buttonId, ?bool $bot = null, ?bool $premium = null, bool $name = false, bool $username = false, bool $photo = false, int $max = 1): KeyboardMarkup
     {
-        return $this->addButton(KeyboardButton::PeerUsers($text, $buttonId, $bot, $premium, $name, $username, $photo, $max));
+        return $this->addButton(KeyboardButton::RequestUsers($text, $buttonId, $bot, $premium, $name, $username, $photo, $max));
     }
 
     /**
@@ -145,7 +146,7 @@ trait EasyMarkup
      */
     public function requestGroup(string $text, int $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?bool $forum = null, ?bool $member = null, bool $title = false, bool $username = false, bool $photo = false, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): KeyboardMarkup
     {
-        return $this->addButton(KeyboardButton::PeerGroup($text, $buttonId, $creator, $hasUsername, $forum, $member, $title, $username, $photo, $userAdminRights, $botAdminRights));
+        return $this->addButton(KeyboardButton::RequestGroup($text, $buttonId, $creator, $hasUsername, $forum, $member, $title, $username, $photo, $userAdminRights, $botAdminRights));
     }
 
     /**
@@ -164,6 +165,6 @@ trait EasyMarkup
      */
     public function requestChannel(string $text, int $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?bool $member = null, bool $title = false, bool $username = false, bool $photo = false, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): KeyboardMarkup
     {
-        return $this->addButton(KeyboardButton::PeerChannel($text, $buttonId, $creator, $hasUsername, $member, $title, $username, $photo, $botAdminRights, $userAdminRights));
+        return $this->addButton(KeyboardButton::RequestChannel($text, $buttonId, $creator, $hasUsername, $member, $title, $username, $photo, $botAdminRights, $userAdminRights));
     }
 }

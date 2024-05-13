@@ -28,7 +28,7 @@ final class KeyboardInline extends Keyboard
     /**
      * @internal
      */
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
         parent::jsonSerialize();
         return ['inline_keyboard' => $this->data];

@@ -7,26 +7,46 @@
  * See the GNU General Public License for more details.
  * If not, see <http://www.gnu.org/licenses/>.
  *
- * @author    Mahdi <mahdi.talaee1379@gmail.com>
  * @author    AhJ <AmirHosseinJafari8228@gmail.com>
  * @copyright Copyright (c) 2023, ReymonTg
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\KeyboardTypes;
+namespace Reymon\EasyKeyboard\Button\KeyboardButton;
 
-use Reymon\EasyKeyboard\Keyboard;
+use Reymon\EasyKeyboard\Button\KeyboardButton;
 
 /**
- * Requests clients to remove the custom keyboard (user will not be able to summon this keyboard; if you want to hide the keyboard from sight but keep it accessible, use one_time_keyboard.
+ * Represents text button that request contact info from user.
  */
-final class KeyboardHide extends Keyboard
+final readonly class Phone extends KeyboardButton
 {
+    /**
+     * @param string $text Label text on the button
+     */
+    public function __construct(string $text)
+    {
+        parent::__construct($text);
+    }
+
+    /**
+     * Create text button that request contact info from user.
+     *
+     * @param string $text Label text on the button
+     */
+    public static function new(string $text): self
+    {
+        return new static($text);
+    }
+
     /**
      * @internal
      */
     public function jsonSerialize(): array
     {
-        return ['remove_keyboard' => $this->data];
+        return [
+            'text' => $this->text,
+            'request_contact' => true
+        ];
     }
 }

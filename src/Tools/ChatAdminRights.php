@@ -67,8 +67,8 @@ final class ChatAdminRights implements \JsonSerializable
     /**
      * @internal
      */
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
-        return \array_filter($this->adminRights, fn ($v) => !\is_null($v));
+        return array_filter_null($this->adminRights);
     }
 }

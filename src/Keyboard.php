@@ -15,25 +15,46 @@
 
 namespace Reymon\EasyKeyboard;
 
-use LengthException;
-use OutOfBoundsException;
+use Generator;
+use IteratorAggregate;
 use RangeException;
-use Reymon\EasyKeyboard\ButtonTypes\InlineButton;
-use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
-use Reymon\EasyKeyboard\KeyboardTypes\KeyboardForceReply;
+use LengthException;
+use JsonSerializable;
+use OutOfBoundsException;
+use Reymon\EasyKeyboard\Button\InlineButton;
+use Reymon\EasyKeyboard\Button\KeyboardButton;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardHide;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardInline;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
-use Reymon\EasyKeyboard\Tools\InlineChoosePeer;
+use Reymon\EasyKeyboard\KeyboardTypes\KeyboardForceReply;
 
 /**
  * Main class for Keyboard.
  */
-abstract class Keyboard implements \JsonSerializable
+abstract class Keyboard implements JsonSerializable, IteratorAggregate
 {
     protected int $currentRowIndex = 0;
 
+    /** @var list<list<Button>> */
     protected array $data = [];
+
+    /**
+     * @var list<list<Button>>
+     */
+    public function getIterator(): Generator
+    {
+        yield from $this->data;
+    }
+
+    /**
+     * Create new easy-keyboard.
+     *
+     * @return KeyboardInline|KeyboardHide|KeyboardMarkup|KeyboardForceReply
+     */
+    public static function new(): static
+    {
+        return new static;
+    }
 
     /**
      * Convert Telegram api keyboard to easy-keyboard.
@@ -46,7 +67,6 @@ abstract class Keyboard implements \JsonSerializable
         if (!$replyMarkup) {
             return null;
         }
-
         $keyboard = new KeyboardInline;
         foreach ($replyMarkup as $row) {
             foreach ($row as $button) {
@@ -59,31 +79,28 @@ abstract class Keyboard implements \JsonSerializable
                     isset($button['pay'])           => InlineButton::Buy($text),
                     isset($button['callback_game']) => InlineButton::Game($text),
                     isset($button['callback_data']) => InlineButton::CallBack($text, $button['callback_data']),
-                    !\is_null($query) => \is_array($query)
-                        ? InlineButton::SwitchInline($text, $query['query'], filter: InlineChoosePeer::tryFrom($button['switch_inline_query_chosen_chat']))
-                        : InlineButton::SwitchInline($text, $query, $same),
+                    isset($button['switch_inline_query']) => InlineButton::SwitchInline($text, $query),
+                    isset($button['switch_inline_query_current_chat']) => InlineButton::SwitchInlineCurrent($text, $query),
+                    isset($button['switch_inline_query_chosen_chat'])  => InlineButton::SwitchInlineFilter(
+                        $text,
+                        $query,
+                        $button['switch_inline_query_chosen_chat']['allow_user_chats']    ?? null,
+                        $button['switch_inline_query_chosen_chat']['allow_bot_chats']     ?? null,
+                        $button['switch_inline_query_chosen_chat']['allow_group_chats']   ?? null,
+                        $button['switch_inline_query_chosen_chat']['allow_channel_chats'] ?? null,
+                    ),
                     !\is_null($login) => InlineButton::Login(
                         $text,
                         $login['url'],
-                        $login['forward_text'],
-                        $login['bot_username'],
-                        $login['request_write_access']
+                        $login['forward_text'] ?? null,
+                        $login['bot_username'] ?? null,
+                        isset($login['request_write_access'])
                     ),
                 });
             }
             $keyboard->row();
         }
         return $keyboard;
-    }
-
-    /**
-     * Create new easy-keyboard.
-     *
-     * @return KeyboardInline|KeyboardHide|KeyboardMarkup|KeyboardForceReply
-     */
-    public static function new(): static
-    {
-        return new static;
     }
 
     /**
@@ -116,7 +133,6 @@ abstract class Keyboard implements \JsonSerializable
      * To add button(s) to easy-keyboard.
      *
      * @param KeyboardButton|InlineButton ...$buttons
-     * @return KeyboardInline|KeyboardHide|KeyboardMarkup|KeyboardForceReply
      */
     public function addButton(Button ...$buttons): self
     {
@@ -129,7 +145,6 @@ abstract class Keyboard implements \JsonSerializable
      * To add a button by it coordinates to easy-keyboard (Note that coordinates start from 0 look like arrays indexes).
      *
      * @param KeyboardButton|InlineButton ...$buttons
-     * @return KeyboardInline|KeyboardHide|KeyboardMarkup|KeyboardForceReply
      */
     public function addToCoordinates(int $row, int $column, Button ...$buttons): self
     {
@@ -140,7 +155,6 @@ abstract class Keyboard implements \JsonSerializable
     /**
      * To replace a button by it coordinates to easy-keyboard (Note that coordinates start from 0 look like arrays indexes).
      *
-     * @return KeyboardInline|KeyboardHide|KeyboardMarkup|KeyboardForceReply
      * @throws OutOfBoundsException
      */
     public function replaceIntoCoordinates(int $row, int $column, Button ...$buttons): self
@@ -155,7 +169,6 @@ abstract class Keyboard implements \JsonSerializable
     /**
      * To remove button by it coordinates to easy-keyboard (Note that coordinates start from 0 look like arrays indexes).
      *
-     * @return KeyboardInline|KeyboardHide|KeyboardMarkup|KeyboardForceReply
      * @throws OutOfBoundsException
      */
     public function removeFromCoordinates(int $row, int $column, int $count = 1): self
@@ -174,7 +187,6 @@ abstract class Keyboard implements \JsonSerializable
     /**
      * Remove the last button from easy-keyboard.
      *
-     * @return KeyboardInline|KeyboardHide|KeyboardMarkup|KeyboardForceReply
      * @throws RangeException
      */
     public function remove(): self
@@ -195,8 +207,7 @@ abstract class Keyboard implements \JsonSerializable
     /**
      * Add a new raw with specified button ( pass null to only add new row).
      *
-     * @param KeyboardButton|InlineButton|null ...$button
-     * @return KeyboardInline|KeyboardHide|KeyboardMarkup|KeyboardForceReply
+     * @param ?Button ...$button
      */
     public function row(?Button ...$button): self
     {
@@ -219,10 +230,9 @@ abstract class Keyboard implements \JsonSerializable
     /**
      * Add specified buttons to easy-keyboard (each button will add to new row).
      *
-     * @param KeyboardButton|InlineButton|null ...$button
-     * @return KeyboardInline|KeyboardHide|KeyboardMarkup|KeyboardForceReply
+     * @param ?Button ...$button
      */
-    public function Stack(Button ...$button): self
+    public function Stack(?Button ...$button): self
     {
         \array_map($this->row(...), $button);
         return $this;
@@ -231,7 +241,7 @@ abstract class Keyboard implements \JsonSerializable
     /**
      * @internal
      */
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
         $keyboard = &$this->data;
         if (empty($keyboard[$this->currentRowIndex])) {

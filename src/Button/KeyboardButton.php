@@ -13,35 +13,40 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\ButtonTypes;
+namespace Reymon\EasyKeyboard\Button;
 
 use Reymon\EasyKeyboard\Button;
 use Reymon\EasyKeyboard\Tools\ChatAdminRights;
-use Reymon\EasyKeyboard\Tools\PollType;
+use Reymon\EasyKeyboard\Button\KeyboardButton\Poll;
+use Reymon\EasyKeyboard\Button\KeyboardButton\Text;
+use Reymon\EasyKeyboard\Button\KeyboardButton\Phone;
+use Reymon\EasyKeyboard\Button\KeyboardButton\Webapp;
+use Reymon\EasyKeyboard\Button\KeyboardButton\Location;
+use Reymon\EasyKeyboard\Button\KeyboardButton\RequestGroup;
+use Reymon\EasyKeyboard\Button\KeyboardButton\RequestUsers;
+use Reymon\EasyKeyboard\Button\KeyboardButton\RequestChannel;
+use Reymon\EasyKeyboard\Button\KeyboardButton\Poll\PollType;
 
-final class KeyboardButton extends Button
+abstract readonly class KeyboardButton extends Button
 {
-    public static function Profile(string $text, int $userId): KeyboardButton
-    {
-        $data = [
-            'text' => $text,
-            'url' => "tg://user?id=$userId",
-        ];
-        return new KeyboardButton($data);
-    }
+    // public static function Profile(string $text, int $userId): KeyboardButton
+    // {
+    //     $data = [
+    //         'text' => $text,
+    //         'url' => "tg://user?id=$userId",
+    //     ];
+    //     return new KeyboardButton($data);
+    // }
 
     /**
      * Create text button that request poll from user.
      *
      * @param string   $text Label text on the button
+     * @param PollType $type Type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
      */
-    public static function Poll(string $text, PollType $type = PollType::ALL): KeyboardButton
+    public static function Poll(string $text, PollType $type = PollType::ALL): Poll
     {
-        $data = [
-            'text'         => $text,
-            'request_poll' => $type,
-        ];
-        return new KeyboardButton($data);
+        return new Poll($text, $type);
     }
 
     /**
@@ -49,13 +54,9 @@ final class KeyboardButton extends Button
      *
      * @param string $text Label text on the button
      */
-    public static function Location(string $text): KeyboardButton
+    public static function Location(string $text): Location
     {
-        $data = [
-            'text'             => $text,
-            'request_location' => true,
-        ];
-        return new KeyboardButton($data);
+        return new Location($text);
     }
 
     /**
@@ -63,13 +64,9 @@ final class KeyboardButton extends Button
      *
      * @param string $text Label text on the button
      */
-    public static function Phone(string $text): KeyboardButton
+    public static function Phone(string $text): Phone
     {
-        $data = [
-            'text'            => $text,
-            'request_contact' => true,
-        ];
-        return new KeyboardButton($data);
+        return new Phone($text);
     }
 
     /**
@@ -77,12 +74,9 @@ final class KeyboardButton extends Button
      *
      * @param string $text Label text on the button
      */
-    public static function Text(string $text): KeyboardButton
+    public static function Text(string $text): Text
     {
-        $data = [
-            'text' => $text
-        ];
-        return new KeyboardButton($data);
+        return new Text($text);
     }
 
     /**
@@ -91,15 +85,9 @@ final class KeyboardButton extends Button
      * @param string $text Label text on the button
      * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
      */
-    public static function WebApp(string $text, string $url): KeyboardButton
+    public static function Webapp(string $text, string $url): Webapp
     {
-        $data = [
-            'text'    => $text,
-            'web_app' => [
-                'url' => $url
-            ],
-        ];
-        return new KeyboardButton($data);
+        return new Webapp($text, $url);
     }
 
     /**
@@ -116,24 +104,9 @@ final class KeyboardButton extends Button
      * @param ?ChatAdminRights $userAdminRights The required administrator rights of the user in the chat. If not specified, no additional restrictions are applied.
      * @param ?ChatAdminRights $botAdminRights  The required administrator rights of the bot in the chat. If not specified, no additional restrictions are applied.
      */
-    public static function PeerChannel(string $text, int $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?bool $member = null, bool $title = false, bool $username = false, bool $photo = false, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): KeyboardButton
+    public static function RequestChannel(string $text, int $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?bool $member = null, bool $title = false, bool $username = false, bool $photo = false, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): KeyboardButton
     {
-        $data = [
-            'text'         => $text,
-            'request_chat' => \array_filter([
-                'chat_is_channel'   => true,
-                'request_id'        => $buttonId,
-                'chat_has_username' => $hasUsername,
-                'chat_is_created'   => $creator,
-                'bot_is_member'     => $member,
-                'request_title'     => $title,
-                'request_username'  => $username,
-                'request_photo'     => $photo,
-                'user_admin_rights' => $userAdminRights,
-                'bot_admin_rights'  => $botAdminRights,
-            ], fn ($v) => !\is_null($v))
-        ];
-        return new KeyboardButton($data);
+        return new RequestChannel($text, $buttonId, $creator, $hasUsername, $member, $title, $username, $photo, $userAdminRights, $botAdminRights);
     }
 
     /**
@@ -151,25 +124,9 @@ final class KeyboardButton extends Button
      * @param ?ChatAdminRights $userAdminRights The required administrator rights of the user in the chat. If not specified, no additional restrictions are applied.
      * @param ?ChatAdminRights $botAdminRights  The required administrator rights of the bot in the chat. If not specified, no additional restrictions are applied.
      */
-    public static function PeerGroup(string $text, int $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?bool $forum = null, ?bool $member = null, bool $title = false, bool $username = false, bool $photo = false, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): KeyboardButton
+    public static function RequestGroup(string $text, int $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?bool $forum = null, ?bool $member = null, bool $title = false, bool $username = false, bool $photo = false, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): KeyboardButton
     {
-        $data = [
-            'text'         => $text,
-            'request_chat' => \array_filter([
-                'chat_is_channel'   => false,
-                'request_id'        => $buttonId,
-                'chat_is_forum'     => $forum,
-                'chat_has_username' => $hasUsername,
-                'chat_is_created'   => $creator,
-                'bot_is_member'     => $member,
-                'request_title'     => $title,
-                'request_username'  => $username,
-                'request_photo'     => $photo,
-                'user_admin_rights' => $userAdminRights,
-                'bot_admin_rights'  => $botAdminRights
-            ], fn ($v) => !\is_null($v))
-        ];
-        return new KeyboardButton($data);
+        return new RequestGroup($text, $buttonId, $creator, $hasUsername, $forum, $member, $title, $username, $photo, $userAdminRights, $botAdminRights);
     }
 
     /**
@@ -184,20 +141,8 @@ final class KeyboardButton extends Button
      * @param bool    $photo    Whether to request the users' photo
      * @param int     $max      The maximum number of users to be selected; 1-10.
      */
-    public static function PeerUsers(string $text, int $buttonId, ?bool $bot = null, ?bool $premium = null, bool $name = false, bool $username = false, bool $photo = false, int $max = 1): KeyboardButton
+    public static function RequestUsers(string $text, int $buttonId, ?bool $bot = null, ?bool $premium = null, bool $name = false, bool $username = false, bool $photo = false, int $max = 1): KeyboardButton
     {
-        $data = [
-            'text'         => $text,
-            'request_users' => \array_filter([
-                'request_id' => $buttonId,
-                'user_is_bot'      => $bot,
-                'user_is_premium'  => $premium,
-                'request_name'     => $name,
-                'request_username' => $username,
-                'request_photo'    => $photo,
-                'max_quantity'     => $max,
-            ], fn ($v) => !\is_null($v))
-        ];
-        return new KeyboardButton($data);
+        return new RequestUsers($text, $buttonId, $bot, $premium, $name, $username, $photo, $max);
     }
 }

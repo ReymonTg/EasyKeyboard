@@ -28,7 +28,7 @@ final class KeyboardForceReply extends Keyboard
     /**
      * @internal
      */
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
         return ['force_reply' => $this->data];
     }

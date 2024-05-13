@@ -3,7 +3,7 @@
 namespace Reymon\EasyKeyboard\Test\Buttons;
 
 use PHPUnit\Framework\TestCase;
-use Reymon\EasyKeyboard\ButtonTypes\KeyboardButton;
+use Reymon\EasyKeyboard\Button\KeyboardButton;
 use Reymon\EasyKeyboard\Tools\PollType;
 
 class KeyboardButtonTest extends TestCase

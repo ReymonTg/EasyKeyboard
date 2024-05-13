@@ -7,27 +7,15 @@
  * See the GNU General Public License for more details.
  * If not, see <http://www.gnu.org/licenses/>.
  *
- * @author    Mahdi <mahdi.talaee1379@gmail.com>
  * @author    AhJ <AmirHosseinJafari8228@gmail.com>
- * @copyright Copyright (c) 2023, ReymonTg
+ * @copyright 2023-2024 AhJ <AmirHosseinJafari8228@gmail.com>
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Tools;
-
-enum PollType: string implements \JsonSerializable
+if (!\function_exists('array_filter_null'))
 {
-    case QUIZ = 'quiz';
-
-    case REGULAR = 'regular';
-
-    case ALL = '';
-
-    /**
-     * @internal
-     */
-    public function jsonSerialize(): mixed
+    function array_filter_null(array $array, int $mode = 0): array
     {
-        return $this->value;
+        return \array_filter($array, static fn ($v) => !\is_null($v), $mode);
     }
 }

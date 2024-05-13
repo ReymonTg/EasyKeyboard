@@ -15,7 +15,7 @@
 
 namespace Reymon\EasyKeyboard\Tools;
 
-use Reymon\EasyKeyboard\ButtonTypes\InlineButton;
+use Reymon\EasyKeyboard\Button\InlineButton;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardInline;
 
 trait EasyInline
@@ -89,14 +89,39 @@ trait EasyInline
     }
 
     /**
-     * Create Inline button with SwitchInline options.
+     * Create inline button that switches the current user to inline mode in a chat
      *
      * @param string $text  Label text on the button
      * @param string $query Data to be sent in a [callback query](https://core.telegram.org/bots/api#callbackquery) to the bot when button is pressed, 1-64 bytes
-     * @param bool   $same  Pressing the button will insert the bot's username and the specified inline query in the current chat's input field
      */
-    public function addSwitchInline(string $text, string $query, bool $same = true, ?InlineChoosePeer $filter = null): KeyboardInline
+    public function addSwitchInline(string $text, string $query): KeyboardInline
     {
-        return $this->addButton(InlineButton::SwitchInline($text, $query, $same, $filter));
+        return $this->addButton(InlineButton::SwitchInline($text, $query));
+    }
+
+    /**
+     * Create inline button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.
+     *
+     * @param string $text  Label text on the button
+     * @param string $query Data to be sent in a [callback query](https://core.telegram.org/bots/api#callbackquery) to the bot when button is pressed, 1-64 bytes
+     */
+    public function addSwitchInlineCurrent(string $text, string $query): KeyboardInline
+    {
+        return $this->addButton(InlineButton::SwitchInlineCurrent($text, $query));
+    }
+
+    /**
+     * Create an inline button that switches the current user to inline mode in a chosen chat, with an optional default inline query.
+     *
+     * @param string    $text          Label text on the button
+     * @param string    $query         The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted
+     * @param bool      $allowUsers    Whether private chats with users can be chosen
+     * @param bool|null $allowBots     Whether private chats with bots can be chosen
+     * @param bool|null $allowGroups   Whether group and supergroup chats can be chosen
+     * @param bool|null $allowChannels Whether channel chats can be chosen
+     */
+    public function SwitchInlineFilter(string $text, string $query = '', bool $allowUsers = true, ?bool $allowBots = null, ?bool $allowGroups = null, ?bool $allowChannels = null): KeyboardInline
+    {
+        return $this->addButton(InlineButton::SwitchInlineFilter($text, $query, $allowUsers, $allowBots, $allowGroups, $allowChannels));
     }
 }

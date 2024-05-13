@@ -31,7 +31,7 @@ final class KeyboardMarkup extends Keyboard
     /**
      * @internal
      */
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
         parent::jsonSerialize();
         return ['keyboard' => $this->data];

@@ -13,20 +13,21 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\KeyboardTypes;
+namespace Reymon\EasyKeyboard\Button\KeyboardButton\Poll;
 
-use Reymon\EasyKeyboard\Keyboard;
-
-/**
- * Requests clients to remove the custom keyboard (user will not be able to summon this keyboard; if you want to hide the keyboard from sight but keep it accessible, use one_time_keyboard.
- */
-final class KeyboardHide extends Keyboard
+enum PollType: string implements \JsonSerializable
 {
+    case QUIZ = 'quiz';
+
+    case REGULAR = 'regular';
+
+    case ALL = '';
+
     /**
      * @internal
      */
-    public function jsonSerialize(): array
+    public function jsonSerialize(): string
     {
-        return ['remove_keyboard' => $this->data];
+        return $this->value;
     }
 }

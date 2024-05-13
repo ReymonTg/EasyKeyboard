@@ -7,42 +7,40 @@
  * See the GNU General Public License for more details.
  * If not, see <http://www.gnu.org/licenses/>.
  *
- * @author    Mahdi <mahdi.talaee1379@gmail.com>
  * @author    AhJ <AmirHosseinJafari8228@gmail.com>
  * @copyright Copyright (c) 2023, ReymonTg
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard;
+namespace Reymon\EasyKeyboard\Button\KeyboardButton;
 
-use JsonSerializable;
+use Reymon\EasyKeyboard\Button\KeyboardButton;
 
-abstract readonly class Button implements JsonSerializable
+/**
+ * 
+ */
+abstract readonly class RequestPeer extends KeyboardButton
 {
-    /**
-     * @param string $text Label text on the button
-     */
-    public function __construct(public string $text)
+    public function __construct(string $text, public int $buttonId)
     {
+        parent::__construct($text);
     }
 
-    public function setText(string $text): Button
+    public function setButtonId(int $buttonId): KeyboardButton
     {
-        return $this->withKey('text', $text);
+        return $this->withKey('buttonId', $buttonId);
     }
 
-    protected function withKey(mixed $key, mixed $value): Button
+    public function withName(?bool $name = null): KeyboardButton
     {
-        $res = get_object_vars($this);
-        $res[$key] = $value;
-        return new static(...$res);
+        return $this->withKey('name', $name);
     }
-
-    /**
-     * @internal
-     */
-    public function jsonSerialize(): array
+    public function withUsername(?bool $username = null): KeyboardButton
     {
-        return ['text' => $this->text];
+        return $this->withKey('username', $username);
+    }
+    public function withPhoto(?bool $photo = null): KeyboardButton
+    {
+        return $this->withKey('photo', $photo);
     }
 }
