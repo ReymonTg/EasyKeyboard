@@ -19,20 +19,26 @@ use Reymon\EasyKeyboard\Button\InlineButton;
 /**
  * Represents inline button with callback data.
  */
-final readonly class CallBack extends InlineButton
+final class CallBack extends InlineButton
 {
     /**
      * @param string $text     Label text on the button
      * @param string $callback Data to be sent in a callback query to the bot when button is pressed, 1-64 bytes
      */
-    public function __construct(string $text, public string $callback)
+    public function __construct(string $text, private string $callback)
     {
         parent::__construct($text);
     }
 
-    public function setCallback(string $callback): InlineButton
+    public function setCallback(string $callback): self
     {
-        return $this->withKey('callback', $callback);
+        $this->callback = $callback;
+        return $this;
+    }
+
+    public function getCallback(): string
+    {
+        return $this->callback;
     }
 
     /**

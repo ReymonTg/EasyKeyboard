@@ -15,24 +15,22 @@
 namespace Reymon\EasyKeyboard\Button\InlineButton;
 
 use Reymon\EasyKeyboard\Button\InlineButton;
+use Reymon\EasyKeyboard\Tools\Url;
 
 /**
  * Represents inline webapp button.
  */
-final readonly class Webapp extends InlineButton
+final class Webapp extends InlineButton
 {
+    use Url;
+
     /**
      * @param string $text Label text on the button
      * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
      */
-    public function __construct(string $text, public string $url)
+    public function __construct(string $text, private string $url)
     {
         parent::__construct($text);
-    }
-
-    public function setUrl(string $url): InlineButton
-    {
-        return $this->withKey('url', $url);
     }
 
     /**

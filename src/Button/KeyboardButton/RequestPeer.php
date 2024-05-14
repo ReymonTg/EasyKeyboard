@@ -19,28 +19,39 @@ use Reymon\EasyKeyboard\Button\KeyboardButton;
 /**
  * 
  */
-abstract readonly class RequestPeer extends KeyboardButton
+abstract class RequestPeer extends KeyboardButton
 {
-    public function __construct(string $text, public int $buttonId)
+    public function __construct(string $text, protected int $buttonId, protected bool $name = false, protected bool $username = false, protected bool $photo = false)
     {
         parent::__construct($text);
     }
 
-    public function setButtonId(int $buttonId): KeyboardButton
+    public function setButtonId(int $buttonId): self
     {
-        return $this->withKey('buttonId', $buttonId);
+        $this->buttonId = $buttonId;
+        return $this;
     }
 
-    public function withName(?bool $name = null): KeyboardButton
+    public function getButtonId(): int
     {
-        return $this->withKey('name', $name);
+        return $this->buttonId;
     }
-    public function withUsername(?bool $username = null): KeyboardButton
+
+    public function withName(?bool $name = null): self
     {
-        return $this->withKey('username', $username);
+        $this->name = $name;
+        return $this;
     }
-    public function withPhoto(?bool $photo = null): KeyboardButton
+
+    public function withUsername(?bool $username = null): self
     {
-        return $this->withKey('photo', $photo);
+        $this->username = $username;
+        return $this;
+    }
+
+    public function withPhoto(?bool $photo = null): self
+    {
+        $this->photo = $photo;
+        return $this;
     }
 }

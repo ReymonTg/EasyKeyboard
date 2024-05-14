@@ -19,20 +19,26 @@ use Reymon\EasyKeyboard\Button\InlineButton;
 /**
  * Represents inline button that switches the current user to inline mode in a chat
  */
-readonly class SwitchInline extends InlineButton
+class SwitchInline extends InlineButton
 {
     /**
      * @param string $text   Label text on the button
      * @param string $query  Data to be sent in a [callback query](https://core.telegram.org/bots/api#callbackquery) to the bot when button is pressed, 1-64 bytes
      */
-    public function __construct(string $text, public string $query = '')
+    public function __construct(string $text, protected string $query = '')
     {
         parent::__construct($text);
     }
 
-    public function setQuery(string $query = ''): InlineButton
+    public function setQuery(string $query = ''): self
     {
-        return $this->withKey('query', $query);
+        $this->query = $query;
+        return $this;
+    }
+
+    public function getQuery(string $query = ''): string
+    {
+        return $this->query;
     }
 
     /**

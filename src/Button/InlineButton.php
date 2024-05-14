@@ -26,7 +26,7 @@ use Reymon\EasyKeyboard\Button\InlineButton\SwitchInline;
 use Reymon\EasyKeyboard\Button\InlineButton\SwitchInlineFilter;
 use Reymon\EasyKeyboard\Button\InlineButton\SwitchInlineCurrent;
 
-abstract readonly class InlineButton extends Button
+abstract class InlineButton extends Button
 {
     /**
      * Create inline button that switches the current user to inline mode in a chat

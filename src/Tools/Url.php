@@ -12,41 +12,18 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button\InlineButton;
+namespace Reymon\EasyKeyboard\Tools;
 
-use Reymon\EasyKeyboard\Button\InlineButton;
-
-/**
- * Represents buy button for your inline buy request(similar to webapps).
- */
-final class Buy extends InlineButton
+trait Url
 {
-    /**
-     * @param string $text Label text on the button
-     */
-    public function __construct(string $text)
+    public function setUrl(string $url): self
     {
-        parent::__construct($text);
+        $this->url = $url;
+        return $this;
     }
 
-    /**
-     * Create a buy button for your inline buy request(similar to webapps).
-     *
-     * @param string $text Label text on the button
-     */
-    public static function new(string $text): self
+    public function getUrl(): string
     {
-        return new static($text);
-    }
-
-    /**
-     * @internal
-     */
-    public function jsonSerialize(): array
-    {
-        return [
-            'text' => $this->text,
-            'pay'  => true
-        ];
+        return $this->url;
     }
 }

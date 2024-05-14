@@ -14,25 +14,23 @@
 
 namespace Reymon\EasyKeyboard\Button\KeyboardButton;
 
+use Reymon\EasyKeyboard\Tools\Url;
 use Reymon\EasyKeyboard\Button\KeyboardButton;
 
 /**
  * Represents text button that open web app without requiring user information.
  */
-final readonly class Webapp extends KeyboardButton
+final class Webapp extends KeyboardButton
 {
+    use Url;
+
     /**
      * @param string $text Label text on the button
      * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
      */
-    public function __construct(string $text, public string $url)
+    public function __construct(string $text, private string $url)
     {
         parent::__construct($text);
-    }
-
-    public function setUrl(string $url): KeyboardButton
-    {
-        return $this->withKey('url', $url);
     }
 
     /**

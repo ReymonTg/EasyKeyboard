@@ -14,12 +14,10 @@
 
 namespace Reymon\EasyKeyboard\Button\KeyboardButton;
 
-use Reymon\EasyKeyboard\Button\KeyboardButton;
-
 /**
  * Represents button the criteria used to request suitable users. The identifiers of the selected users will be shared with the bot when the corresponding button is pressed.
  */
-final readonly class RequestUsers extends RequestPeer
+final class RequestUsers extends RequestPeer
 {
     /**
      * @param string  $text     Label text on the button
@@ -31,32 +29,31 @@ final readonly class RequestUsers extends RequestPeer
      * @param bool    $photo    Whether to request the users' photo
      * @param int     $max      The maximum number of users to be selected; 1-10.
      */
-    public function __construct(string $text, $buttonId, public ?bool $bot = null, public ?bool $premium = null, public bool $name = false, public bool $username = false, public bool $photo = false, public int $max = 1)
+    public function __construct(string $text, int $buttonId, private ?bool $bot = null, private ?bool $premium = null, bool $name = false, bool $username = false, bool $photo = false, private int $max = 1)
     {
-        parent::__construct($text, $buttonId);
+        parent::__construct($text, $buttonId, $name, $username, $photo);
     }
 
-    public function setIsBot(?bool $bot = null): KeyboardButton
+    public function setIsBot(?bool $bot = null): self
     {
-        return $this->withKey('bot', $bot);
+        $this->bot = $bot;
+        return $this;
     }
 
-    public function setMax(int $max = 1): KeyboardButton
+    public function getIsBot(): bool
     {
-        return $this->withKey('max', $max);
+        return $this->bot;
     }
 
-    public function withName(?bool $name = null): KeyboardButton
+    public function setMax(int $max = 1): self
     {
-        return $this->withKey('name', $name);
+        $this->max = $max;
+        return $this;
     }
-    public function withUsername(?bool $username = null): KeyboardButton
+
+    public function getMax(): int
     {
-        return $this->withKey('username', $username);
-    }
-    public function withPhoto(?bool $photo = null): KeyboardButton
-    {
-        return $this->withKey('photo', $photo);
+        return $this->max;
     }
 
     /**

@@ -14,12 +14,10 @@
 
 namespace Reymon\EasyKeyboard\Button\InlineButton;
 
-use Reymon\EasyKeyboard\Button\InlineButton;
-
 /**
  * Represents an inline button that switches the current user to inline mode in a chosen chat, with an optional default inline query.
  */
-final readonly class SwitchInlineFilter extends SwitchInline
+final class SwitchInlineFilter extends SwitchInline
 {
     /**
      * @param string    $text          Label text on the button
@@ -29,29 +27,53 @@ final readonly class SwitchInlineFilter extends SwitchInline
      * @param bool|null $allowGroups   Whether group and supergroup chats can be chosen
      * @param bool|null $allowChannels Whether channel chats can be chosen 
      */
-    public function __construct(string $text, string $query = '', public bool $allowUsers = true, public ?bool $allowBots = null, public ?bool $allowGroups = null, public ?bool $allowChannels = null)
+    public function __construct(string $text, string $query = '', private bool $allowUsers = true, private ?bool $allowBots = null, private ?bool $allowGroups = null, private ?bool $allowChannels = null)
     {
         parent::__construct($text, $query);
     }
 
-    public function allowUsers(bool $allow): InlineButton
+    public function allowUsers(bool $allow): self
     {
-        return $this->withKey('allowUsers', $allow);
+        $this->allowUsers = $allow;
+        return $this;
     }
 
-    public function allowBots(bool $allow): InlineButton
+    public function getAllowUsers(): bool
     {
-        return $this->withKey('allowBots', $allow);
+        return $this->allowUsers;
     }
 
-    public function allowGroups(bool $allow): InlineButton
+    public function allowBots(bool $allow): self
     {
-        return $this->withKey('allowGroups', $allow);
+        $this->allowBots = $allow;
+        return $this;
     }
 
-    public function allowChannels(bool $allow): InlineButton
+    public function getAllowBots(): bool
     {
-        return $this->withKey('allowChannels', $allow);
+        return $this->allowBots;
+    }
+
+    public function allowGroups(bool $allow): self
+    {
+        $this->allowGroups = $allow;
+        return $this;
+    }
+
+    public function getAllowGroups(): bool
+    {
+        return $this->allowGroups;
+    }
+
+    public function allowChannels(bool $allow): self
+    {
+        $this->allowChannels = $allow;
+        return $this;
+    }
+
+    public function getAllowChannels(): bool
+    {
+        return $this->allowChannels;
     }
 
     /**

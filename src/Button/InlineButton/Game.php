@@ -19,7 +19,7 @@ use Reymon\EasyKeyboard\Button\InlineButton;
 /**
  * Represents game button for your inline game.
  */
-final readonly class Game extends InlineButton
+final class Game extends InlineButton
 {
     /**
      * @param string $text Label text on the button

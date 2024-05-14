@@ -19,7 +19,7 @@ use Reymon\EasyKeyboard\Button\KeyboardButton;
 /**
  * Represents simple text keyboard.
  */
-final readonly class Text extends KeyboardButton
+final class Text extends KeyboardButton
 {
     /**
      * Create simple text keyboard.

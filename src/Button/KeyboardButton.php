@@ -27,7 +27,7 @@ use Reymon\EasyKeyboard\Button\KeyboardButton\RequestUsers;
 use Reymon\EasyKeyboard\Button\KeyboardButton\RequestChannel;
 use Reymon\EasyKeyboard\Button\KeyboardButton\Poll\PollType;
 
-abstract readonly class KeyboardButton extends Button
+abstract class KeyboardButton extends Button
 {
     // public static function Profile(string $text, int $userId): KeyboardButton
     // {
@@ -98,15 +98,15 @@ abstract readonly class KeyboardButton extends Button
      * @param ?bool            $creator         Whether to request a chat owned by the user.
      * @param ?bool            $hasUsername     Whether to request a supergroup or a channel with (or without) a username. If not specified, no additional restrictions are applied.
      * @param ?bool            $member          Whether to request a chat with the bot as a member. Otherwise, no additional restrictions are applied.
-     * @param bool             $title           Whether to request the chat's title
+     * @param bool             $name            Whether to request the chat's title
      * @param bool             $username        Whether to request the chat's username
      * @param bool             $photo           Whether to request the chat's photo
      * @param ?ChatAdminRights $userAdminRights The required administrator rights of the user in the chat. If not specified, no additional restrictions are applied.
      * @param ?ChatAdminRights $botAdminRights  The required administrator rights of the bot in the chat. If not specified, no additional restrictions are applied.
      */
-    public static function RequestChannel(string $text, int $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?bool $member = null, bool $title = false, bool $username = false, bool $photo = false, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): KeyboardButton
+    public static function RequestChannel(string $text, int $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?bool $member = null, bool $name = false, bool $username = false, bool $photo = false, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): KeyboardButton
     {
-        return new RequestChannel($text, $buttonId, $creator, $hasUsername, $member, $title, $username, $photo, $userAdminRights, $botAdminRights);
+        return new RequestChannel($text, $buttonId, $creator, $hasUsername, $member, $name, $username, $photo, $userAdminRights, $botAdminRights);
     }
 
     /**
@@ -118,15 +118,15 @@ abstract readonly class KeyboardButton extends Button
      * @param ?bool            $hasUsername     Whether to request a supergroup or a channel with (or without) a username. If not specified, no additional restrictions are applied.
      * @param ?bool            $forum           Whether to request a forum (or non-forum) supergroup.
      * @param ?bool            $member          Whether to request a chat with the bot as a member. Otherwise, no additional restrictions are applied.
-     * @param bool             $title           Whether to request the chat's title
+     * @param bool             $name            Whether to request the chat's title
      * @param bool             $username        Whether to request the chat's username
      * @param bool             $photo           Whether to request the chat's photo
      * @param ?ChatAdminRights $userAdminRights The required administrator rights of the user in the chat. If not specified, no additional restrictions are applied.
      * @param ?ChatAdminRights $botAdminRights  The required administrator rights of the bot in the chat. If not specified, no additional restrictions are applied.
      */
-    public static function RequestGroup(string $text, int $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?bool $forum = null, ?bool $member = null, bool $title = false, bool $username = false, bool $photo = false, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): KeyboardButton
+    public static function RequestGroup(string $text, int $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?bool $forum = null, ?bool $member = null, bool $name = false, bool $username = false, bool $photo = false, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): KeyboardButton
     {
-        return new RequestGroup($text, $buttonId, $creator, $hasUsername, $forum, $member, $title, $username, $photo, $userAdminRights, $botAdminRights);
+        return new RequestGroup($text, $buttonId, $creator, $hasUsername, $forum, $member, $name, $username, $photo, $userAdminRights, $botAdminRights);
     }
 
     /**

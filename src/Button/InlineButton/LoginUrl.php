@@ -15,12 +15,15 @@
 namespace Reymon\EasyKeyboard\Button\InlineButton;
 
 use Reymon\EasyKeyboard\Button\InlineButton;
+use Reymon\EasyKeyboard\Tools\Url;
 
 /**
  * Represents inline button for login.
  */
-final readonly class LoginUrl extends InlineButton
+final class LoginUrl extends InlineButton
 {
+    use Url;
+
     /**
      * @param string  $text        Label text on the button
      * @param string  $url         An HTTPS URL used to automatically authorize the user
@@ -28,29 +31,42 @@ final readonly class LoginUrl extends InlineButton
      * @param ?string $username    Username of a bot, which will be used for user authorization.
      * @param bool    $writeAccess Whether to request the permission for your bot to send messages to the user
      */
-    public function __construct(string $text, public string $url, public ?string $fwdText = null, public ?string $username = null, public bool $writeAccess = false)
+    public function __construct(string $text, private string $url, private ?string $fwdText = null, private ?string $username = null, private bool $writeAccess = false)
     {
         parent::__construct($text);
     }
 
-    public function setUrl(string $url): InlineButton
+    public function setForwardText(?string $fwdText = null): self
     {
-        return $this->withKey('url', $url);
+        $this->fwdText = $fwdText;
+        return $this;
     }
 
-    public function setForwardText(?string $fwdText = null): InlineButton
+    public function getForwardText(): ?string
     {
-        return $this->withKey('fwdText', $fwdText);
+        return $this->fwdText;
     }
 
-    public function setUsername(?string $username = null): InlineButton
+    public function setUsername(?string $username = null): self
     {
-        return $this->withKey('username', $username);
+        $this->username = $username;
+        return $this;
     }
 
-    public function setWriteAccess(bool $writeAccess = false): InlineButton
+    public function getUsername(): ?string
     {
-        return $this->withKey('writeAccess', $writeAccess);
+        return $this->username;
+    }
+
+    public function setWriteAccess(bool $writeAccess = false): self
+    {
+        $this->writeAccess = $writeAccess;
+        return $this;
+    }
+
+    public function getWriteAccess(): bool
+    {
+        return $this->writeAccess;
     }
 
     /**

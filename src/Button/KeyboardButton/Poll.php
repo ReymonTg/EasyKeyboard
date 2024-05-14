@@ -20,20 +20,26 @@ use Reymon\EasyKeyboard\Button\KeyboardButton\Poll\PollType;
 /**
  * Represents text button that request poll from user.
  */
-final readonly class Poll extends KeyboardButton
+final class Poll extends KeyboardButton
 {
     /**
      * @param string $text Label text on the button
      * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
      */
-    public function __construct(string $text, public PollType $type = PollType::ALL)
+    public function __construct(string $text, private PollType $type = PollType::ALL)
     {
         parent::__construct($text);
     }
 
-    public function setPollType(PollType $type = PollType::ALL): KeyboardButton
+    public function setPollType(PollType $type = PollType::ALL): self
     {
-        return $this->withKey('type', $type);
+        $this->type = $type;
+        return $this;
+    }
+
+    public function getPollType(): PollType
+    {
+        return $this->type;
     }
 
     /**

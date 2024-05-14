@@ -18,7 +18,7 @@ namespace Reymon\EasyKeyboard\Button\InlineButton;
 /**
  * Represents inline button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.
  */
-final readonly class SwitchInlineCurrent extends SwitchInline
+final class SwitchInlineCurrent extends SwitchInline
 {
     /**
      * @param string $text  Label text on the button

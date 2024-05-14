@@ -19,7 +19,7 @@ use Reymon\EasyKeyboard\Tools\ChatAdminRights;
 /**
  * Represents button the criteria used to request a suitable channel. The identifier of the selected channel will be shared with the bot when the corresponding button is pressed.
  */
-final readonly class RequestChannel extends RequestPeer
+final class RequestChannel extends RequestPeer
 {
     /**
      * @param string           $text            Label text on the button
@@ -27,15 +27,15 @@ final readonly class RequestChannel extends RequestPeer
      * @param ?bool            $creator         Whether to request a chat owned by the user.
      * @param ?bool            $hasUsername     Whether to request a supergroup or a channel with (or without) a username. If not specified, no additional restrictions are applied.
      * @param ?bool            $member          Whether to request a chat with the bot as a member. Otherwise, no additional restrictions are applied.
-     * @param bool             $title           Whether to request the chat's title
+     * @param bool             $name            Whether to request the chat's title
      * @param bool             $username        Whether to request the chat's username
      * @param bool             $photo           Whether to request the chat's photo
      * @param ?ChatAdminRights $userAdminRights The required administrator rights of the user in the chat. If not specified, no additional restrictions are applied.
      * @param ?ChatAdminRights $botAdminRights  The required administrator rights of the bot in the chat. If not specified, no additional restrictions are applied.
      */
-    public function __construct(string $text, $buttonId, public ?bool $creator = null, public ?bool $hasUsername = null, public ?bool $member = null, public bool $title = false, public bool $username = false, public bool $photo = false, public ?ChatAdminRights $userAdminRights = null, public ?ChatAdminRights $botAdminRights = null)
+    public function __construct(string $text, int $buttonId, private ?bool $creator = null, private ?bool $hasUsername = null, private ?bool $member = null, bool $name = false, bool $username = false, bool $photo = false, private ?ChatAdminRights $userAdminRights = null, private ?ChatAdminRights $botAdminRights = null)
     {
-        parent::__construct($text, $buttonId);
+        parent::__construct($text, $buttonId, $name, $username, $photo);
     }
 
     /**
@@ -46,15 +46,15 @@ final readonly class RequestChannel extends RequestPeer
      * @param ?bool            $creator         Whether to request a chat owned by the user.
      * @param ?bool            $hasUsername     Whether to request a supergroup or a channel with (or without) a username. If not specified, no additional restrictions are applied.
      * @param ?bool            $member          Whether to request a chat with the bot as a member. Otherwise, no additional restrictions are applied.
-     * @param bool             $title           Whether to request the chat's title
+     * @param bool             $name            Whether to request the chat's title
      * @param bool             $username        Whether to request the chat's username
      * @param bool             $photo           Whether to request the chat's photo
      * @param ?ChatAdminRights $userAdminRights The required administrator rights of the user in the chat. If not specified, no additional restrictions are applied.
      * @param ?ChatAdminRights $botAdminRights  The required administrator rights of the bot in the chat. If not specified, no additional restrictions are applied.
      */
-    public static function new(string $text, $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?bool $member = null, bool $title = false, bool $username = false, bool $photo = false, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): self
+    public static function new(string $text, $buttonId, ?bool $creator = null, ?bool $hasUsername = null, ?bool $member = null, bool $name = false, bool $username = false, bool $photo = false, ?ChatAdminRights $userAdminRights = null, ?ChatAdminRights $botAdminRights = null): self
     {
-        return new static($text, $buttonId, $creator, $hasUsername, $member, $title, $username, $photo, $userAdminRights, $botAdminRights);
+        return new static($text, $buttonId, $creator, $hasUsername, $member, $name, $username, $photo, $userAdminRights, $botAdminRights);
     }
 
     /**
@@ -70,7 +70,7 @@ final readonly class RequestChannel extends RequestPeer
                 'chat_has_username' => $this->hasUsername,
                 'chat_is_created'   => $this->creator,
                 'bot_is_member'     => $this->member,
-                'request_title'     => $this->title,
+                'request_title'     => $this->name,
                 'request_username'  => $this->username,
                 'request_photo'     => $this->photo,
                 'user_admin_rights' => $this->userAdminRights,

@@ -19,7 +19,7 @@ use Reymon\EasyKeyboard\Button\KeyboardButton;
 /**
  * Represents text button that request location from user.
  */
-final readonly class Location extends KeyboardButton
+final class Location extends KeyboardButton
 {
     /**
      * @param string $text Label text on the button

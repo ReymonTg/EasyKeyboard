@@ -17,25 +17,24 @@ namespace Reymon\EasyKeyboard;
 
 use JsonSerializable;
 
-abstract readonly class Button implements JsonSerializable
+abstract class Button implements JsonSerializable
 {
     /**
      * @param string $text Label text on the button
      */
-    public function __construct(public string $text)
+    public function __construct(protected string $text)
     {
     }
 
-    public function setText(string $text): Button
+    public function setText(string $text): self
     {
-        return $this->withKey('text', $text);
+        $this->text = $text;
+        return $this;
     }
 
-    protected function withKey(mixed $key, mixed $value): Button
+    public function getText(): string
     {
-        $res = get_object_vars($this);
-        $res[$key] = $value;
-        return new static(...$res);
+        return $this->text;
     }
 
     /**

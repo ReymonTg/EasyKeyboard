@@ -19,7 +19,7 @@ use Reymon\EasyKeyboard\Button\KeyboardButton;
 /**
  * Represents text button that request contact info from user.
  */
-final readonly class Phone extends KeyboardButton
+final class Phone extends KeyboardButton
 {
     /**
      * @param string $text Label text on the button
