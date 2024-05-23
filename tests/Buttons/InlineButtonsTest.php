@@ -85,8 +85,8 @@ class InlineButtonsTest extends TestCase
     public function testSwitchInline(): void
     {
         $button1 = InlineButton::SwitchInline('hello', 'test');
-        $button2 = InlineButton::SwitchInline('hello', 'test', true);
-        $button3 = InlineButton::SwitchInline('hello', 'test', filter: new InlineChoosePeer);
+        $button2 = InlineButton::SwitchInlineCurrent('hello', 'test');
+        $button3 = InlineButton::SwitchInlineFilter('hello', 'test');
         $rawButton1 = [
             'switch_inline_query' => 'test',
             'text' => 'hello'
@@ -95,9 +95,8 @@ class InlineButtonsTest extends TestCase
             'switch_inline_query_current_chat' => 'test',
             'text' => 'hello'
         ];
-        $peer = new InlineChoosePeer;
         $rawButton3 = [
-            'switch_inline_query_chosen_chat' => [...$peer->jsonSerialize(),'query' => 'test'],
+            'switch_inline_query_chosen_chat' => ['allow_user_chats' => true, 'query' => 'test'],
             'text' => 'hello'
         ];
         $this->assertEquals(\json_encode($button1), \json_encode($rawButton1));

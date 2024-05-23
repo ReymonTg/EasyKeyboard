@@ -1,24 +1,24 @@
 {
-    "name": "reymon/easy-keyboard",
+    "name"       : "reymon/easy-keyboard",
     "description": "A easy keyboard builder for Api syntax",
-    "keywords": [
-        "telegram",
+    "keywords"   : [
         "bot",
         "api",
         "easy",
         "keyboard",
         "builder",
+        "telegram",
         "telegram-api"
     ],
-    "type": "library",
+    "type"   : "library",
     "license": "GPL-3.0-only",
     "authors": [
         {
-            "name": "Mahdi",
+            "name" : "Mahdi",
             "email": "mahdi.talaee1379@gmail.com"
         },
         {
-            "name": "AmirHossein Jafari",
+            "name" : "AmirHossein Jafari",
             "email": "amirhosseinjafari8228@gmail.com"
         }
     ],
@@ -34,21 +34,22 @@
         }
     },
     "require": {
-        "php-64bit": ">=8.1",
+        "php-64bit"   : ">=8.1",
         "ext-mbstring": "*",
-        "ext-json": "*"
+        "ext-json"    : "*"
     },
     "require-dev": {
-        "amphp/php-cs-fixer-config": "^2.0",
-        "phpunit/phpunit": "^9"
+        "phpunit/phpunit"          : "^9",
+        "amphp/php-cs-fixer-config": "^2.0"
     },
     "scripts": {
         "build": [
             "@cs-fix",
             "@test"
         ],
-        "cs-fix": "php -d pcre.jit=0 vendor/bin/php-cs-fixer --config=.php-cs-fixer.dist.php fix -v",
-        "test" :"php -dzend.assertions=1 -dassert.exception=1 ./vendor/bin/phpunit --coverage-text tests"
+        "cs"    : "php -d pcre.jit=0 vendor/bin/php-cs-fixer fix -v --diff --dry-run",
+        "cs-fix": "php -d pcre.jit=0 vendor/bin/php-cs-fixer fix -v --diff",
+        "test"  : "php -dzend.assertions=1 -dassert.exception=1 ./vendor/bin/phpunit --coverage-text tests"
     },
     "minimum-stability": "stable"
 }

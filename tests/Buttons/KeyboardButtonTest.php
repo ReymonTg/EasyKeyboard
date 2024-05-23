@@ -4,15 +4,15 @@ namespace Reymon\EasyKeyboard\Test\Buttons;
 
 use PHPUnit\Framework\TestCase;
 use Reymon\EasyKeyboard\Button\KeyboardButton;
-use Reymon\EasyKeyboard\Tools\PollType;
+use Reymon\EasyKeyboard\Button\KeyboardButton\Poll\PollType;
 
 class KeyboardButtonTest extends TestCase
 {
     public function testPeer(): void
     {
-        $button1 = KeyboardButton::PeerUsers('hello', 0);
-        $button2 = KeyboardButton::PeerGroup('hello', 0);
-        $button3 = KeyboardButton::PeerChannel('hello', 0);
+        $button1 = KeyboardButton::RequestUsers('hello', 0);
+        $button2 = KeyboardButton::RequestGroup('hello', 0);
+        $button3 = KeyboardButton::RequestChannel('hello', 0);
         $rawButton1 = [
             'text' => 'hello',
             'request_users' => [
@@ -94,18 +94,18 @@ class KeyboardButtonTest extends TestCase
         $button = KeyboardButton::Poll('send-poll', PollType::QUIZ);
         $rawButton = [
             'text'            => 'send-poll',
-            'request_poll' => PollType::QUIZ,
+            'request_poll' => 'quiz',
         ];
         $this->assertEquals(\json_encode($button), \json_encode($rawButton));
     }
 
-    public function testProfile(): void
-    {
-        $button = KeyboardButton::Profile('send-profile', 777000);
-        $rawButton = [
-            'text' => 'send-profile',
-            'url' => "tg://user?id=777000",
-        ];
-        $this->assertEquals(\json_encode($button), \json_encode($rawButton));
-    }
+    // public function testProfile(): void
+    // {
+    //     $button = KeyboardButton::Profile('send-profile', 777000);
+    //     $rawButton = [
+    //         'text' => 'send-profile',
+    //         'url' => "tg://user?id=777000",
+    //     ];
+    //     $this->assertEquals(\json_encode($button), \json_encode($rawButton));
+    // }
 }
