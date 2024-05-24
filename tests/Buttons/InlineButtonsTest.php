@@ -14,7 +14,7 @@ class InlineButtonsTest extends TestCase
             'text' => 'hello',
             'pay' => true,
         ];
-        $this->assertEquals(\json_encode($button), \json_encode($rawButton));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button), \json_encode($rawButton));
     }
 
     public function testGame(): void
@@ -24,7 +24,7 @@ class InlineButtonsTest extends TestCase
             'text' => 'hello',
             'callback_game' => '',
         ];
-        $this->assertEquals(\json_encode($button), \json_encode($rawButton));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button), \json_encode($rawButton));
     }
 
     public function testUrl(): void
@@ -34,7 +34,7 @@ class InlineButtonsTest extends TestCase
             'text' => 'hello',
             'url' => 'https://example.com',
         ];
-        $this->assertEquals(\json_encode($button), \json_encode($rawButton));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button), \json_encode($rawButton));
     }
 
     public function testCallbackData(): void
@@ -44,7 +44,7 @@ class InlineButtonsTest extends TestCase
             'text' => 'hello',
             'callback_data' => 'hello-callback',
         ];
-        $this->assertEquals(\json_encode($button), \json_encode($rawButton));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button), \json_encode($rawButton));
     }
 
     public function testLogin(): void
@@ -76,9 +76,9 @@ class InlineButtonsTest extends TestCase
             ],
             'text' => 'please-login',
         ];
-        $this->assertEquals(\json_encode($button1), \json_encode($rawButton1));
-        $this->assertEquals(\json_encode($button2), \json_encode($rawButton2));
-        $this->assertEquals(\json_encode($button3), \json_encode($rawButton3));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button1), \json_encode($rawButton1));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button2), \json_encode($rawButton2));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button3), \json_encode($rawButton3));
     }
 
     public function testSwitchInline(): void
@@ -98,8 +98,8 @@ class InlineButtonsTest extends TestCase
             'switch_inline_query_chosen_chat' => ['allow_user_chats' => true, 'query' => 'test'],
             'text' => 'hello'
         ];
-        $this->assertEquals(\json_encode($button1), \json_encode($rawButton1));
-        $this->assertEquals(\json_encode($button2), \json_encode($rawButton2));
-        $this->assertEquals(\json_encode($button3), \json_encode($rawButton3));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button1), \json_encode($rawButton1));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button2), \json_encode($rawButton2));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button3), \json_encode($rawButton3));
     }
 }

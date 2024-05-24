@@ -43,9 +43,9 @@ class KeyboardButtonTest extends TestCase
                 'request_photo'    => false
             ]
         ];
-        $this->assertEquals(\json_encode($button1), \json_encode($rawButton1));
-        $this->assertEquals(\json_encode($button2), \json_encode($rawButton2));
-        $this->assertEquals(\json_encode($button3), \json_encode($rawButton3));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button1), \json_encode($rawButton1));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button2), \json_encode($rawButton2));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button3), \json_encode($rawButton3));
     }
 
     public function testWebApp(): void
@@ -57,7 +57,7 @@ class KeyboardButtonTest extends TestCase
                 'url' => 'https://example.com'
             ],
         ];
-        $this->assertEquals(\json_encode($button), \json_encode($rawButton));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button), \json_encode($rawButton));
     }
 
     public function testText(): void
@@ -66,7 +66,7 @@ class KeyboardButtonTest extends TestCase
         $rawButton = [
             'text' => 'hello'
         ];
-        $this->assertEquals(\json_encode($button), \json_encode($rawButton));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button), \json_encode($rawButton));
     }
 
     public function testPhone(): void
@@ -76,7 +76,7 @@ class KeyboardButtonTest extends TestCase
             'text'            => 'send-phone',
             'request_contact' => true,
         ];
-        $this->assertEquals(\json_encode($button), \json_encode($rawButton));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button), \json_encode($rawButton));
     }
 
     public function testLocation(): void
@@ -86,7 +86,7 @@ class KeyboardButtonTest extends TestCase
             'text'            => 'send-location',
             'request_location' => true,
         ];
-        $this->assertEquals(\json_encode($button), \json_encode($rawButton));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button), \json_encode($rawButton));
     }
 
     public function testPoll(): void
@@ -96,7 +96,7 @@ class KeyboardButtonTest extends TestCase
             'text'            => 'send-poll',
             'request_poll' => 'quiz',
         ];
-        $this->assertEquals(\json_encode($button), \json_encode($rawButton));
+        $this->assertJsonStringEqualsJsonString(\json_encode($button), \json_encode($rawButton));
     }
 
     // public function testProfile(): void
@@ -106,6 +106,6 @@ class KeyboardButtonTest extends TestCase
     //         'text' => 'send-profile',
     //         'url' => "tg://user?id=777000",
     //     ];
-    //     $this->assertEquals(\json_encode($button), \json_encode($rawButton));
+    //     $this->assertJsonStringEqualsJsonString(\json_encode($button), \json_encode($rawButton));
     // }
 }
