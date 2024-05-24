@@ -17,16 +17,12 @@ namespace Reymon\EasyKeyboard;
 
 use Generator;
 use IteratorAggregate;
-use RangeException;
-use LengthException;
 use JsonSerializable;
+use LengthException;
 use OutOfBoundsException;
+use RangeException;
 use Reymon\EasyKeyboard\Button\InlineButton;
-use Reymon\EasyKeyboard\Button\KeyboardButton;
-use Reymon\EasyKeyboard\KeyboardTypes\KeyboardHide;
 use Reymon\EasyKeyboard\KeyboardTypes\KeyboardInline;
-use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
-use Reymon\EasyKeyboard\KeyboardTypes\KeyboardForceReply;
 
 /**
  * Main class for Keyboard.
@@ -48,8 +44,6 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
 
     /**
      * Create new easy-keyboard.
-     *
-     * @return KeyboardInline|KeyboardHide|KeyboardMarkup|KeyboardForceReply
      */
     public static function new(): static
     {
@@ -131,7 +125,6 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
     /**
      * To add button(s) to easy-keyboard.
      *
-     * @param KeyboardButton|InlineButton ...$buttons
      */
     public function addButton(Button ...$buttons): self
     {
@@ -143,7 +136,6 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
     /**
      * To add a button by it coordinates to easy-keyboard (Note that coordinates start from 0 look like arrays indexes).
      *
-     * @param KeyboardButton|InlineButton ...$buttons
      */
     public function addToCoordinates(int $row, int $column, Button ...$buttons): self
     {

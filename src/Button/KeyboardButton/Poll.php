@@ -24,7 +24,6 @@ final class Poll extends KeyboardButton
 {
     /**
      * @param string $text Label text on the button
-     * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
      */
     public function __construct(string $text, private PollType $type = PollType::ALL)
     {

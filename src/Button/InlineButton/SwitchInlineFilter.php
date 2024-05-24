@@ -25,7 +25,7 @@ final class SwitchInlineFilter extends SwitchInline
      * @param bool      $allowUsers    Whether private chats with users can be chosen
      * @param bool|null $allowBots     Whether private chats with bots can be chosen
      * @param bool|null $allowGroups   Whether group and supergroup chats can be chosen
-     * @param bool|null $allowChannels Whether channel chats can be chosen 
+     * @param bool|null $allowChannels Whether channel chats can be chosen
      */
     public function __construct(string $text, string $query = '', private bool $allowUsers = true, private ?bool $allowBots = null, private ?bool $allowGroups = null, private ?bool $allowChannels = null)
     {
@@ -84,7 +84,7 @@ final class SwitchInlineFilter extends SwitchInline
      * @param bool      $allowUsers    Whether private chats with users can be chosen
      * @param bool|null $allowBots     Whether private chats with bots can be chosen
      * @param bool|null $allowGroups   Whether group and supergroup chats can be chosen
-     * @param bool|null $allowChannels Whether channel chats can be chosen 
+     * @param bool|null $allowChannels Whether channel chats can be chosen
      */
     public static function new(string $text, string $query = '', bool $allowUsers = true, ?bool $allowBots = null, ?bool $allowGroups = null, ?bool $allowChannels = null): self
     {
@@ -98,7 +98,7 @@ final class SwitchInlineFilter extends SwitchInline
     {
         return [
             'text' => $this->text,
-            'switch_inline_query_chosen_chat' => \array_filter_null([
+            'switch_inline_query_chosen_chat' => array_filter_null([
                 'query' => $this->query,
                 'allow_user_chats'    => $this->allowUsers,
                 'allow_bot_chats'     => $this->allowBots,

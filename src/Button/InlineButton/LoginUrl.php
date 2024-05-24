@@ -90,7 +90,7 @@ final class LoginUrl extends InlineButton
     {
         return [
             'text'      => $this->text,
-            'login_url' => \array_filter_null([
+            'login_url' => array_filter_null([
                 'url'                  => $this->url,
                 'forward_text'         => $this->fwdText,
                 'bot_username'         => $this->username,

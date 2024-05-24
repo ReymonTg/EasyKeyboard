@@ -17,19 +17,19 @@ namespace Reymon\EasyKeyboard\Button;
 
 use Reymon\EasyKeyboard\Button;
 use Reymon\EasyKeyboard\Button\InlineButton\Buy;
-use Reymon\EasyKeyboard\Button\InlineButton\Url;
-use Reymon\EasyKeyboard\Button\InlineButton\Game;
-use Reymon\EasyKeyboard\Button\InlineButton\Webapp;
 use Reymon\EasyKeyboard\Button\InlineButton\CallBack;
+use Reymon\EasyKeyboard\Button\InlineButton\Game;
 use Reymon\EasyKeyboard\Button\InlineButton\LoginUrl;
 use Reymon\EasyKeyboard\Button\InlineButton\SwitchInline;
-use Reymon\EasyKeyboard\Button\InlineButton\SwitchInlineFilter;
 use Reymon\EasyKeyboard\Button\InlineButton\SwitchInlineCurrent;
+use Reymon\EasyKeyboard\Button\InlineButton\SwitchInlineFilter;
+use Reymon\EasyKeyboard\Button\InlineButton\Url;
+use Reymon\EasyKeyboard\Button\InlineButton\Webapp;
 
 abstract class InlineButton extends Button
 {
     /**
-     * Create inline button that switches the current user to inline mode in a chat
+     * Create inline button that switches the current user to inline mode in a chat.
      *
      * @param string $text  Label text on the button
      * @param string $query Data to be sent in a [callback query](https://core.telegram.org/bots/api#callbackquery) to the bot when button is pressed, 1-64 bytes
@@ -58,7 +58,7 @@ abstract class InlineButton extends Button
      * @param bool      $allowUsers    Whether private chats with users can be chosen
      * @param bool|null $allowBots     Whether private chats with bots can be chosen
      * @param bool|null $allowGroups   Whether group and supergroup chats can be chosen
-     * @param bool|null $allowChannels Whether channel chats can be chosen 
+     * @param bool|null $allowChannels Whether channel chats can be chosen
      */
     public static function SwitchInlineFilter(string $text, string $query = '', bool $allowUsers = true, ?bool $allowBots = null, ?bool $allowGroups = null, ?bool $allowChannels = null): SwitchInlineFilter
     {

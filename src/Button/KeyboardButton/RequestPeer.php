@@ -16,9 +16,6 @@ namespace Reymon\EasyKeyboard\Button\KeyboardButton;
 
 use Reymon\EasyKeyboard\Button\KeyboardButton;
 
-/**
- * 
- */
 abstract class RequestPeer extends KeyboardButton
 {
     public function __construct(string $text, protected int $buttonId, protected bool $name = false, protected bool $username = false, protected bool $photo = false)

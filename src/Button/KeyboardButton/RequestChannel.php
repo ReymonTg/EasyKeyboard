@@ -64,7 +64,7 @@ final class RequestChannel extends RequestPeer
     {
         return [
             'text' => $this->text,
-            'request_chat' => \array_filter_null([
+            'request_chat' => array_filter_null([
                 'chat_is_channel'   => true,
                 'request_id'        => $this->buttonId,
                 'chat_has_username' => $this->hasUsername,

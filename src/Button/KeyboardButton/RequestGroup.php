@@ -66,7 +66,7 @@ final class RequestGroup extends RequestPeer
     {
         return [
             'text'         => $this->text,
-            'request_chat' => \array_filter_null([
+            'request_chat' => array_filter_null([
                 'chat_is_channel'   => false,
                 'request_id'        => $this->buttonId,
                 'chat_is_forum'     => $this->forum,

@@ -34,9 +34,9 @@
         }
     },
     "require": {
-        "php-64bit"   : ">=8.1",
-        "ext-mbstring": "*",
-        "ext-json"    : "*"
+        "php-64bit"   : ">=8.0",
+        "ext-json"    : "*",
+        "ext-mbstring": "*"
     },
     "require-dev": {
         "phpunit/phpunit"          : "^9",
@@ -47,9 +47,9 @@
             "@cs-fix",
             "@test"
         ],
-        "cs"    : "php -d pcre.jit=0 vendor/bin/php-cs-fixer fix -v --diff --dry-run",
-        "cs-fix": "php -d pcre.jit=0 vendor/bin/php-cs-fixer fix -v --diff",
-        "test"  : "php -dzend.assertions=1 -dassert.exception=1 ./vendor/bin/phpunit --coverage-text tests"
+        "cs"    : "php ./vendor/bin/php-cs-fixer fix -v --diff --dry-run",
+        "cs-fix": "php ./vendor/bin/php-cs-fixer fix -v --diff",
+        "test"  : "php -d zend.assertions=1 -d assert.exception=1 ./vendor/bin/phpunit --coverage-text tests"
     },
     "minimum-stability": "stable"
 }

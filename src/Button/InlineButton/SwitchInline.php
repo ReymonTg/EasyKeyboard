@@ -17,7 +17,7 @@ namespace Reymon\EasyKeyboard\Button\InlineButton;
 use Reymon\EasyKeyboard\Button\InlineButton;
 
 /**
- * Represents inline button that switches the current user to inline mode in a chat
+ * Represents inline button that switches the current user to inline mode in a chat.
  */
 class SwitchInline extends InlineButton
 {
@@ -42,7 +42,7 @@ class SwitchInline extends InlineButton
     }
 
     /**
-     * Create inline button that switches the current user to inline mode in a chat
+     * Create inline button that switches the current user to inline mode in a chat.
      *
      * @param string $text  Label text on the button
      * @param string $query Data to be sent in a [callback query](https://core.telegram.org/bots/api#callbackquery) to the bot when button is pressed, 1-64 bytes

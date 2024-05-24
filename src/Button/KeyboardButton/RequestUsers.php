@@ -80,7 +80,7 @@ final class RequestUsers extends RequestPeer
     {
         return [
             'text' => $this->text,
-            'request_users'  => \array_filter_null([
+            'request_users'  => array_filter_null([
                 'request_id' => $this->buttonId,
                 'user_is_bot'      => $this->bot,
                 'user_is_premium'  => $this->premium,

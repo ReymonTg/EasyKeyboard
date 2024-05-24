@@ -16,8 +16,8 @@
 namespace Reymon\EasyKeyboard\Tools;
 
 use Reymon\EasyKeyboard\Button\KeyboardButton;
-use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
 use Reymon\EasyKeyboard\Button\KeyboardButton\Poll\PollType;
+use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
 
 trait EasyMarkup
 {
