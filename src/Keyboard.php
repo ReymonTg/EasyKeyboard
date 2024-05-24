@@ -106,7 +106,7 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
                 'resize'      => fn (bool $option = true) => $this->data['resize_keyboard']   = $option,
                 'selective'   => fn (bool $option = true) => $this->data['is_persistent']     = $option,
                 'singleUse'   => fn (bool $option = true) => $this->data['one_time_keyboard'] = $option,
-                'placeholder' => function (string $placeholder = null): void {
+                'placeholder' => function (?string $placeholder = null): void {
                     $length = \mb_strlen($placeholder);
                     if (isset($placeholder) && $length >= 0 && $length <= 64) {
                         $this->data['input_field_placeholder'] = $placeholder;
