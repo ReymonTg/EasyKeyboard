@@ -47,15 +47,16 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
         return new static;
     }
 
-    public function getButtonByRow(int $row, int $colmun): ?Button
+    public function getButtonByRow(int $row, int $colmun): array|Button
     {
         return $this->getRow($row)[$colmun] ?? [];
     }
 
     public function getRow(int $row): ?array
     {
-        if (isset($this->data[$row]))
+        if (isset($this->data[$row])) {
             return $this->data[$row];
+        }
         return null;
     }
 

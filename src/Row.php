@@ -15,8 +15,10 @@
 namespace Reymon\EasyKeyboard;
 
 use Generator;
-use JsonSerializable;
 use IteratorAggregate;
+use JsonSerializable;
+use OutOfBoundsException;
+use RangeException;
 
 final class Row implements JsonSerializable, IteratorAggregate
 {
@@ -30,7 +32,7 @@ final class Row implements JsonSerializable, IteratorAggregate
 
     public function addButton(Button ...$button): self
     {
-        $this->buttons = array_merge($this->buttons, $button);
+        $this->buttons = \array_merge($this->buttons, $button);
         $this->currentColumnIndex++;
         return  $this;
     }
@@ -52,7 +54,7 @@ final class Row implements JsonSerializable, IteratorAggregate
 
     public function isEmpty(): bool
     {
-        return count($this->buttons) === 0;
+        return \count($this->buttons) === 0;
     }
 
     /**
@@ -69,5 +71,37 @@ final class Row implements JsonSerializable, IteratorAggregate
     public function jsonSerialize(): array
     {
         return $this->buttons;
+    }
+    /**
+     * remove last button from row.
+     *
+     * @throws RangeException
+     */
+    public function remove(?int $columnNumber = null): self
+    {
+        if(!empty($this->buttons) && $this->currentColumnIndex !== 0) {
+            $buttons = \array_keys($this->buttons);
+            unset($this->buttons[($columnNumber ? $columnNumber > 0: \end($buttons))]);
+            $this->currentColumnIndex--;
+            return $this;
+        }
+        throw new RangeException("Raw array is already empty!");
+    }
+
+    /**
+     * replace last button from row.
+     *
+     * @throws OutOfBoundsException
+     */
+    public function replace(?int $columnNumber = null, Button ...$buttons): self
+    {
+        if (\array_key_exists($columnNumber, $this->buttons)) {
+            \array_splice($this->buttons, $columnNumber, \count($buttons), $buttons);
+            return $this;
+        } elseif ($columnNumber == null) {
+            \array_splice($this->buttons, $columnNumber, 0, $buttons);
+            return $this;
+        }
+        throw new OutOfBoundsException("Please be sure that $columnNumber exists in array keys!");
     }
 }
