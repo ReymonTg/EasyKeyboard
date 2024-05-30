@@ -99,7 +99,7 @@ final class Row implements JsonSerializable, IteratorAggregate
             \array_splice($this->buttons, $columnNumber, \count($buttons), $buttons);
             return $this;
         } elseif ($columnNumber == null) {
-            \array_splice($this->buttons, $columnNumber, 0, $buttons);
+            \array_splice($this->buttons, count($this->buttons) - 1, 0, $buttons);
             return $this;
         }
         throw new OutOfBoundsException("Please be sure that $columnNumber exists in array keys!");
