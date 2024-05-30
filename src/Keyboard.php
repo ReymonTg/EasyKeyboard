@@ -34,9 +34,6 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
     /** @var list<list<Button>> */
     protected array $data = [];
 
-    /**
-     * @var list<list<Button>>
-     */
     public function getIterator(): Generator
     {
         yield from $this->data;
@@ -48,6 +45,28 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
     public static function new(): static
     {
         return new static;
+    }
+
+    public function getButtonByRow(int $row, int $colmun): ?Button
+    {
+        return $this->getRow($row)[$colmun] ?? [];
+    }
+
+    public function getRow(int $row): ?array
+    {
+        if (isset($this->data[$row]))
+            return $this->data[$row];
+        return null;
+    }
+
+    public function getFirstRow(): ?array
+    {
+        return $this->getRow(0);
+    }
+
+    public function getLastRow(): array
+    {
+        return $this->getRow($this->currentRowIndex - 1);
     }
 
     /**
