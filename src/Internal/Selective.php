@@ -7,29 +7,24 @@
  * See the GNU General Public License for more details.
  * If not, see <http://www.gnu.org/licenses/>.
  *
- * @author    Mahdi <mahdi.talaee1379@gmail.com>
  * @author    AhJ <AmirHosseinJafari8228@gmail.com>
  * @copyright Copyright (c) 2023, ReymonTg
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\KeyboardTypes;
-
-use Reymon\EasyKeyboard\Keyboard;
-use Reymon\EasyKeyboard\Tools\KeyboardDocs;
+namespace Reymon\EasyKeyboard\Internal;
 
 /**
- * Shows reply interface to the user, as if they manually selected the bot's message and tapped 'Reply'.
- *
- * @mixin KeyboardDocs
+ * @internal
  */
-final class KeyboardForceReply extends Keyboard
+trait Selective
 {
     /**
-     * @internal
+     * Whether to show the keyboard to specific users only. Targets: 1- users that are @mentioned in the text of the [Message](https://core.telegram.org/bots/api#message) object 2- if the bot's message is a reply to a message in the same chat and forum topic, sender of the original message.
      */
-    public function jsonSerialize(): array
+    public function selective(bool $selective = true): self
     {
-        return ['force_reply' => $this->data];
+        $this->option['selective'] = $selective;
+        return $this;
     }
 }

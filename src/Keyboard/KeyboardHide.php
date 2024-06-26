@@ -13,34 +13,34 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Tools;
+namespace Reymon\EasyKeyboard\Keyboard;
 
-use Reymon\EasyKeyboard\KeyboardTypes\KeyboardForceReply;
-use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
+use Reymon\EasyKeyboard\Keyboard;
+use Reymon\EasyKeyboard\Exception;
+use Reymon\EasyKeyboard\Internal\Selective;
 
-interface KeyboardDocs
+/**
+ * Requests clients to remove the custom keyboard (user will not be able to summon this keyboard; if you want to hide the keyboard from sight but keep it accessible, use one_time_keyboard.
+ */
+final class KeyboardHide extends Keyboard
 {
-    /**
-     * Make current keyboard to be just used once.
-     *
-     */
-    public function singleUse(bool $singleUse = true): KeyboardMarkup|KeyboardForceReply;
+    use Selective;
+
+    public function __construct()
+    {
+        $this->option['remove_keyboard'] = true;
+    }
+
+    public function addButton(\Reymon\EasyKeyboard\Button ...$buttons): Keyboard
+    {
+        throw new Exception(\sprintf('%s cannot use %s', __CLASS__, __METHOD__));
+    }
 
     /**
-     * Make current keyboard size smaller.
-     *
+     * @internal
      */
-    public function resize(bool $resize = true): KeyboardMarkup|KeyboardForceReply;
-
-    /**
-     * Make current keyboard selective.
-     *
-     */
-    public function selective(bool $selective = true): KeyboardMarkup|KeyboardForceReply;
-
-    /**
-     * Create placeholder for current keyboard it can be also empty string.
-     *
-     */
-    public function placeholder(?string $placeholder = null): KeyboardMarkup|KeyboardForceReply;
+    public function getIterator(): \EmptyIterator
+    {
+        return new \EmptyIterator;
+    }
 }

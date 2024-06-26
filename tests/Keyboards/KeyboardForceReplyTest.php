@@ -2,7 +2,7 @@
 
 namespace Reymon\EasyKeyboard\Test\Keyboards;
 
-use Reymon\EasyKeyboard\KeyboardTypes\KeyboardForceReply;
+use Reymon\EasyKeyboard\Keyboard\KeyboardForceReply;
 use Reymon\EasyKeyboard\Test\Buttons\KeyboardButtonTest;
 
 class KeyboardForceReplyTest extends KeyboardButtonTest

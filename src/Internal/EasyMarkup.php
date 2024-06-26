@@ -13,11 +13,12 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Tools;
+namespace Reymon\EasyKeyboard\Internal;
 
 use Reymon\EasyKeyboard\Button\KeyboardButton;
 use Reymon\EasyKeyboard\Button\KeyboardButton\Poll\PollType;
-use Reymon\EasyKeyboard\KeyboardTypes\KeyboardMarkup;
+use Reymon\EasyKeyboard\Keyboard\KeyboardMarkup;
+use Reymon\EasyKeyboard\Tools\ChatAdminRights;
 
 trait EasyMarkup
 {
@@ -45,11 +46,6 @@ trait EasyMarkup
         \array_map($callabe, $keyboards);
         return $this;
     }
-
-    // public function addProfile(string $text, int $userId): KeyboardMarkup
-    // {
-    //     return $this->addButton(KeyboardButton::Profile($text, $userId));
-    // }
 
     /**
      * Create text button that open web app without requiring user information.

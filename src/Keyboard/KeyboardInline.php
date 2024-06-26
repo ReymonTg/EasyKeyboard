@@ -13,20 +13,24 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\KeyboardTypes;
+namespace Reymon\EasyKeyboard\Keyboard;
 
 use Reymon\EasyKeyboard\Keyboard;
+use Reymon\EasyKeyboard\Internal\EasyInline;
 
 /**
- * Requests clients to remove the custom keyboard (user will not be able to summon this keyboard; if you want to hide the keyboard from sight but keep it accessible, use one_time_keyboard.
+ * Represents an inline keyboard that appears right next to the message it belongs to.
  */
-final class KeyboardHide extends Keyboard
+final class KeyboardInline extends Keyboard
 {
+    use EasyInline;
+
     /**
      * @internal
      */
     public function jsonSerialize(): array
     {
-        return ['remove_keyboard' => $this->data];
+        parent::jsonSerialize();
+        return [...$this->option, 'inline_keyboard' => $this->data];
     }
 }

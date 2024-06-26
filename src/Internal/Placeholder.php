@@ -7,33 +7,31 @@
  * See the GNU General Public License for more details.
  * If not, see <http://www.gnu.org/licenses/>.
  *
- * @author    Mahdi <mahdi.talaee1379@gmail.com>
  * @author    AhJ <AmirHosseinJafari8228@gmail.com>
  * @copyright Copyright (c) 2023, ReymonTg
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\KeyboardTypes;
+namespace Reymon\EasyKeyboard\Internal;
 
-use Reymon\EasyKeyboard\Keyboard;
-use Reymon\EasyKeyboard\Tools\EasyMarkup;
-use Reymon\EasyKeyboard\Tools\KeyboardDocs;
+use LengthException;
 
 /**
- * Represents a custom keyboard with reply options.
- *
- * @mixin KeyboardDocs
+ * @internal
  */
-final class KeyboardMarkup extends Keyboard
+trait Placeholder
 {
-    use EasyMarkup;
-
     /**
-     * @internal
+     * The placeholder to be shown in the input field when the keyboard is active; 1-64 characters
      */
-    public function jsonSerialize(): array
+    public function placeholder(?string $placeholder = null): self
     {
-        parent::jsonSerialize();
-        return ['keyboard' => $this->data];
+        $length = \mb_strlen($placeholder);
+        if (isset($placeholder) && $length >= 0 && $length <= 64) {
+            $this->option['input_field_placeholder'] = $placeholder;
+        } elseif ($placeholder != null) {
+            throw new LengthException('Maximum length is 64. ' . $length . ' given.');
+        }
+        return $this;
     }
 }

@@ -13,10 +13,10 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Tools;
+namespace Reymon\EasyKeyboard\Internal;
 
 use Reymon\EasyKeyboard\Button\InlineButton;
-use Reymon\EasyKeyboard\KeyboardTypes\KeyboardInline;
+use Reymon\EasyKeyboard\Keyboard\KeyboardInline;
 
 trait EasyInline
 {
@@ -120,7 +120,7 @@ trait EasyInline
      * @param bool|null $allowGroups   Whether group and supergroup chats can be chosen
      * @param bool|null $allowChannels Whether channel chats can be chosen
      */
-    public function SwitchInlineFilter(string $text, string $query = '', bool $allowUsers = true, ?bool $allowBots = null, ?bool $allowGroups = null, ?bool $allowChannels = null): KeyboardInline
+    public function addSwitchInlineFilter(string $text, string $query = '', bool $allowUsers = true, ?bool $allowBots = null, ?bool $allowGroups = null, ?bool $allowChannels = null): KeyboardInline
     {
         return $this->addButton(InlineButton::SwitchInlineFilter($text, $query, $allowUsers, $allowBots, $allowGroups, $allowChannels));
     }
