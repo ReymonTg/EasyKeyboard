@@ -14,53 +14,24 @@
 
 namespace Reymon\EasyKeyboard;
 
-use Generator;
-use IteratorAggregate;
-use JsonSerializable;
-use OutOfBoundsException;
 use RangeException;
+use OutOfBoundsException;
 
-final class Row implements JsonSerializable, IteratorAggregate
+/**
+ * @implements \IteratorAggregate<Button>
+ */
+final class Row implements \JsonSerializable, \Countable, \IteratorAggregate
 {
-    /** @var list<Button> */
     private array $buttons = [];
-    private int $currentColumnIndex = 0;
 
     public function __construct()
     {
     }
 
-    public function addButton(Button ...$button): self
-    {
-        $this->buttons = \array_merge($this->buttons, $button);
-        $this->currentColumnIndex++;
-        return  $this;
-    }
-
-    public function getButton(int $column): ?Button
-    {
-        return $this->buttons[$column] ?? null;
-    }
-
-    public function getFirstButton(): ?Button
-    {
-        return $this->getButton(0);
-    }
-
-    public function getLastButton(): ?Button
-    {
-        return $this->getButton($this->currentColumnIndex - 1);
-    }
-
-    public function isEmpty(): bool
-    {
-        return \count($this->buttons) === 0;
-    }
-
     /**
      * @internal
      */
-    public function getIterator(): Generator
+    public function getIterator(): \Generator
     {
         yield from $this->buttons;
     }
@@ -72,36 +43,80 @@ final class Row implements JsonSerializable, IteratorAggregate
     {
         return $this->buttons;
     }
+
     /**
-     * remove last button from row.
-     *
-     * @throws RangeException
+     * @internal
      */
-    public function remove(?int $columnNumber = null): self
+    public function count(): int
     {
-        if(!empty($this->buttons) && $this->currentColumnIndex !== 0) {
-            $buttons = \array_keys($this->buttons);
-            unset($this->buttons[($columnNumber ? $columnNumber > 0: \end($buttons))]);
-            $this->currentColumnIndex--;
-            return $this;
-        }
-        throw new RangeException("Raw array is already empty!");
+        return count($this->buttons);
+    }
+
+    public function addButton(Button ...$buttons): self
+    {
+        $this->buttons = \array_values(\array_merge($this->buttons, $buttons));
+        return  $this;
+    }
+
+    public function item(int $column): ?Button
+    {
+        return $this->buttons[$column] ?? null;
+    }
+
+    public function first(): ?Button
+    {
+        return $this->item(0);
+    }
+
+    public function last(): ?Button
+    {
+        return $this->item($this->count() - 1);
+    }
+
+    public function isEmpty(): bool
+    {
+        return $this->count() === 0;
     }
 
     /**
-     * replace last button from row.
+     * Remove last button from row.
+     *
+     * @throws RangeException
+     */
+    public function remove(?int $column = null): self
+    {
+        if(!$this->isEmpty()) {
+            $buttons = \array_keys($this->buttons);
+            unset($this->buttons[($column ? $column > 0: \end($buttons))]);
+            return $this;
+        }
+        throw new RangeException("Row is empty");
+    }
+
+    /**
+     * Replace last button from row.
      *
      * @throws OutOfBoundsException
      */
-    public function replace(?int $columnNumber = null, Button ...$buttons): self
+    public function replace(?int $column = null, Button ...$buttons): self
     {
-        if (\array_key_exists($columnNumber, $this->buttons)) {
-            \array_splice($this->buttons, $columnNumber, \count($buttons), $buttons);
+        if (\array_key_exists($column, $this->buttons)) {
+            \array_splice($this->buttons, $column, \count($buttons), $buttons);
             return $this;
-        } elseif ($columnNumber == null) {
+        } elseif ($column == null) {
             \array_splice($this->buttons, \count($this->buttons) - 1, 0, $buttons);
             return $this;
         }
-        throw new OutOfBoundsException("Please be sure that $columnNumber exists in array keys!");
+        throw new OutOfBoundsException("Column $column does not exists");
+    }
+
+    public function add(int $index, Button $value): self
+    {
+        if ((\count($this->buttons) - 1) < $index) {
+            throw new OutOfBoundsException("Column index is bigger than of row's size");
+        }
+        $remain = \array_splice($this->buttons, $index, replacement: [$value]);
+        $this->buttons = array_merge($this->buttons, $remain);
+        return $this;
     }
 }

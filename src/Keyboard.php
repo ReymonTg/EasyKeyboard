@@ -15,29 +15,20 @@
 
 namespace Reymon\EasyKeyboard;
 
-use Generator;
-use IteratorAggregate;
-use JsonSerializable;
-use LengthException;
-use OutOfBoundsException;
 use RangeException;
+use OutOfBoundsException;
 use Reymon\EasyKeyboard\Button\InlineButton;
-use Reymon\EasyKeyboard\KeyboardTypes\KeyboardInline;
+use Reymon\EasyKeyboard\Keyboard\KeyboardInline;
 
 /**
- * Main class for Keyboard.
+ * @implements \IteratorAggregate<Row>
  */
-abstract class Keyboard implements JsonSerializable, IteratorAggregate
+abstract class Keyboard implements \JsonSerializable, \Countable, \IteratorAggregate
 {
-    protected int $currentRowIndex = 0;
+    private int $currentRowIndex = 0;
 
-    /** @var list<list<Button>> */
     protected array $data = [];
-
-    public function getIterator(): Generator
-    {
-        yield from $this->data;
-    }
+    protected array $option = [];
 
     /**
      * Create new easy-keyboard.
@@ -47,27 +38,39 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
         return new static;
     }
 
-    public function getButtonByRow(int $row, int $colmun): array|Button
+    /**
+     * @internal
+     */
+    public function getIterator(): \Traversable
     {
-        return $this->getRow($row)[$colmun] ?? [];
+        $keyboard = &$this->data;
+        if (($keyboard[$this->currentRowIndex]?? null)?->isEmpty()) {
+            unset($keyboard[$this->currentRowIndex]);
+        }
+        yield from $this->data;
     }
 
-    public function getRow(int $row): ?array
+    public function item(int $row): ?Row
     {
-        if (isset($this->data[$row])) {
+        if (isset($this->data[$row]) && !empty($this->data[$row])) {
             return $this->data[$row];
         }
         return null;
     }
 
-    public function getFirstRow(): ?array
+    public function first(): ?Row
     {
-        return $this->getRow(0);
+        return $this->item(0);
     }
 
-    public function getLastRow(): array
+    public function last(): ?Row
     {
-        return $this->getRow($this->currentRowIndex - 1);
+        return $this->item($this->currentRowIndex - 1);
+    }
+
+    public function count(): int
+    {
+        return $this->currentRowIndex;
     }
 
     /**
@@ -117,44 +120,19 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
     }
 
     /**
-     * @throws Exception
-     */
-    public function __call(string $name, array $arguments)
-    {
-        if ((!isset($arguments[0]) || $arguments[0])) {
-            $fn = match ($name) {
-                'resize'      => fn (bool $option = true) => $this->data['resize_keyboard']   = $option,
-                'selective'   => fn (bool $option = true) => $this->data['is_persistent']     = $option,
-                'singleUse'   => fn (bool $option = true) => $this->data['one_time_keyboard'] = $option,
-                'placeholder' => function (?string $placeholder = null): void {
-                    $length = \mb_strlen($placeholder);
-                    if (isset($placeholder) && $length >= 0 && $length <= 64) {
-                        $this->data['input_field_placeholder'] = $placeholder;
-                    } elseif ($placeholder != null) {
-                        throw new LengthException('PLACE_HOLDER_MAX_CHAR');
-                    }
-                },
-                default => throw Exception::undefinedMethod($this::class, $name)
-            };
-            isset($arguments[0]) ? $fn($arguments[0]) : $fn();
-            return $this;
-        }
-        throw Exception::undefinedMethod($this::class, $name);
-    }
-
-    /**
-     * To add button(s) to easy-keyboard.
+     * Add button(s) to keyboard.
      *
      */
     public function addButton(Button ...$buttons): self
     {
         $row = &$this->data[$this->currentRowIndex];
-        $row = \array_merge($row ?? [], $buttons);
+        $row ??=  new Row();
+        $row->addButton(...$buttons);
         return $this;
     }
 
     /**
-     * To add a button by it coordinates to easy-keyboard (Note that coordinates start from 0 look like arrays indexes).
+     * To add a button by it coordinates to keyboard (Note that coordinates start from 0 look like arrays indexes).
      *
      */
     public function addToCoordinates(int $row, int $column, Button ...$buttons): self
@@ -164,7 +142,7 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
     }
 
     /**
-     * To replace a button by it coordinates to easy-keyboard (Note that coordinates start from 0 look like arrays indexes).
+     * To replace a button by it coordinates to keyboard (Note that coordinates start from 0 look like arrays indexes).
      *
      * @throws OutOfBoundsException
      */
@@ -178,7 +156,7 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
     }
 
     /**
-     * To remove button by it coordinates to easy-keyboard (Note that coordinates start from 0 look like arrays indexes).
+     * To remove button by it coordinates to keyboard (Note that coordinates start from 0 look like arrays indexes).
      *
      * @throws OutOfBoundsException
      */
@@ -196,7 +174,7 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
     }
 
     /**
-     * Remove the last button from easy-keyboard.
+     * Remove the last button from keyboard.
      *
      * @throws RangeException
      */
@@ -222,11 +200,11 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
      */
     public function row(?Button ...$button): self
     {
-        $keyboard = &$this->data;
+        $row = &$this->data[$this->currentRowIndex];
+        $row ??= new Row();
 
-        // Last row is not empty, add new row
-        if (!empty($keyboard[$this->currentRowIndex])) {
-            $keyboard[] = [];
+        if (!$row->isEmpty()) {
+            $this->data[] = new Row();
             $this->currentRowIndex++;
         }
 
@@ -235,11 +213,25 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
             $this->row();
         }
 
+        // $keyboard = &$this->data;
+        // $current  = &$keyboard[$this->currentRowIndex] ?? false;
+
+        // // Last row is not empty, add new row
+        // if (!$current?->isEmpty()) {
+        //     $keyboard[] = new Row();
+        //     $this->currentRowIndex++;
+        // }
+
+        // if (!empty($button)) {
+        //     $this->addButton(... $button);
+        //     $this->row();
+        // }
+
         return $this;
     }
 
     /**
-     * Add specified buttons to easy-keyboard (each button will add to new row).
+     * Add specified buttons to keyboard (each button will add to new row).
      *
      * @param ?Button ...$button
      */
@@ -255,9 +247,9 @@ abstract class Keyboard implements JsonSerializable, IteratorAggregate
     public function jsonSerialize(): array
     {
         $keyboard = &$this->data;
-        if (empty($keyboard[$this->currentRowIndex])) {
+        if ($keyboard[$this->currentRowIndex]->isEmpty()) {
             unset($keyboard[$this->currentRowIndex]);
         }
-        return $this->data;
+        return $this->option;
     }
 }

@@ -14,8 +14,8 @@
 
 namespace Reymon\EasyKeyboard\Button\KeyboardButton;
 
+use Reymon\EasyKeyboard\Internal\Url;
 use Reymon\EasyKeyboard\Button\KeyboardButton;
-use Reymon\EasyKeyboard\Tools\Url;
 
 /**
  * Represents text button that open web app without requiring user information.

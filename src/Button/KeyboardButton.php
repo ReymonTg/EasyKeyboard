@@ -16,33 +16,24 @@
 namespace Reymon\EasyKeyboard\Button;
 
 use Reymon\EasyKeyboard\Button;
-use Reymon\EasyKeyboard\Button\KeyboardButton\Location;
+use Reymon\EasyKeyboard\Button\KeyboardButton\Text;
 use Reymon\EasyKeyboard\Button\KeyboardButton\Phone;
+use Reymon\EasyKeyboard\Button\KeyboardButton\Webapp;
+use Reymon\EasyKeyboard\Button\KeyboardButton\Location;
+use Reymon\EasyKeyboard\Button\KeyboardButton\RequestUsers;
+use Reymon\EasyKeyboard\Button\KeyboardButton\RequestGroup;
+use Reymon\EasyKeyboard\Button\KeyboardButton\RequestChannel;
 use Reymon\EasyKeyboard\Button\KeyboardButton\Poll;
 use Reymon\EasyKeyboard\Button\KeyboardButton\Poll\PollType;
-use Reymon\EasyKeyboard\Button\KeyboardButton\RequestChannel;
-use Reymon\EasyKeyboard\Button\KeyboardButton\RequestGroup;
-use Reymon\EasyKeyboard\Button\KeyboardButton\RequestUsers;
-use Reymon\EasyKeyboard\Button\KeyboardButton\Text;
-use Reymon\EasyKeyboard\Button\KeyboardButton\Webapp;
 use Reymon\EasyKeyboard\Tools\ChatAdminRights;
 
 abstract class KeyboardButton extends Button
 {
-    // public static function Profile(string $text, int $userId): KeyboardButton
-    // {
-    //     $data = [
-    //         'text' => $text,
-    //         'url' => "tg://user?id=$userId",
-    //     ];
-    //     return new KeyboardButton($data);
-    // }
-
     /**
      * Create text button that request poll from user.
      *
      * @param string   $text Label text on the button
-     * @param PollType $type Type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
+     * @param PollType $type Type of the poll, which is allowed to be created and sent when the corresponding button is pressed.
      */
     public static function Poll(string $text, PollType $type = PollType::ALL): Poll
     {

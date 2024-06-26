@@ -12,8 +12,11 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Tools;
+namespace Reymon\EasyKeyboard\Internal;
 
+/**
+ * @internal
+ */
 trait Url
 {
     public function setUrl(string $url): self

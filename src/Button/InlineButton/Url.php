@@ -15,7 +15,7 @@
 namespace Reymon\EasyKeyboard\Button\InlineButton;
 
 use Reymon\EasyKeyboard\Button\InlineButton;
-use Reymon\EasyKeyboard\Tools\Url as ToolsUrl;
+use Reymon\EasyKeyboard\Internal\Url as ToolsUrl;
 
 /**
  * Represents inline button with url.
