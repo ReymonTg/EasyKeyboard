@@ -17,6 +17,7 @@ namespace Reymon\EasyKeyboard\Tools;
 
 final class ChatAdminRights implements \JsonSerializable
 {
+    /** @var list<bool|null> */
     private array $adminRights = [];
 
     /**
@@ -62,6 +63,166 @@ final class ChatAdminRights implements \JsonSerializable
             'can_delete_stories'     => $deleteStories,
         ];
         return new ChatAdminRights($adminRights);
+    }
+
+    public function canChangeInfo(): ?bool
+    {
+        return $this->adminRights['can_change_info'];
+    }
+
+    public function changeInfo(?bool $changeInfo = null): self
+    {
+        $this->adminRights['can_change_info'] = $changeInfo;
+        return $this;
+    }
+
+    public function canPostMessages(): ?bool
+    {
+        return $this->adminRights['can_post_messages'];
+    }
+
+    public function postMessages(?bool $postMessages = null): self
+    {
+        $this->adminRights['can_post_messages'] = $postMessages;
+        return $this;
+    }
+
+    public function canEditMessages(): ?bool
+    {
+        return $this->adminRights['can_edit_messages'];
+    }
+
+    public function editMessages(?bool $editMessages = null): self
+    {
+        $this->adminRights['can_edit_messages'] = $editMessages;
+        return $this;
+    }
+
+    public function canDeleteMessages(): ?bool
+    {
+        return $this->adminRights['can_delete_messages'];
+    }
+
+    public function deleteMessages(?bool $deleteMessages = null): self
+    {
+        $this->adminRights['can_delete_messages'] = $deleteMessages;
+        return $this;
+    }
+
+    public function canBanUsers(): ?bool
+    {
+        return $this->adminRights['can_restrict_members'];
+    }
+
+    public function banUsers(?bool $banUsers = null): self
+    {
+        $this->adminRights['can_restrict_members'] = $banUsers;
+        return $this;
+    }
+
+    public function canInviteUsers(): ?bool
+    {
+        return $this->adminRights['can_invite_users'];
+    }
+
+    public function inviteUsers(?bool $inviteUsers = null): self
+    {
+        $this->adminRights['can_invite_users'] = $inviteUsers;
+        return $this;
+    }
+
+    public function canPinMessages(): ?bool
+    {
+        return $this->adminRights['can_pin_messages'];
+    }
+
+    public function pinMessages(?bool $pinMessages = null): self
+    {
+        $this->adminRights['can_pin_messages'] = $pinMessages;
+        return $this;
+    }
+
+    public function canAddAdmins(): ?bool
+    {
+        return $this->adminRights['can_promote_members'];
+    }
+
+    public function addAdmins(?bool $addAdmins = null): self
+    {
+        $this->adminRights['can_promote_members'] = $addAdmins;
+        return $this;
+    }
+
+    public function isAnonymous(): ?bool
+    {
+        return $this->adminRights['is_anonymous'];
+    }
+
+    public function anonymous(?bool $anonymous = null): self
+    {
+        $this->adminRights['is_anonymous'] = $anonymous;
+        return $this;
+    }
+
+    public function canManageCall(): ?bool
+    {
+        return $this->adminRights['can_manage_video_chats'];
+    }
+
+    public function manageCall(?bool $manageCall = null): self
+    {
+        $this->adminRights['can_manage_video_chats'] = $manageCall;
+        return $this;
+    }
+    public function canManageChat(): ?bool
+    {
+        return $this->adminRights['can_manage_chat'];
+    }
+
+    public function manageChat(?bool $manageChat = null): self
+    {
+        $this->adminRights['can_manage_chat'] = $manageChat;
+        return $this;
+    }
+    public function canManageTopics(): ?bool
+    {
+        return $this->adminRights['manage_topics'];
+    }
+
+    public function manageTopics(?bool $manageTopics = null): self
+    {
+        $this->adminRights['manage_topics'] = $manageTopics;
+        return $this;
+    }
+    public function canPostStories(): ?bool
+    {
+        return $this->adminRights['can_post_stories'];
+    }
+
+    public function postStories(?bool $postStories = null): self
+    {
+        $this->adminRights['can_post_stories'] = $postStories;
+        return $this;
+    }
+    public function canEditStories(): ?bool
+    {
+        return $this->adminRights['can_edit_stories'];
+    }
+
+    public function editStories(?bool $editStories = null): self
+    {
+        $this->adminRights['can_edit_stories'] = $editStories;
+        return $this;
+    }
+    public function canDeleteStories(): ?bool
+    {
+        return $this->adminRights['can_delete_stories'];
+    }
+
+    public function deleteStories(?bool $deleteStories = null): self
+    {
+        $this->adminRights['can_delete_stories'] = $deleteStories;
+        return $this;
     }
 
     /**
