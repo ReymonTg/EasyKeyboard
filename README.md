@@ -1,5 +1,5 @@
 # EasyKeyboard
-Simple reply &amp; inline telegram api keyboard
+An easy keyboard builder for Telegram Api syntax
 <div id="top"></div>
 
 <!-- TABLE OF CONTENTS -->
