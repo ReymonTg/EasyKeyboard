@@ -15,9 +15,9 @@
 
 namespace Reymon\EasyKeyboard\Keyboard;
 
-use Reymon\EasyKeyboard\Keyboard;
 use Reymon\EasyKeyboard\Exception;
 use Reymon\EasyKeyboard\Internal\Selective;
+use Reymon\EasyKeyboard\Keyboard;
 
 /**
  * Requests clients to remove the custom keyboard (user will not be able to summon this keyboard; if you want to hide the keyboard from sight but keep it accessible, use one_time_keyboard.

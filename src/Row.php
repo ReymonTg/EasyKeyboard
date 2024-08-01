@@ -14,8 +14,8 @@
 
 namespace Reymon\EasyKeyboard;
 
-use RangeException;
 use OutOfBoundsException;
+use RangeException;
 
 /**
  * @implements \IteratorAggregate<Button>
@@ -49,7 +49,7 @@ final class Row implements \JsonSerializable, \Countable, \IteratorAggregate
      */
     public function count(): int
     {
-        return count($this->buttons);
+        return \count($this->buttons);
     }
 
     public function addButton(Button ...$buttons): self
@@ -85,7 +85,7 @@ final class Row implements \JsonSerializable, \Countable, \IteratorAggregate
      */
     public function remove(?int $column = null): self
     {
-        if(!$this->isEmpty()) {
+        if (!$this->isEmpty()) {
             $buttons = \array_keys($this->buttons);
             unset($this->buttons[($column ? $column > 0: \end($buttons))]);
             return $this;
@@ -116,7 +116,7 @@ final class Row implements \JsonSerializable, \Countable, \IteratorAggregate
             throw new OutOfBoundsException("Column index is bigger than of row's size");
         }
         $remain = \array_splice($this->buttons, $index, replacement: [$value]);
-        $this->buttons = array_merge($this->buttons, $remain);
+        $this->buttons = \array_merge($this->buttons, $remain);
         return $this;
     }
 }

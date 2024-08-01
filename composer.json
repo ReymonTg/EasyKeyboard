@@ -1,6 +1,6 @@
 {
     "name"       : "reymon/easy-keyboard",
-    "description": "A easy keyboard builder for Api syntax",
+    "description": "An easy keyboard builder for Telegram Api syntax",
     "keywords"   : [
         "bot",
         "api",
@@ -50,6 +50,5 @@
         "cs"    : "php ./vendor/bin/php-cs-fixer fix -v --diff --dry-run",
         "cs-fix": "php ./vendor/bin/php-cs-fixer fix -v --diff",
         "test"  : "php -d zend.assertions=1 -d assert.exception=1 ./vendor/bin/phpunit --coverage-text tests"
-    },
-    "minimum-stability": "stable"
+    }
 }

@@ -15,10 +15,10 @@
 
 namespace Reymon\EasyKeyboard\Keyboard;
 
-use Reymon\EasyKeyboard\Keyboard;
 use Reymon\EasyKeyboard\Exception;
-use Reymon\EasyKeyboard\Internal\Selective;
 use Reymon\EasyKeyboard\Internal\Placeholder;
+use Reymon\EasyKeyboard\Internal\Selective;
+use Reymon\EasyKeyboard\Keyboard;
 
 /**
  * Shows reply interface to the user, as if they manually selected the bot's message and tapped 'Reply'.

@@ -105,7 +105,6 @@ final class SwitchInlineFilter extends SwitchInline
                 'allow_group_chats'   => $this->allowGroups,
                 'allow_channel_chats' => $this->allowChannels,
             ])
-
         ];
     }
 }

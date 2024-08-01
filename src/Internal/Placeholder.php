@@ -22,7 +22,7 @@ use LengthException;
 trait Placeholder
 {
     /**
-     * The placeholder to be shown in the input field when the keyboard is active; 1-64 characters
+     * The placeholder to be shown in the input field when the keyboard is active; 1-64 characters.
      */
     public function placeholder(?string $placeholder = null): self
     {

@@ -16,15 +16,15 @@
 namespace Reymon\EasyKeyboard\Button;
 
 use Reymon\EasyKeyboard\Button;
-use Reymon\EasyKeyboard\Button\InlineButton\Url;
 use Reymon\EasyKeyboard\Button\InlineButton\Buy;
-use Reymon\EasyKeyboard\Button\InlineButton\Game;
-use Reymon\EasyKeyboard\Button\InlineButton\Webapp;
 use Reymon\EasyKeyboard\Button\InlineButton\CallBack;
+use Reymon\EasyKeyboard\Button\InlineButton\Game;
 use Reymon\EasyKeyboard\Button\InlineButton\LoginUrl;
 use Reymon\EasyKeyboard\Button\InlineButton\SwitchInline;
 use Reymon\EasyKeyboard\Button\InlineButton\SwitchInlineCurrent;
 use Reymon\EasyKeyboard\Button\InlineButton\SwitchInlineFilter;
+use Reymon\EasyKeyboard\Button\InlineButton\Url;
+use Reymon\EasyKeyboard\Button\InlineButton\Webapp;
 
 abstract class InlineButton extends Button
 {
