@@ -44,7 +44,7 @@ abstract class Keyboard implements \JsonSerializable, \Countable, \IteratorAggre
     public function getIterator(): \Traversable
     {
         $keyboard = &$this->data;
-        if (($keyboard[$this->currentRowIndex]?? null)?->isEmpty()) {
+        if (($keyboard[$this->currentRowIndex] ?? null)?->isEmpty()) {
             unset($keyboard[$this->currentRowIndex]);
         }
         yield from $this->data;
@@ -247,7 +247,7 @@ abstract class Keyboard implements \JsonSerializable, \Countable, \IteratorAggre
     public function jsonSerialize(): array
     {
         $keyboard = &$this->data;
-        if ($keyboard[$this->currentRowIndex]->isEmpty()) {
+        if (($keyboard[$this->currentRowIndex] ?? null)?->isEmpty()) {
             unset($keyboard[$this->currentRowIndex]);
         }
         return $this->option;

@@ -11,7 +11,7 @@ class KeyboardForceReplyTest extends KeyboardButtonTest
     {
         $keyboard = KeyboardForceReply::new();
         $rawKeyboard = [
-            'force_reply' => []
+            'force_reply' => true
         ];
         $this->assertJsonStringEqualsJsonString(\json_encode($keyboard), \json_encode($rawKeyboard));
     }

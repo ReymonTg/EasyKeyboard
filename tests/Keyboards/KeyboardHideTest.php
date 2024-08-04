@@ -11,7 +11,7 @@ class KeyboardHideTest extends TestCase
     {
         $button = KeyboardHide::new();
         $rawButton = [
-            'remove_keyboard' => []
+            'remove_keyboard' => true
         ];
         $this->assertJsonStringEqualsJsonString(\json_encode($button), \json_encode($rawButton));
     }
