@@ -196,7 +196,6 @@ abstract class Keyboard implements \JsonSerializable, \Countable, \IteratorAggre
     /**
      * Add a new raw with specified button ( pass null to only add new row).
      *
-     * @param ?Button ...$button
      */
     public function row(?Button ...$button): self
     {
@@ -233,7 +232,6 @@ abstract class Keyboard implements \JsonSerializable, \Countable, \IteratorAggre
     /**
      * Add specified buttons to keyboard (each button will add to new row).
      *
-     * @param ?Button ...$button
      */
     public function Stack(?Button ...$button): self
     {
