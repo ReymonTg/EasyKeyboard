@@ -12,22 +12,21 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button\KeyboardButton;
-
-use Reymon\EasyKeyboard\Button\KeyboardButton;
+namespace Reymon\EasyKeyboard\Utils;
 
 /**
- * Represents simple text keyboard.
+ * @internal
  */
-final class Text extends KeyboardButton
+trait Url
 {
-    /**
-     * Create simple text keyboard.
-     *
-     * @param string $text Label text on the button
-     */
-    public static function new(string $text): self
+    public function setUrl(string $url): self
     {
-        return new static($text);
+        $this->url = $url;
+        return $this;
+    }
+
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 }

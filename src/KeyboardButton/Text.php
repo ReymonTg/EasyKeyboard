@@ -7,30 +7,27 @@
  * See the GNU General Public License for more details.
  * If not, see <http://www.gnu.org/licenses/>.
  *
- * @author    Mahdi <mahdi.talaee1379@gmail.com>
  * @author    AhJ <AmirHosseinJafari8228@gmail.com>
  * @copyright Copyright (c) 2023, ReymonTg
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Keyboard;
+namespace Reymon\EasyKeyboard\KeyboardButton;
 
-use Reymon\EasyKeyboard\Utils\EasyInline;
-use Reymon\EasyKeyboard\Keyboard;
+use Reymon\EasyKeyboard\KeyboardButton;
 
 /**
- * Represents an inline keyboard that appears right next to the message it belongs to.
+ * Represents simple text keyboard.
  */
-final class KeyboardInline extends Keyboard
+final class Text extends KeyboardButton
 {
-    use EasyInline;
-
     /**
-     * @internal
+     * Create simple text keyboard.
+     *
+     * @param string $text Label text on the button
      */
-    public function jsonSerialize(): array
+    public static function new(string $text): self
     {
-        parent::jsonSerialize();
-        return [...$this->option, 'inline_keyboard' => $this->data];
+        return new static($text);
     }
 }

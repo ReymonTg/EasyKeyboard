@@ -12,44 +12,36 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button\KeyboardButton;
+namespace Reymon\EasyKeyboard\InlineButton;
 
-use Reymon\EasyKeyboard\Button\KeyboardButton;
-use Reymon\EasyKeyboard\Button\KeyboardButton\Poll\PollType;
+use Reymon\EasyKeyboard\InlineButton;
+use Reymon\EasyKeyboard\Utils\Url;
 
 /**
- * Represents text button that request poll from user.
+ * Represents inline webapp button.
  */
-final class Poll extends KeyboardButton
+final class Webapp extends InlineButton
 {
+    use Url;
+
     /**
      * @param string $text Label text on the button
+     * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
      */
-    public function __construct(string $text, private PollType $type = PollType::ALL)
+    public function __construct(string $text, private string $url)
     {
         parent::__construct($text);
     }
 
-    public function setPollType(PollType $type = PollType::ALL): self
-    {
-        $this->type = $type;
-        return $this;
-    }
-
-    public function getPollType(): PollType
-    {
-        return $this->type;
-    }
-
     /**
-     * Create text button that request poll from user.
+     * Create Inline webapp button.
      *
-     * @param string   $text Label text on the button
-     * @param PollType $type Type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
+     * @param string $text Label text on the button
+     * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
      */
-    public static function new(string $text, PollType $type = PollType::ALL): self
+    public static function new(string $text, string $url): self
     {
-        return new static($text, $type);
+        return new static($text, $url);
     }
 
     /**
@@ -58,8 +50,8 @@ final class Poll extends KeyboardButton
     public function jsonSerialize(): array
     {
         return [
-            'text' => $this->text,
-            'request_poll' => $this->type
+            'text'    => $this->text,
+            'web_app' => ['url' => $this->url]
         ];
     }
 }

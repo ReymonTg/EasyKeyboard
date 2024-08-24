@@ -13,18 +13,17 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button;
+namespace Reymon\EasyKeyboard;
 
-use Reymon\EasyKeyboard\Button;
-use Reymon\EasyKeyboard\Button\InlineButton\Buy;
-use Reymon\EasyKeyboard\Button\InlineButton\CallBack;
-use Reymon\EasyKeyboard\Button\InlineButton\Game;
-use Reymon\EasyKeyboard\Button\InlineButton\LoginUrl;
-use Reymon\EasyKeyboard\Button\InlineButton\SwitchInline;
-use Reymon\EasyKeyboard\Button\InlineButton\SwitchInlineCurrent;
-use Reymon\EasyKeyboard\Button\InlineButton\SwitchInlineFilter;
-use Reymon\EasyKeyboard\Button\InlineButton\Url;
-use Reymon\EasyKeyboard\Button\InlineButton\Webapp;
+use Reymon\EasyKeyboard\InlineButton\Buy;
+use Reymon\EasyKeyboard\InlineButton\CallBack;
+use Reymon\EasyKeyboard\InlineButton\Game;
+use Reymon\EasyKeyboard\InlineButton\LoginUrl;
+use Reymon\EasyKeyboard\InlineButton\SwitchInline;
+use Reymon\EasyKeyboard\InlineButton\SwitchInlineCurrent;
+use Reymon\EasyKeyboard\InlineButton\SwitchInlineFilter;
+use Reymon\EasyKeyboard\InlineButton\Url;
+use Reymon\EasyKeyboard\InlineButton\Webapp;
 
 abstract class InlineButton extends Button
 {

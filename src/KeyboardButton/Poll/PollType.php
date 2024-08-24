@@ -7,46 +7,27 @@
  * See the GNU General Public License for more details.
  * If not, see <http://www.gnu.org/licenses/>.
  *
+ * @author    Mahdi <mahdi.talaee1379@gmail.com>
  * @author    AhJ <AmirHosseinJafari8228@gmail.com>
  * @copyright Copyright (c) 2023, ReymonTg
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button\InlineButton;
+namespace Reymon\EasyKeyboard\KeyboardButton\Poll;
 
-use Reymon\EasyKeyboard\Button\InlineButton;
-
-/**
- * Represents buy button for your inline buy request(similar to webapps).
- */
-final class Buy extends InlineButton
+enum PollType: string implements \JsonSerializable
 {
-    /**
-     * @param string $text Label text on the button
-     */
-    public function __construct(string $text)
-    {
-        parent::__construct($text);
-    }
+    case QUIZ = 'quiz';
 
-    /**
-     * Create a buy button for your inline buy request(similar to webapps).
-     *
-     * @param string $text Label text on the button
-     */
-    public static function new(string $text): self
-    {
-        return new static($text);
-    }
+    case REGULAR = 'regular';
+
+    case ALL = '';
 
     /**
      * @internal
      */
-    public function jsonSerialize(): array
+    public function jsonSerialize(): string
     {
-        return [
-            'text' => $this->text,
-            'pay'  => true
-        ];
+        return $this->value;
     }
 }

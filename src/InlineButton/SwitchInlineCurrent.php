@@ -7,42 +7,30 @@
  * See the GNU General Public License for more details.
  * If not, see <http://www.gnu.org/licenses/>.
  *
+ * @author    Mahdi <mahdi.talaee1379@gmail.com>
  * @author    AhJ <AmirHosseinJafari8228@gmail.com>
  * @copyright Copyright (c) 2023, ReymonTg
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button\InlineButton;
-
-use Reymon\EasyKeyboard\Button\InlineButton;
+namespace Reymon\EasyKeyboard\InlineButton;
 
 /**
- * Represents inline button that switches the current user to inline mode in a chat.
+ * Represents inline button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.
  */
-class SwitchInline extends InlineButton
+final class SwitchInlineCurrent extends SwitchInline
 {
     /**
-     * @param string $text   Label text on the button
-     * @param string $query  Data to be sent in a [callback query](https://core.telegram.org/bots/api#callbackquery) to the bot when button is pressed, 1-64 bytes
+     * @param string $text  Label text on the button
+     * @param string $query Data to be sent in a [callback query](https://core.telegram.org/bots/api#callbackquery) to the bot when button is pressed, 1-64 bytes
      */
-    public function __construct(string $text, protected string $query = '')
+    public function __construct(string $text, string $query = '')
     {
-        parent::__construct($text);
-    }
-
-    public function setQuery(string $query = ''): self
-    {
-        $this->query = $query;
-        return $this;
-    }
-
-    public function getQuery(string $query = ''): string
-    {
-        return $this->query;
+        parent::__construct($text, $query);
     }
 
     /**
-     * Create inline button that switches the current user to inline mode in a chat.
+     * Create inline button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.
      *
      * @param string $text  Label text on the button
      * @param string $query Data to be sent in a [callback query](https://core.telegram.org/bots/api#callbackquery) to the bot when button is pressed, 1-64 bytes
@@ -59,7 +47,7 @@ class SwitchInline extends InlineButton
     {
         return [
             'text' => $this->text,
-            'switch_inline_query' => $this->query
+            'switch_inline_query_current_chat' => $this->query
         ];
     }
 }

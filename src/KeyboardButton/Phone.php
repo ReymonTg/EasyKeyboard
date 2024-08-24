@@ -7,27 +7,46 @@
  * See the GNU General Public License for more details.
  * If not, see <http://www.gnu.org/licenses/>.
  *
- * @author    Mahdi <mahdi.talaee1379@gmail.com>
  * @author    AhJ <AmirHosseinJafari8228@gmail.com>
  * @copyright Copyright (c) 2023, ReymonTg
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button\KeyboardButton\Poll;
+namespace Reymon\EasyKeyboard\KeyboardButton;
 
-enum PollType: string implements \JsonSerializable
+use Reymon\EasyKeyboard\KeyboardButton;
+
+/**
+ * Represents text button that request contact info from user.
+ */
+final class Phone extends KeyboardButton
 {
-    case QUIZ = 'quiz';
+    /**
+     * @param string $text Label text on the button
+     */
+    public function __construct(string $text)
+    {
+        parent::__construct($text);
+    }
 
-    case REGULAR = 'regular';
-
-    case ALL = '';
+    /**
+     * Create text button that request contact info from user.
+     *
+     * @param string $text Label text on the button
+     */
+    public static function new(string $text): self
+    {
+        return new static($text);
+    }
 
     /**
      * @internal
      */
-    public function jsonSerialize(): string
+    public function jsonSerialize(): array
     {
-        return $this->value;
+        return [
+            'text' => $this->text,
+            'request_contact' => true
+        ];
     }
 }

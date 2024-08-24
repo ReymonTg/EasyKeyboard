@@ -12,9 +12,9 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button\InlineButton;
+namespace Reymon\EasyKeyboard\InlineButton;
 
-use Reymon\EasyKeyboard\Button\InlineButton;
+use Reymon\EasyKeyboard\InlineButton;
 
 /**
  * Represents inline button with callback data.

@@ -12,19 +12,41 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Internal;
+namespace Reymon\EasyKeyboard\InlineButton;
+
+use Reymon\EasyKeyboard\InlineButton;
 
 /**
- * @internal
+ * Represents buy button for your inline buy request(similar to webapps).
  */
-trait Selective
+final class Buy extends InlineButton
 {
     /**
-     * Whether to show the keyboard to specific users only. Targets: 1- users that are @mentioned in the text of the [Message](https://core.telegram.org/bots/api#message) object 2- if the bot's message is a reply to a message in the same chat and forum topic, sender of the original message.
+     * @param string $text Label text on the button
      */
-    public function selective(bool $selective = true): self
+    public function __construct(string $text)
     {
-        $this->option['selective'] = $selective;
-        return $this;
+        parent::__construct($text);
+    }
+
+    /**
+     * Create a buy button for your inline buy request(similar to webapps).
+     *
+     * @param string $text Label text on the button
+     */
+    public static function new(string $text): self
+    {
+        return new static($text);
+    }
+
+    /**
+     * @internal
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'text' => $this->text,
+            'pay'  => true
+        ];
     }
 }

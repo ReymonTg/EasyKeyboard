@@ -12,7 +12,7 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button\InlineButton;
+namespace Reymon\EasyKeyboard\InlineButton;
 
 /**
  * Represents an inline button that switches the current user to inline mode in a chosen chat, with an optional default inline query.

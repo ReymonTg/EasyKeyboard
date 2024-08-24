@@ -12,41 +12,19 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button\KeyboardButton;
-
-use Reymon\EasyKeyboard\Button\KeyboardButton;
+namespace Reymon\EasyKeyboard\Utils;
 
 /**
- * Represents text button that request contact info from user.
+ * @internal
  */
-final class Phone extends KeyboardButton
+trait Selective
 {
     /**
-     * @param string $text Label text on the button
+     * Whether to show the keyboard to specific users only. Targets: 1- users that are @mentioned in the text of the [Message](https://core.telegram.org/bots/api#message) object 2- if the bot's message is a reply to a message in the same chat and forum topic, sender of the original message.
      */
-    public function __construct(string $text)
+    public function selective(bool $selective = true): self
     {
-        parent::__construct($text);
-    }
-
-    /**
-     * Create text button that request contact info from user.
-     *
-     * @param string $text Label text on the button
-     */
-    public static function new(string $text): self
-    {
-        return new static($text);
-    }
-
-    /**
-     * @internal
-     */
-    public function jsonSerialize(): array
-    {
-        return [
-            'text' => $this->text,
-            'request_contact' => true
-        ];
+        $this->option['selective'] = $selective;
+        return $this;
     }
 }

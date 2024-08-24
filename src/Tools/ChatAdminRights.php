@@ -13,7 +13,7 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Tools;
+namespace Reymon\EasyKeyboard\Utils;
 
 final class ChatAdminRights implements \JsonSerializable
 {

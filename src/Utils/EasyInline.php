@@ -13,9 +13,9 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Internal;
+namespace Reymon\EasyKeyboard\Utils;
 
-use Reymon\EasyKeyboard\Button\InlineButton;
+use Reymon\EasyKeyboard\InlineButton;
 use Reymon\EasyKeyboard\Keyboard\KeyboardInline;
 
 trait EasyInline

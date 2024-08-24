@@ -13,19 +13,18 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button;
+namespace Reymon\EasyKeyboard;
 
-use Reymon\EasyKeyboard\Button;
-use Reymon\EasyKeyboard\Button\KeyboardButton\Location;
-use Reymon\EasyKeyboard\Button\KeyboardButton\Phone;
-use Reymon\EasyKeyboard\Button\KeyboardButton\Poll;
-use Reymon\EasyKeyboard\Button\KeyboardButton\Poll\PollType;
-use Reymon\EasyKeyboard\Button\KeyboardButton\RequestChannel;
-use Reymon\EasyKeyboard\Button\KeyboardButton\RequestGroup;
-use Reymon\EasyKeyboard\Button\KeyboardButton\RequestUsers;
-use Reymon\EasyKeyboard\Button\KeyboardButton\Text;
-use Reymon\EasyKeyboard\Button\KeyboardButton\Webapp;
-use Reymon\EasyKeyboard\Tools\ChatAdminRights;
+use Reymon\EasyKeyboard\KeyboardButton\Location;
+use Reymon\EasyKeyboard\KeyboardButton\Phone;
+use Reymon\EasyKeyboard\KeyboardButton\Poll;
+use Reymon\EasyKeyboard\KeyboardButton\Poll\PollType;
+use Reymon\EasyKeyboard\KeyboardButton\RequestChannel;
+use Reymon\EasyKeyboard\KeyboardButton\RequestGroup;
+use Reymon\EasyKeyboard\KeyboardButton\RequestUsers;
+use Reymon\EasyKeyboard\KeyboardButton\Text;
+use Reymon\EasyKeyboard\KeyboardButton\Webapp;
+use Reymon\EasyKeyboard\Utils\ChatAdminRights;
 
 abstract class KeyboardButton extends Button
 {

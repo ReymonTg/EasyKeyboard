@@ -12,21 +12,41 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Internal;
+namespace Reymon\EasyKeyboard\InlineButton;
+
+use Reymon\EasyKeyboard\InlineButton;
 
 /**
- * @internal
+ * Represents game button for your inline game.
  */
-trait Url
+final class Game extends InlineButton
 {
-    public function setUrl(string $url): self
+    /**
+     * @param string $text Label text on the button
+     */
+    public function __construct(string $text)
     {
-        $this->url = $url;
-        return $this;
+        parent::__construct($text);
     }
 
-    public function getUrl(): string
+    /**
+     * Create game button for your inline game.
+     *
+     * @param string $text Label text on the button
+     */
+    public static function new(string $text): self
     {
-        return $this->url;
+        return new static($text);
+    }
+
+    /**
+     * @internal
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'text'          => $this->text,
+            'callback_game' => ''
+        ];
     }
 }

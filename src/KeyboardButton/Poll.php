@@ -12,31 +12,44 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button\InlineButton;
+namespace Reymon\EasyKeyboard\KeyboardButton;
 
-use Reymon\EasyKeyboard\Button\InlineButton;
+use Reymon\EasyKeyboard\KeyboardButton;
+use Reymon\EasyKeyboard\KeyboardButton\Poll\PollType;
 
 /**
- * Represents game button for your inline game.
+ * Represents text button that request poll from user.
  */
-final class Game extends InlineButton
+final class Poll extends KeyboardButton
 {
     /**
      * @param string $text Label text on the button
      */
-    public function __construct(string $text)
+    public function __construct(string $text, private PollType $type = PollType::ALL)
     {
         parent::__construct($text);
     }
 
-    /**
-     * Create game button for your inline game.
-     *
-     * @param string $text Label text on the button
-     */
-    public static function new(string $text): self
+    public function setPollType(PollType $type = PollType::ALL): self
     {
-        return new static($text);
+        $this->type = $type;
+        return $this;
+    }
+
+    public function getPollType(): PollType
+    {
+        return $this->type;
+    }
+
+    /**
+     * Create text button that request poll from user.
+     *
+     * @param string   $text Label text on the button
+     * @param PollType $type Type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
+     */
+    public static function new(string $text, PollType $type = PollType::ALL): self
+    {
+        return new static($text, $type);
     }
 
     /**
@@ -45,8 +58,8 @@ final class Game extends InlineButton
     public function jsonSerialize(): array
     {
         return [
-            'text'          => $this->text,
-            'callback_game' => ''
+            'text' => $this->text,
+            'request_poll' => $this->type
         ];
     }
 }

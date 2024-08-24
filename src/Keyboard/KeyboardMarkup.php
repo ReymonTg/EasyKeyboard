@@ -15,9 +15,9 @@
 
 namespace Reymon\EasyKeyboard\Keyboard;
 
-use Reymon\EasyKeyboard\Internal\EasyMarkup;
-use Reymon\EasyKeyboard\Internal\Placeholder;
-use Reymon\EasyKeyboard\Internal\Selective;
+use Reymon\EasyKeyboard\Utils\EasyMarkup;
+use Reymon\EasyKeyboard\Utils\Placeholder;
+use Reymon\EasyKeyboard\Utils\Selective;
 use Reymon\EasyKeyboard\Keyboard;
 
 /**

@@ -12,9 +12,9 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button\KeyboardButton;
+namespace Reymon\EasyKeyboard\KeyboardButton;
 
-use Reymon\EasyKeyboard\Tools\ChatAdminRights;
+use Reymon\EasyKeyboard\Utils\ChatAdminRights;
 
 /**
  * Represents button the criteria used to request a suitable group/supergroup. The identifier of the selected chat will be shared with the bot when the corresponding button is pressed.

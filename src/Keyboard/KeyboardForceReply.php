@@ -15,10 +15,11 @@
 
 namespace Reymon\EasyKeyboard\Keyboard;
 
-use Reymon\EasyKeyboard\Exception;
-use Reymon\EasyKeyboard\Internal\Placeholder;
-use Reymon\EasyKeyboard\Internal\Selective;
+use Reymon\EasyKeyboard\Button;
 use Reymon\EasyKeyboard\Keyboard;
+use Reymon\EasyKeyboard\Exception;
+use Reymon\EasyKeyboard\Utils\Selective;
+use Reymon\EasyKeyboard\Utils\Placeholder;
 
 /**
  * Shows reply interface to the user, as if they manually selected the bot's message and tapped 'Reply'.
@@ -32,7 +33,7 @@ final class KeyboardForceReply extends Keyboard
         $this->option['force_reply'] = true;
     }
 
-    public function addButton(\Reymon\EasyKeyboard\Button ...$buttons): Keyboard
+    public function addButton(Button ...$buttons): Keyboard
     {
         throw new Exception(\sprintf('%s cannot use %s', __CLASS__, __METHOD__));
     }

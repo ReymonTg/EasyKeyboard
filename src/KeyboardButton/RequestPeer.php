@@ -12,9 +12,9 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button\KeyboardButton;
+namespace Reymon\EasyKeyboard\KeyboardButton;
 
-use Reymon\EasyKeyboard\Button\KeyboardButton;
+use Reymon\EasyKeyboard\KeyboardButton;
 
 abstract class RequestPeer extends KeyboardButton
 {

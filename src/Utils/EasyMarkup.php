@@ -13,12 +13,12 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Internal;
+namespace Reymon\EasyKeyboard\Utils;
 
-use Reymon\EasyKeyboard\Button\KeyboardButton;
-use Reymon\EasyKeyboard\Button\KeyboardButton\Poll\PollType;
+use Reymon\EasyKeyboard\KeyboardButton;
+use Reymon\EasyKeyboard\KeyboardButton\Poll\PollType;
 use Reymon\EasyKeyboard\Keyboard\KeyboardMarkup;
-use Reymon\EasyKeyboard\Tools\ChatAdminRights;
+use Reymon\EasyKeyboard\Utils\ChatAdminRights;
 
 trait EasyMarkup
 {

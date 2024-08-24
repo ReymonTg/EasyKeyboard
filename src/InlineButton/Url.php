@@ -12,17 +12,17 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button\InlineButton;
+namespace Reymon\EasyKeyboard\InlineButton;
 
-use Reymon\EasyKeyboard\Button\InlineButton;
-use Reymon\EasyKeyboard\Internal\Url;
+use Reymon\EasyKeyboard\InlineButton;
+use Reymon\EasyKeyboard\Utils\Url as ToolsUrl;
 
 /**
- * Represents inline webapp button.
+ * Represents inline button with url.
  */
-final class Webapp extends InlineButton
+final class Url extends InlineButton
 {
-    use Url;
+    use ToolsUrl;
 
     /**
      * @param string $text Label text on the button
@@ -34,10 +34,10 @@ final class Webapp extends InlineButton
     }
 
     /**
-     * Create Inline webapp button.
+     * Create Inline button with url.
      *
      * @param string $text Label text on the button
-     * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
+     * @param string $url  HTTP or tg:// URL to be opened when the button is pressed. Links `tg://user?id=<user_id>` can be used to mention a user by their ID without using a username, if this is allowed by their privacy settings.
      */
     public static function new(string $text, string $url): self
     {
@@ -50,8 +50,8 @@ final class Webapp extends InlineButton
     public function jsonSerialize(): array
     {
         return [
-            'text'    => $this->text,
-            'web_app' => ['url' => $this->url]
+            'text' => $this->text,
+            'url'  => $this->url
         ];
     }
 }

@@ -12,31 +12,36 @@
  * @license   https://choosealicense.com/licenses/gpl-3.0/ GPLv3
  */
 
-namespace Reymon\EasyKeyboard\Button\KeyboardButton;
+namespace Reymon\EasyKeyboard\KeyboardButton;
 
-use Reymon\EasyKeyboard\Button\KeyboardButton;
+use Reymon\EasyKeyboard\KeyboardButton;
+use Reymon\EasyKeyboard\Utils\Url;
 
 /**
- * Represents text button that request location from user.
+ * Represents text button that open web app without requiring user information.
  */
-final class Location extends KeyboardButton
+final class Webapp extends KeyboardButton
 {
+    use Url;
+
     /**
      * @param string $text Label text on the button
+     * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
      */
-    public function __construct(string $text)
+    public function __construct(string $text, private string $url)
     {
         parent::__construct($text);
     }
 
     /**
-     * Create text button that request location from user.
+     * Create text button that open web app without requiring user information.
      *
      * @param string $text Label text on the button
+     * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
      */
-    public static function new(string $text): self
+    public static function new(string $text, string $url): self
     {
-        return new static($text);
+        return new static($text, $url);
     }
 
     /**
@@ -45,8 +50,8 @@ final class Location extends KeyboardButton
     public function jsonSerialize(): array
     {
         return [
-            'text' => $this->text,
-            'request_location' => true
+            'text'    => $this->text,
+            'web_app' => ['url' => $this->url]
         ];
     }
 }
