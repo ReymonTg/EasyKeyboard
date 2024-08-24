@@ -3,7 +3,7 @@
 namespace Reymon\EasyKeyboard\Test\Buttons;
 
 use PHPUnit\Framework\TestCase;
-use Reymon\EasyKeyboard\Button\InlineButton;
+use Reymon\EasyKeyboard\InlineButton;
 
 class InlineButtonsTest extends TestCase
 {
