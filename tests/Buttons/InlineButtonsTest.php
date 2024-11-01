@@ -47,6 +47,16 @@ class InlineButtonsTest extends TestCase
         $this->assertJsonStringEqualsJsonString(\json_encode($button), \json_encode($rawButton));
     }
 
+    public function testCopyText(): void
+    {
+        $button = InlineButton::CopyText('hello', 'hello-copy');
+        $rawButton = [
+            'text' => 'hello',
+            'copy_text' => ['text' => 'hello-copy'],
+        ];
+        $this->assertJsonStringEqualsJsonString(\json_encode($button), \json_encode($rawButton));
+    }
+
     public function testLogin(): void
     {
         $button1 = InlineButton::Login('please-login', 'https://example.com');
