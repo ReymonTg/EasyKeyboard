@@ -47,14 +47,14 @@ trait EasyInline
     }
 
     /**
-     * Create Inline webapp button.
+     * Create inline button that copies specified text to the clipboard.
      *
-     * @param string $text Label text on the button
-     * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
+     * @param string $text     Label text on the button
+     * @param string $copyText The text to be copied to the clipboard; 1-256 characters
      */
-    public function addWebApp(string $text, string $url): KeyboardInline
+    public function addCopyText(string $text, string $copyText): KeyboardInline
     {
-        return $this->addButton(InlineButton::WebApp($text, $url));
+        return $this->addButton(InlineButton::CopyText($text, $copyText));
     }
 
     /**
@@ -66,6 +66,31 @@ trait EasyInline
     public function addUrl(string $text, string $url): KeyboardInline
     {
         return $this->addButton(InlineButton::Url($text, $url));
+    }
+
+    /**
+     * Create Inline webapp button.
+     *
+     * @param string $text Label text on the button
+     * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
+     */
+    public function addWebApp(string $text, string $url): KeyboardInline
+    {
+        return $this->addButton(InlineButton::WebApp($text, $url));
+    }
+
+    /**
+     * Create inline button for login.
+     *
+     * @param string  $text        Label text on the button
+     * @param string  $url         An HTTPS URL used to automatically authorize the user
+     * @param ?string $fwdText     New text of the button in forwarded messages
+     * @param ?string $username    Username of a bot, which will be used for user authorization.
+     * @param bool    $writeAccess Whether to request the permission for your bot to send messages to the user
+     */
+    public function addLogin(string $text, string $url, ?string $fwdText = null, ?string $username = null, bool $writeAccess = false): KeyboardInline
+    {
+        return $this->addButton(InlineButton::Login($text, $url, $fwdText, $username, $writeAccess));
     }
 
     /**

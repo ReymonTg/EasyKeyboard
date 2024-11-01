@@ -16,17 +16,95 @@
 namespace Reymon\EasyKeyboard;
 
 use Reymon\EasyKeyboard\InlineButton\Buy;
-use Reymon\EasyKeyboard\InlineButton\CallBack;
+use Reymon\EasyKeyboard\InlineButton\Url;
 use Reymon\EasyKeyboard\InlineButton\Game;
+use Reymon\EasyKeyboard\InlineButton\Webapp;
+use Reymon\EasyKeyboard\InlineButton\CallBack;
+use Reymon\EasyKeyboard\InlineButton\CopyText;
 use Reymon\EasyKeyboard\InlineButton\LoginUrl;
 use Reymon\EasyKeyboard\InlineButton\SwitchInline;
-use Reymon\EasyKeyboard\InlineButton\SwitchInlineCurrent;
 use Reymon\EasyKeyboard\InlineButton\SwitchInlineFilter;
-use Reymon\EasyKeyboard\InlineButton\Url;
-use Reymon\EasyKeyboard\InlineButton\Webapp;
+use Reymon\EasyKeyboard\InlineButton\SwitchInlineCurrent;
 
 abstract class InlineButton extends Button
 {
+    /**
+     * Create inline button with callback data.
+     *
+     * @param string $text     Label text on the button
+     * @param string $callback Data to be sent in a callback query to the bot when button is pressed, 1-64 bytes
+     */
+    public static function CallBack(string $text, string $callback): CallBack
+    {
+        return new CallBack($text, $callback);
+    }
+
+    /**
+     * Create inline button that copies specified text to the clipboard.
+     *
+     * @param string $text     Label text on the button
+     * @param string $copyText The text to be copied to the clipboard; 1-256 characters
+     */
+    public static function CopyText(string $text, string $copyText): CopyText
+    {
+        return new CopyText($text, $copyText);
+    }
+
+    /**
+     * Create Inline button with url.
+     *
+     * @param string $text Label text on the button
+     * @param string $url  HTTP or tg:// URL to be opened when the button is pressed. Links `tg://user?id=<user_id>` can be used to mention a user by their ID without using a username, if this is allowed by their privacy settings.
+     */
+    public static function Url(string $text, string $url): Url
+    {
+        return new Url($text, $url);
+    }
+
+    /**
+     * Create Inline webapp button.
+     *
+     * @param string $text Label text on the button
+     * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
+     */
+    public static function Webapp(string $text, string $url): Webapp
+    {
+        return new Webapp($text, $url);
+    }
+
+    /**
+     * Create inline button for login.
+     *
+     * @param string  $text        Label text on the button
+     * @param string  $url         An HTTPS URL used to automatically authorize the user
+     * @param ?string $fwdText     New text of the button in forwarded messages
+     * @param ?string $username    Username of a bot, which will be used for user authorization.
+     * @param bool    $writeAccess Whether to request the permission for your bot to send messages to the user
+     */
+    public static function Login(string $text, string $url, ?string $fwdText = null, ?string $username = null, bool $writeAccess = false): LoginUrl
+    {
+        return new LoginUrl($text, $url, $fwdText, $username, $writeAccess);
+    }
+
+    /**
+     * Create game button for your inline game.
+     *
+     * @param string $text Label text on the button
+     */
+    public static function Game(string $text): Game
+    {
+        return new Game($text);
+    }
+
+    /**
+     * Create a buy button for your inline buy request(similar to webapps).
+     *
+     * @param string $text Label text on the button
+     */
+    public static function Buy(string $text): Buy
+    {
+        return new Buy($text);
+    }
     /**
      * Create inline button that switches the current user to inline mode in a chat.
      *
@@ -62,72 +140,5 @@ abstract class InlineButton extends Button
     public static function SwitchInlineFilter(string $text, string $query = '', bool $allowUsers = true, ?bool $allowBots = null, ?bool $allowGroups = null, ?bool $allowChannels = null): SwitchInlineFilter
     {
         return new SwitchInlineFilter($text, $query, $allowUsers, $allowBots, $allowGroups, $allowChannels);
-    }
-
-    /**
-     * Create Inline webapp button.
-     *
-     * @param string $text Label text on the button
-     * @param string $url  An HTTPS URL of a Web App to be opened with additional data as specified in [Initializing Web Apps](https://core.telegram.org/bots/webapps#initializing-mini-apps)
-     */
-    public static function Webapp(string $text, string $url): Webapp
-    {
-        return new Webapp($text, $url);
-    }
-
-    /**
-     * Create inline button for login.
-     *
-     * @param string  $text        Label text on the button
-     * @param string  $url         An HTTPS URL used to automatically authorize the user
-     * @param ?string $fwdText     New text of the button in forwarded messages
-     * @param ?string $username    Username of a bot, which will be used for user authorization.
-     * @param bool    $writeAccess Whether to request the permission for your bot to send messages to the user
-     */
-    public static function Login(string $text, string $url, ?string $fwdText = null, ?string $username = null, bool $writeAccess = false): LoginUrl
-    {
-        return new LoginUrl($text, $url, $fwdText, $username, $writeAccess);
-    }
-
-    /**
-     * Create inline button with callback data.
-     *
-     * @param string $text     Label text on the button
-     * @param string $callback Data to be sent in a callback query to the bot when button is pressed, 1-64 bytes
-     */
-    public static function CallBack(string $text, string $callback): CallBack
-    {
-        return new CallBack($text, $callback);
-    }
-
-    /**
-     * Create Inline button with url.
-     *
-     * @param string $text Label text on the button
-     * @param string $url  HTTP or tg:// URL to be opened when the button is pressed. Links `tg://user?id=<user_id>` can be used to mention a user by their ID without using a username, if this is allowed by their privacy settings.
-     */
-    public static function Url(string $text, string $url): Url
-    {
-        return new Url($text, $url);
-    }
-
-    /**
-     * Create game button for your inline game.
-     *
-     * @param string $text Label text on the button
-     */
-    public static function Game(string $text): Game
-    {
-        return new Game($text);
-    }
-
-    /**
-     * Create a buy button for your inline buy request(similar to webapps).
-     *
-     * @param string $text Label text on the button
-     */
-    public static function Buy(string $text): Buy
-    {
-        return new Buy($text);
     }
 }
