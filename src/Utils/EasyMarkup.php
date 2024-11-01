@@ -15,10 +15,9 @@
 
 namespace Reymon\EasyKeyboard\Utils;
 
+use Reymon\EasyKeyboard\Keyboard\KeyboardMarkup;
 use Reymon\EasyKeyboard\KeyboardButton;
 use Reymon\EasyKeyboard\KeyboardButton\Poll\PollType;
-use Reymon\EasyKeyboard\Keyboard\KeyboardMarkup;
-use Reymon\EasyKeyboard\Utils\ChatAdminRights;
 
 trait EasyMarkup
 {

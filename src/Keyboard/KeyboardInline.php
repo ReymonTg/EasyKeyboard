@@ -15,8 +15,8 @@
 
 namespace Reymon\EasyKeyboard\Keyboard;
 
-use Reymon\EasyKeyboard\Utils\EasyInline;
 use Reymon\EasyKeyboard\Keyboard;
+use Reymon\EasyKeyboard\Utils\EasyInline;
 
 /**
  * Represents an inline keyboard that appears right next to the message it belongs to.

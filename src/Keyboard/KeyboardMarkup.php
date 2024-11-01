@@ -15,10 +15,10 @@
 
 namespace Reymon\EasyKeyboard\Keyboard;
 
+use Reymon\EasyKeyboard\Keyboard;
 use Reymon\EasyKeyboard\Utils\EasyMarkup;
 use Reymon\EasyKeyboard\Utils\Placeholder;
 use Reymon\EasyKeyboard\Utils\Selective;
-use Reymon\EasyKeyboard\Keyboard;
 
 /**
  * Represents a custom keyboard with reply options.

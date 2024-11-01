@@ -17,7 +17,6 @@ namespace Reymon\EasyKeyboard;
 
 use OutOfBoundsException;
 use RangeException;
-use Reymon\EasyKeyboard\InlineButton;
 use Reymon\EasyKeyboard\Keyboard\KeyboardInline;
 
 /**

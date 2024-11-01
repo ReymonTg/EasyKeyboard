@@ -16,8 +16,8 @@
 namespace Reymon\EasyKeyboard\Keyboard;
 
 use Reymon\EasyKeyboard\Button;
-use Reymon\EasyKeyboard\Keyboard;
 use Reymon\EasyKeyboard\Exception;
+use Reymon\EasyKeyboard\Keyboard;
 use Reymon\EasyKeyboard\Utils\Selective;
 
 /**
