@@ -23,8 +23,8 @@ use Reymon\EasyKeyboard\InlineButton\LoginUrl;
 use Reymon\EasyKeyboard\InlineButton\SwitchInline;
 use Reymon\EasyKeyboard\InlineButton\SwitchInlineCurrent;
 use Reymon\EasyKeyboard\InlineButton\SwitchInlineFilter;
-use Reymon\EasyKeyboard\InlineButton\Url;
 use Reymon\EasyKeyboard\InlineButton\Webapp;
+use Reymon\EasyKeyboard\InlineButton\Url;
 
 abstract class InlineButton extends Button
 {
